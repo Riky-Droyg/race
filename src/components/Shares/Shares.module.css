@@ -1,0 +1,203 @@
+.financialOverview {
+    /* стилі для загального контейнера */
+}
+
+.buttonReturn {
+    display: flex;
+    padding: 20px 0px;
+}
+.buttomReturnImgArrow {
+    width: 20px;
+}
+.buttonReturnText {
+    font-size: 16px;
+    padding-left: 20px;
+}
+
+.cashOnHand {
+    height: 100%;
+    border-radius: 16px;
+    background-color: #e5b7b7;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px 16px;
+    margin-bottom: 13px;
+}
+
+.amount {
+    /* стилі для елементів з сумою */
+    font-size: 32px;
+}
+
+.label {
+    /* стилі для елементів з мітками */
+    font-size: 15px;
+}
+.wrapper_buttons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.purse {
+    font-size: 32px;
+    padding: 10px 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #000000;
+    color: white;
+    font-weight: 600;
+    border-radius: 16px;
+    margin-bottom: 10px;
+    width: 100%;
+    margin-left: 10px;
+}
+.purse:first-child {
+    margin-left: 0px;
+
+}
+
+.optionSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 13px;
+}
+.wrapperInpun{
+  /* padding: 20px; */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.wrapperInpun:last-child{
+margin-left: 10px;
+}
+
+.numberInput{
+    width: 100%;
+    height: 60px;
+    border-radius: 16px;
+    border: #e5b7b7 solid 3px;
+    font-weight: 600;
+    font-size: 20px;
+    padding:  5px 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.optionRow {
+    display: flex;
+    border-radius: 13px;
+    background-color: #e5b7b7;
+    padding: 10px;
+}
+
+.businessItem {
+    /* стилі для кожного елемента бізнесу */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 13px;
+    background-color: #e5b7b7;
+    height: 45px;
+    margin-bottom: 10px;
+    padding: 5px 18px;
+    font-weight: 400;
+    font-size: 16px;
+}
+.buisnesDelete {
+    width: 12px;
+    height: 19px;
+}
+.businessSize {
+    /* стилі для розміру бізнесу */
+}
+
+.businessIncome {
+    /* стилі для доходу бізнесу */
+    font-size: 24px;
+    font-weight: 500;
+}
+/* Акції */
+.stocksOverview {
+    /* стилі для загального контейнера акцій */
+    border-radius: 16px;
+    background-color: #b7cfe5;
+    padding: 15px 18px;
+    margin-bottom: 22px;
+}
+
+.headerRow {
+    /* стилі для заголовкового ряду */
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: black;
+
+}
+
+.headerItem {
+    padding: 13px 25px;
+    font-size: 24px;
+    font-weight: 600;
+    color: black;
+
+    /* стилі для елементів заголовкового ряду */
+}
+
+.dataRow {
+    /* стилі для рядків даних */
+    display: flex;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    justify-content: space-between;
+    align-content: center;
+    margin-bottom: 12px;
+    height: 60px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+
+.dataItem {
+    /* стилі для елементів рядків даних */
+    padding: 8px 20px;
+    font-size: 20px;
+    font-weight: 600;
+    color: black;
+
+}
+.wrapperSum{
+    width: 100%;
+    height: 60px;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    /* border: solid 3px #e5b7b7; */
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.sum{
+    width: 100%;
+    height: 60px;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    border: solid 3px #e5b7b7;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}

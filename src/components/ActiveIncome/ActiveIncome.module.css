@@ -1,0 +1,89 @@
+.financialOverview {
+    /* стилі для загального контейнера */
+  }
+  
+  .cashOnHand {
+    height: 100%;
+    border-radius: 16px;
+    background-color: #B7E5C1;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+    padding: 10px 16px;
+    margin-bottom: 13px;
+  }
+  
+  .amount {
+    /* стилі для елементів з сумою */
+    font-size: 32px;
+  }
+  
+  .label {
+    /* стилі для елементів з мітками */
+    font-size: 15px;
+  }
+  .numberInput{
+    width: 100%;
+    height: 60px;
+    text-align: center;
+    font-size: 16px;
+    border-radius: 16px;
+    font-size: 20px;
+    font-weight: 600;
+  }
+    
+    .purse {
+      font-size: 32px;
+      padding: 10px 32px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #000000;
+      border-radius: 16px;
+      margin-bottom: 10px;
+      color: white;
+      font-weight: 600;
+    }
+
+
+    .optionSection{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 13px;
+
+    }
+    .optionRow {
+        display: flex;
+        border-radius: 13px;
+        background-color:  #B7E5C1;
+        padding: 10px;
+    }
+
+  .businessItem {
+      /* стилі для кожного елемента бізнесу */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 13px;
+      background-color: #B7E5C1;
+      height: 45px;
+      margin-bottom: 10px;
+      padding: 5px 18px;
+      font-weight: 400;
+      font-size: 16px;
+
+  }
+  .buisnesDelete{
+    width: 12px;
+    height: 19px;
+  }
+  .businessSize {
+      /* стилі для розміру бізнесу */
+  }
+  
+  .businessIncome {
+      /* стилі для доходу бізнесу */
+      font-size: 24px;
+      font-weight: 500;
+  }
+  
