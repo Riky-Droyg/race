@@ -1,45 +1,49 @@
-import React from "react";
+import React, { useState } from "react";
 import s from "./Debets.module.css";
 import daggerImg from "../../img/dagger.png";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
 
-function Debets(props) {
-    // let newIncome = React.createRef();
-    let referenceInput = React.createRef();
-    let referenceInputName = React.createRef();
+function Debts(props) {
+	let [nameDebts, setNameDebts] = useState("");
+	let [value, setValue] = useState(""); // Початкове значення — пустий рядок
 
-    let onChangeActiveInput = () => {
-        let number = referenceInput.current.value;
-        props.UpdateOneChangeActiveInput(number);
-    };
-    let onChangeActiveInputName = () => {
-        let text = referenceInputName.current.value;
-        props.UpdateOneChangeActiveInputName(text);
-    };
-    let AddExpenses = () => {
-        props.AddExpenses();
+	const nameDebtsChange = (event) => {
+		setNameDebts(event.target.value);
+        console.log(nameDebts) // Оновлення стану при зміні значення
+	};
+	const valueChange = (event) => {
+		setValue(event.target.value); // Оновлення стану при зміні значення
+	};
+
+
+
+    let AddDebts = () => {
+        props.AddDebts(nameDebts, +value);
+        setNameDebts("")
+        setValue("")
     };
 
-    let DeleleExpenses = (index) => {
-        props.DeleleExpenses(index);
+    let DeleteDebts = (index) => {
+        props.DeleteDebts(index);
     };
-    let content = props.Debets.MainMenu.debets.debets_data.map((el, index) => (
+    let content = props.state.debts.list.map((el, index) => (
         <div
-            onClick={() => DeleleExpenses(index)}
+            onClick={() => DeleteDebts(index)}
             key={index}
             className={s.businessItem}
         >
             <img className={s.buisnesDelete} src={daggerImg} alt="dagger" />
-            <div className={s.businessSize}>{el.nameDebets}</div>
-            <div className={s.businessIncome}>{el.sumDebets}</div>
+            <div className={s.businessSize}>{el.name}</div>
+            <div className={s.businessIncome}>{el.sum}</div>
         </div>
     ));
+
     return (
         <div className={s.financialOverview}>
             <ButtonReturn />
             <div className={s.cashOnHand}>
                 <div className={s.amount}>
-                    {props.Debets.MainMenu.debets.debets_sum}
+                    {props.state.debts.total}
                 </div>
                 <div className={s.label}>Борги</div>
             </div>
@@ -47,20 +51,18 @@ function Debets(props) {
             <div className={s.optionSection}>
                 <div className={s.wrapperInpun}>
                     <input
-                        onChange={onChangeActiveInputName}
-                        ref={referenceInputName}
-                        value={props.Debets.MainMenu.activeInputText}
+                        onChange={nameDebtsChange}
+                        value={nameDebts}
                         type="text"
                         className={s.numberInput}
-                        placeholder="Назва боргу"
+                        placeholder="Назва"
 
                     />
                 </div>
                 <div className={s.wrapperInpun}>
                     <input
-                        onChange={onChangeActiveInput}
-                        ref={referenceInput}
-                        value={props.Debets.MainMenu.activeInputNumber}
+                        onChange={valueChange}
+                        value={value}
                         type="number"
                         className={s.numberInput}
                         placeholder="Сума"
@@ -68,12 +70,12 @@ function Debets(props) {
                 </div>
             </div>
 
-            <div onClick={AddExpenses} className={s.purse}>
+            <div onClick={AddDebts} className={s.purse}>
                 Додати 
             </div>
             {content}
         </div>
-    );
+	);
 }
 
-export default Debets;
+export default Debts;

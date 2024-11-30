@@ -1,15 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-// import {
-//     ChangeBisnesSizeAC,
-// } from "../Redux/PassiveIncomeReduser";
-import { AddExpensesAC, DeleleExpensesAC, UpdateOneChangeActiveInputAC, UpdateOneChangeActiveInputNameAC } from "../Redux/ExpensesReduser";
 import Shares from "./Shares";
-// import { AddSharesAC, ChangeSelectStocksAC, DeleteSharesAC } from "../Redux/SharesReduser";
+import { addSharesThunks, deleteSharesThunks, sellingSharesThunks } from "../Redux/Redux-Thunk";
 
 let mapStatetoProps = (state) => {
     return {
-        Shares: state.SharesReduser,
+        state: state.MainReduser,
     };
 };
 
@@ -18,25 +14,25 @@ let mapDispatchToProps = (dispatch) => {
         // ChangeBisnesSize: (buisnesSize) => {
         //     dispatch(ChangeBisnesSizeAC(buisnesSize));
         // },
-        UpdateOneChangeActiveInput: (text) => {
-            dispatch(UpdateOneChangeActiveInputAC(text));
-        },
-        UpdateOneChangeActiveInputName: (text) => {
-            dispatch(UpdateOneChangeActiveInputNameAC(text));
-        },
-        AddExpenses: () => {
-            dispatch(AddExpensesAC());
-        },
-        DeleleExpenses: (index) => {
-            dispatch(DeleleExpensesAC(index))
-        },
+        // UpdateOneChangeActiveInput: (text) => {
+        //     dispatch(UpdateOneChangeActiveInputAC(text));
+        // },
+        // UpdateOneChangeActiveInputName: (text) => {
+        //     dispatch(UpdateOneChangeActiveInputNameAC(text));
+        // },
+        // AddExpenses: () => {
+        //     dispatch(AddExpensesAC());
+        // },
+        // DeleleExpenses: (index) => {
+        //     dispatch(DeleleExpensesAC(index))
+        // },
         
-        // AddShares: (name) => {
-        //     dispatch(AddSharesAC(name))
-        // },
-        // DeleteShares: (name) => {
-        //     dispatch(DeleteSharesAC(name))
-        // },
+        AddShares: (nameShares, count, price) => {
+            dispatch(addSharesThunks(nameShares, count, price))
+        },
+        DeleteShares: (nameShares, count, price) => {
+            dispatch(sellingSharesThunks(nameShares, count, price))
+        },
         // ChangeSelectStocks:(name) => {
         //     dispatch(ChangeSelectStocksAC(name))
         // },

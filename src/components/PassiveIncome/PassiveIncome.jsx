@@ -5,13 +5,14 @@ import ButtonReturn from "../ButtonReturn/ButtonReturn";
 
 function PassiveIncome(props) {
 	let [sizeBuisnes, setSizeBuisnes] = useState("Малий Бізнес");
-	let [value, setValue] = useState(0); // Початкове значення — пустий рядок
+	let [value, setValue] = useState(""); // Початкове значення — пустий рядок
 
 	const handleChange = (event) => {
 		setValue(event.target.value); // Оновлення стану при зміні значення
 	};
 	let addBuisnes = () => {
 		props.addBuisnes(sizeBuisnes, +value);
+        setValue("")
 	};
 
 	let deleteBuisnes = (index) => {

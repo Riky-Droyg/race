@@ -1,32 +1,21 @@
 import React from "react";
 import { connect } from "react-redux";
 import ActiveIncome from "./ActiveIncome";
-import {
-    AddExpensesAC,
-    ChangeBisnesSizeAC,
-    DeleleExpensesAC,
-    UpdateOneChangeActiveInputAC,
-} from "../Redux/ActiveIncomeReduser";
+import { AddActiveIncomeAC, DeleteActiveIncomeAC } from "../Redux/MainReduser";
 
 let mapStatetoProps = (state) => {
     return {
-        ActiveIncome: state.ActiveIncomeReduser,
+        state: state.MainReduser,
     };
 };
 
 let mapDispatchToProps = (dispatch) => {
     return {
-        ChangeBisnesSize: (buisnesSize) => {
-            dispatch(ChangeBisnesSizeAC(buisnesSize));
+        AddActiveIncomeAC: (value) => {
+            dispatch(AddActiveIncomeAC(value));
         },
-        UpdateOnChangeInput: (text) => {
-            dispatch(UpdateOneChangeActiveInputAC(text));
-        },
-        addBuisnes: () => {
-            dispatch(AddExpensesAC());
-        },
-        DeleteBuisnes: (index) => {
-            dispatch(DeleleExpensesAC(index))
+        DeleteActiveIncomeAC: (index) => {
+            dispatch(DeleteActiveIncomeAC(index))
         },
     };
 };

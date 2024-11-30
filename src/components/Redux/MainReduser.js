@@ -1,21 +1,19 @@
 import initialState from "./Data";
-import { AddDataThunks } from "./Redux-Thunk";
-
-let UPADE_STATE = "UPADE_STATE";
-let GET_STATE = "GET_STATE";
-let ADD_BUISNES = "ADD_BUISNES";
 let AUTORIZATION = "AUTORIZATION";
+let ADD_BUISNES = "ADD_BUISNES";
 let DELETE_BUISNES = "DELETE_BUISNES";
+let ADD_EXPENSES = "ADD_EXPENSES";
+let DELETE_EXPENSES = "DELETE_EXPENSES";
+let ADD_ACTIVE_INCOME = "ADD_ACTIVE_INCOME";
+let DELETE_ACTIVE_INCOME = "DELETE_ACTIVE_INCOME";
+let ADD_DEBTS = "ADD_DEBTS";
+let DELETE_DEBTS = "DELETE_DEBTS";
+let ADD_SHARES = "ADD_SHARES";
+let SELLING_SHARES = "SELLING_SHARES";
+let PURSE = "PURSE";
 
 const MainReduser = (state = initialState, action) => {
 	switch (action.type) {
-		case GET_STATE: {
-			console.log({ action });
-			return {
-				...initialState,
-				data: action.data,
-			};
-		}
 		case AUTORIZATION: {
 			return action.data;
 		}
@@ -57,16 +55,185 @@ const MainReduser = (state = initialState, action) => {
 			};
 			return updatedState; // Повертаємо новий стан
 		}
+
+		case ADD_EXPENSES: {
+			let newInem = {
+				name: action.text,
+				sum: action.value,
+			};
+			const updatedList = [...state.expenses.list, newInem];
+			// Підсумовуємо всі значення sum в масиві list
+			const totalSum = updatedList.reduce((total, item) => {
+				return total + item.sum; // Додаємо sum кожного елемента до total
+			}, 0); // Початкове значення для total - 0
+			const updatedState = {
+				...state,
+				expenses: {
+					...state.expenses,
+					total: totalSum,
+					list: updatedList,
+				},
+			};
+			return updatedState; // Повертаємо новий стан
+		}
+		case DELETE_EXPENSES: {
+			const updatedList = state.expenses.list.filter((_, index) => index !== action.index);
+			const totalSum = updatedList.reduce((total, item) => {
+				return total + item.sum; // Додаємо sum кожного елемента до total
+			}, 0); // Початкове значення для total - 0
+
+			const updatedState = {
+				...state,
+				expenses: {
+					...state.expenses,
+					total: totalSum,
+					list: updatedList,
+				},
+			};
+			return updatedState; // Повертаємо новий стан
+		}
+		case ADD_ACTIVE_INCOME: {
+			return {
+				...state,
+				active_income: {
+					...state.active_income,
+					total: action.value,
+					salary: action.value,
+					to_restore: 0,
+				},
+			};
+		}
+		case DELETE_ACTIVE_INCOME: {
+			return {
+				...state,
+				active_income: {
+					...state.active_income,
+					total: 0,
+				},
+			};
+		}
+
+		case ADD_DEBTS: {
+			let newInem = {
+				name: action.text,
+				sum: action.value,
+			};
+			const updatedList = [...state.debts.list, newInem];
+			// Підсумовуємо всі значення sum в масиві list
+			const totalSum = updatedList.reduce((total, item) => {
+				return total + item.sum; // Додаємо sum кожного елемента до total
+			}, 0); // Початкове значення для total - 0
+			const updatedState = {
+				...state,
+				debts: {
+					...state.debts,
+					total: totalSum,
+					list: updatedList,
+				},
+			};
+			return updatedState; // Повертаємо новий стан
+		}
+		case DELETE_DEBTS: {
+			const updatedList = state.debts.list.filter((_, index) => index !== action.index);
+			const totalSum = updatedList.reduce((total, item) => {
+				return total + item.sum; // Додаємо sum кожного елемента до total
+			}, 0); // Початкове значення для total - 0
+
+			const updatedState = {
+				...state,
+				debts: {
+					...state.debts,
+					total: totalSum,
+					list: updatedList,
+				},
+			};
+			return updatedState; // Повертаємо новий стан
+		}
+		case ADD_SHARES: {
+			let newInem = {
+				count: +action.count,
+				price: +action.price,
+			};
+			const updatedList = [...state.stocks[action.nameShares].list, newInem];
+
+			// Підсумовуємо всі значення sum в масиві list
+			const totalCount = newInem.count + state.stocks[action.nameShares].totalCount;
+			const totalPrice = newInem.count * newInem.price + state.stocks[action.nameShares].averagePrice * state.stocks[action.nameShares].totalCount;
+			const averagePrice = totalPrice / totalCount;
+			// const totalCount = updatedList.reduce((total, item) => total + item.count, 0);
+			// const totalPrice = updatedList.reduce((total, item) => total + item.count * item.price, 0);
+			// const averagePrice = totalPrice / totalCount;
+
+			const updatedState = {
+				...state,
+				stocks: {
+					...state.stocks,
+					[action.nameShares]: {
+						...state.stocks[action.nameShares],
+						list: updatedList,
+						averagePrice: averagePrice,
+						totalCount: totalCount,
+					},
+				},
+			};
+			return updatedState; // Повертаємо новий стан
+		}
+		case SELLING_SHARES: {
+			let newInem = {
+				count: +action.count,
+				price: +action.price,
+			};
+
+			// Підсумовуємо всі значення sum в масиві list
+			const totalCount = state.stocks[action.nameShares].totalCount - newInem.count;
+			const cashOnHand = state.cash_on_hand + newInem.price;
+			// const totalCount = updatedList.reduce((total, item) => total + item.count, 0);
+			// const totalPrice = updatedList.reduce((total, item) => total + item.count * item.price, 0);
+			// const averagePrice = totalPrice / totalCount;
+			let averagePrice = () => {
+				if (state.stocks[action.nameShares].totalCount <= 0) {
+					return 0;
+				} else {
+					return state.stocks[action.nameShares].totalCount;
+				}
+			};
+
+			const updatedState = {
+				...state,
+				stocks: {
+					...state.stocks,
+					[action.nameShares]: {
+						...state.stocks[action.nameShares],
+						totalCount: totalCount,
+						averagePrice: averagePrice,
+					},
+				},
+				cash_on_hand: cashOnHand,
+			};
+			return updatedState; // Повертаємо новий стан
+		}
+		case PURSE: {
+			let newCashOnHand = "";
+			if (action.action === "+") {
+				 newCashOnHand = +state.cash_on_hand + +action.value;
+			} else if (action.action === "-") {
+				newCashOnHand = +state.cash_on_hand - +action.value;
+			}
+			const updatedState = {
+				...state,
+				cash_on_hand: newCashOnHand,
+			};
+			return updatedState; // Повертаємо новий стан
+		}
 		default:
 			return state;
 	}
 };
 
-export let UpdateStateAC = (key, value) => {
+export let АuthorizationAC = (data) => {
 	return {
-		type: UPADE_STATE,
-		key: key,
-		value: value,
+		type: AUTORIZATION,
+		data,
 	};
 };
 export let AddBuisnesAC = (sizeBuisnes, value) => {
@@ -76,18 +243,7 @@ export let AddBuisnesAC = (sizeBuisnes, value) => {
 		value,
 	};
 };
-export let GetTestThunks = (data) => {
-	return {
-		type: GET_STATE,
-		data: data,
-	};
-};
-export let АuthorizationAC = (data) => {
-	return {
-		type: AUTORIZATION,
-		data,
-	};
-};
+
 export let DeleteBuisnesAC = (index) => {
 	return {
 		type: DELETE_BUISNES,
@@ -95,4 +251,67 @@ export let DeleteBuisnesAC = (index) => {
 	};
 };
 
+export let AddExpensesAC = (text, value) => {
+	return {
+		type: ADD_EXPENSES,
+		text,
+		value,
+	};
+};
+export let DeleteExpensesAC = (index) => {
+	return {
+		type: DELETE_EXPENSES,
+		index,
+	};
+};
+export let AddActiveIncomeAC = (value) => {
+	return {
+		type: ADD_ACTIVE_INCOME,
+		value,
+	};
+};
+export let DeleteActiveIncomeAC = () => {
+	return {
+		type: DELETE_ACTIVE_INCOME,
+	};
+};
+
+export let AddDebtsAC = (text, value) => {
+	return {
+		type: ADD_DEBTS,
+		text,
+		value,
+	};
+};
+
+export let DeleteDebtsAC = (index) => {
+	return {
+		type: DELETE_DEBTS,
+		index,
+	};
+};
+
+export let AddSharesAC = (nameShares, count, price) => {
+	return {
+		type: ADD_SHARES,
+		nameShares,
+		count,
+		price,
+	};
+};
+export let sellingSharesAC = (nameShares, count, price) => {
+	return {
+		type: SELLING_SHARES,
+		nameShares,
+		count,
+		price,
+	};
+};
+export let PurseAC = (action, value) => {
+	return {
+		type: PURSE,
+		action,
+		value,
+	};
+};
 export default MainReduser;

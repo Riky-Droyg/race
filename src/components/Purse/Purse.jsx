@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import s from "./ActiveIncome.module.css";
+import s from "./Purse.module.css";
 import daggerImg from "../../img/dagger.png";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
 
-function ActiveIncome(props) {
+function Purse(props) {
 	let [value, setValue] = useState(""); // Початкове значення — пустий рядок
 
 	const handleChange = (event) => {
@@ -15,8 +15,11 @@ function ActiveIncome(props) {
 		setValue("");
 	};
 
-	let DeleteActiveIncome = () => {
-		props.DeleteActiveIncomeAC();
+	let addPurseAC = () => {
+		props.PurseAC("+", value);
+	};
+	let minusPurseAC = () => {
+		props.PurseAC("-", value);
 	};
 	// let content = props.state.active_income.active_income.active_income_data.map((el, index) => (
 	// 	<div onClick={() => deleteBuisnes(index)} key={index} className={s.businessItem}>
@@ -29,24 +32,49 @@ function ActiveIncome(props) {
 		<div className={s.financialOverview}>
 			<ButtonReturn />
 			<div className={s.cashOnHand}>
-				<div className={s.amount}>{props.state.active_income.total}</div>
-				<div className={s.label}>Активний дохід</div>
+				<div className={s.amount}>{props.state.cash_on_hand}</div>
+				<div className={s.label}>Готівки на руках</div>
 			</div>
 
-			<div className={s.businessItem}>
-				<img onClick={DeleteActiveIncome} className={s.buisnesDelete} src={daggerImg} alt="dagger" />
+			<div className={s.optionSection}>
+				<input
+					onChange={handleChange}
+					value={value}
+					type="number"
+					className={s.numberInput}
+					placeholder="Введи суму"
+				/>
+			</div>
+			{/* <div className={s.businessItem}>
+				<img
+					onClick={DeleteActiveIncome}
+					className={s.buisnesDelete}
+					src={daggerImg}
+					alt="dagger"
+				/>
 				<div className={s.businessIncome}>Зарплата</div>
 				<div className={s.businessSize}>{props.state.active_income.salary}</div>
+			</div> */}
+			<div
+				onClick={addPurseAC}
+				className={s.button__add}
+			>
+				+Разовий дохід
 			</div>
-			<div className={s.optionSection}>
-				<input onChange={handleChange} value={value} type="number" className={s.numberInput} placeholder="Введи зарплату з картки" />
+			<div
+				onClick={minusPurseAC}
+				className={s.button__minus}
+			>
+				-Разова витрата
 			</div>
-
-			<div onClick={AddActiveIncome} className={s.purse}>
-				Додати
+			<div
+				onClick={AddActiveIncome}
+				className={s.buttom__salary}
+			>
+				Получка
 			</div>
 		</div>
 	);
 }
 
-export default ActiveIncome;
+export default Purse;

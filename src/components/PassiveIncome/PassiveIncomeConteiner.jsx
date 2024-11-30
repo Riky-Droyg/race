@@ -1,9 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import PassiveIncome from "./PassiveIncome";
-import { AddBuisnesAC, ChangeBisnesSizeAC, DeleleBuisnesAC, UpdateOneChangeAC } from "../Redux/PassiveIncomeReduser";
-import { UpdateStateAC } from "../Redux/MainReduser";
-import { AddDataThunks, DeleteDataThunks } from "../Redux/Redux-Thunk";
+import { AddBuisnesThunks, DeleteBuisnesThunks } from "../Redux/Redux-Thunk";
 
 let mapStatetoProps = (state) => {
 	return {
@@ -13,14 +11,11 @@ let mapStatetoProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
 	return {
-		UpdateOnChangeInput: (text) => {
-			dispatch(UpdateOneChangeAC(text));
-		},
 		addBuisnes: (sizeBuisnes, value) => {
-			dispatch(AddDataThunks(sizeBuisnes, value));
+			dispatch(AddBuisnesThunks(sizeBuisnes, value));
 		},
 		DeleteBuisnes: (index) => {
-			dispatch(DeleteDataThunks(index));
+			dispatch(DeleteBuisnesThunks(index));
 		},
 	};
 };

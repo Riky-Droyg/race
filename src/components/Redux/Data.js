@@ -1,67 +1,51 @@
 let State = {
-    "_id": "673f329485098ffad6a00b80",
-    "cash_on_hand": 0,
-    "total_income": 0,
-    "passive_income": {
-      "total": 0,
-      "list": [
-        {
-          "name": "Кіоск",
-          "sum": 500,
-          "type": "Малий Бізнес"
-        }
-      ]
-    },
-    "active_income": 0,
-    "salary": 0,
-    "expenses": {
-      "total": 0,
-      "list": [
-        {
-          "name": "Кіоск",
-          "sum": 500
-        }
-      ]
-    },
-    "stocks": {
-      "ykt": {
-        "totalCount": 0,
-        "averagePrice": 0,
-        "list": [
-          {
-            "count": 500,
-            "price": 20
-          }
-        ]
-      },
-      "krs": {
-        "totalCount": 0,
-        "averagePrice": 0,
-        "list": null
-      },
-      "dr": {
-        "totalCount": 0,
-        "averagePrice": 0,
-        "list": null
-      },
-      "kchg": {
-        "totalCount": 0,
-        "averagePrice": 0,
-        "list": null
-      },
-      "yakhz": {
-        "totalCount": 0,
-        "averagePrice": 0,
-        "list": null
-      }
-    },
-    "debts": {
-      "total": 0,
-      "list": null
-    },
-    "nick": "Test"
-  }
-
+	cash_on_hand: 0,
+	total_income: 0,
+	passive_income: {
+		total: 0,
+		list: [],
+	},
+	active_income: {
+		total: 0,
+		salary: 0,
+		to_restore: 0,
+	},
+	expenses: {
+		total: 0,
+		list: [],
+	},
+	stocks: {
+		ykt: {
+			averagePrice: 0,
+			list: [],
+			totalCount: 0,
+		},
+		krs: {
+			averagePrice: 0,
+			list: [],
+			totalCount: 0,
+		},
+		dr: {
+			averagePrice: 0,
+			list: [],
+			totalCount: 0,
+		},
+		kchg: {
+			averagePrice: 0,
+			list: [],
+			totalCount: 0,
+		},
+		yakhz: {
+			averagePrice: 0,
+			list: [],
+			totalCount: 0,
+		},
+	},
+	debts: {
+		total: 0,
+		list: [],
+	},
+};
 export default State;
 
 // let test = { number: 1 , midlValue:1}

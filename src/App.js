@@ -10,10 +10,12 @@ import LoginMenuContainer from "./components/LoginMenu/LoginMenuConteiner";
 import { useEffect } from "react";
 import { АuthorizationThunks } from "./components/Redux/Redux-Thunk";
 import { useDispatch } from "react-redux";
+import PurseConteiner from "./components/Purse/PurseConteiner";
 
 function App(props) {
 	const dispatch = useDispatch();
 	useEffect(() => {
+		console.log("Use effect");
 		// Отримуємо JSON із localStorage
 		let stateJson = localStorage.getItem("state");
 
@@ -42,25 +44,17 @@ function App(props) {
 						<Route path="/" element={<LoginMenuContainer />} />
 						{/* END Меню користувача */}
 
-						<Route path="/" element={<MainMenuConteiner />} />
+						{/* <Route path="/" element={<MainMenuConteiner />} /> */}
 						<Route path="/MainMenu" element={<MainMenuConteiner />} />
+						<Route path="/Purse" element={<PurseConteiner />} />
 						<Route path="/PassiveIncome" element={<PassiveIncomeConteiner />} />
-						{/* <Route
-              path="/Expenses"
-              element={<ExpensesConteiner />}
-            />
-            <Route
-              path="/ActiveIncome"
-              element={<ActiveIncomeConteiner/>}
-            />
-            <Route
-              path="/Debets"
-              element={<DebetsConteiner/>}
-            />
-            <Route
-              path="/Shares"
-              element={<SharesConteiner/>}
-            /> */}
+						<Route path="/Expenses" element={<ExpensesConteiner />} />
+
+						<Route path="/ActiveIncome" element={<ActiveIncomeConteiner />} />
+
+						<Route path="/Debets" element={<DebetsConteiner />} />
+
+						<Route path="/Shares" element={<SharesConteiner />} />
 					</Routes>
 					{/* CONTENT */}
 					{/* <Profile /> */}

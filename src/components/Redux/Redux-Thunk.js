@@ -1,19 +1,5 @@
-import { AddExpensesAC } from "./ExpensesReduser";
-import { AddBuisnesAC, DeleteBuisnesAC, GetTestThunks, UpdateStateAC, АuthorizationAC } from "./MainReduser";
+import { AddExpensesAC, AddBuisnesAC, DeleteBuisnesAC, АuthorizationAC, DeleteExpensesAC, AddActiveIncomeAC, DeleteActiveIncomeAC, AddDebetsAC, AddDebtsAC, DeleteDebtsAC, AddSharesAC, sellingSharesAC, PurseAC } from "./MainReduser";
 
-export const getThunks = () => (dispatch) => {
-	fetch("https://patsuk-6e89a0c8f358.herokuapp.com/get/recJCksG0BD2ak11D")
-		.then((response) => {
-			return response.json();
-		})
-		.then((data) => {
-			dispatch(GetTestThunks(data));
-		})
-		.catch((error) => {
-			console.error("Помилка завантаження:", error);
-		});
-		
-};
 export const АuthorizationThunks = (name, navigate) => (dispatch) => {
 	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/new_user/${name}`)
 		.then((response) => {
@@ -30,125 +16,165 @@ export const АuthorizationThunks = (name, navigate) => (dispatch) => {
 			console.error("Помилка завантаження:", error);
 		});
 };
-// export const АuthorizationThunks = (name, navigate) => (dispatch) => {
-// 	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/new_user/${name}`)
-// 		.then((response) => {
-// 			return response.json();
-// 		})
-// 		.then((data) => {
-// 			console.log(data);
-// 			localStorage.setItem(name, data.user._id);
 
-// 			dispatch(АuthorizationAC(data.user));
-// 			return data;
-// 		})
-// 		.catch((error) => {
-// 			console.error("Помилка завантаження:", error);
-// 		});
-// };
-export const AddDataThunks = (sizeBuisnes, value) => (dispatch, getState) => {
-	dispatch(AddBuisnesAC(sizeBuisnes, value));
+export const AddBuisnesThunks = (text, value) => (dispatch, getState) => {
+	dispatch(AddBuisnesAC(text, value));
 	let state = getState().MainReduser;
-	console.log(state)
+	console.log(state);
 	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
 		method: "PUT",
 		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(
-			state
-	),
+		body: JSON.stringify(state),
 	});
 };
-export const DeleteDataThunks = (index) => (dispatch, getState) => {
+export const DeleteBuisnesThunks = (index) => (dispatch, getState) => {
 	dispatch(DeleteBuisnesAC(index));
 	let state = getState().MainReduser;
-	console.log(state)
-	
+	console.log(state);
+
 	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
 		method: "PUT",
 		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(
-			state
-	),
+		body: JSON.stringify(state),
+	});
+};
+export const AddExpensesThunks = (text, value) => (dispatch, getState) => {
+	dispatch(AddExpensesAC(text, value));
+	let state = getState().MainReduser;
+	console.log(state);
+	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
+		method: "PUT",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(state),
+	});
+};
+export const DeleteExpensesThunks = (index) => (dispatch, getState) => {
+	dispatch(DeleteExpensesAC(index));
+	let state = getState().MainReduser;
+	console.log(state);
+
+	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
+		method: "PUT",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(state),
+	});
+};
+export const AddActiveIncomeThunks = (value) => (dispatch, getState) => {
+	dispatch(AddActiveIncomeAC(value));
+	let state = getState().MainReduser;
+	console.log(state);
+	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
+		method: "PUT",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(state),
+	});
+};
+export const DeleteActiveIncomeThunks = () => (dispatch, getState) => {
+	dispatch(DeleteActiveIncomeAC());
+	let state = getState().MainReduser;
+	console.log(state);
+	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
+		method: "PUT",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(state),
 	});
 };
 
-export const putTestThunks = (key, value) => (dispatch) => {
-	let test = {
-		_id: "673e2d52f483d0437ef1ebd8",
-		cash_on_hand: 0,
-		total_income: 0,
-		passive_income: {
-			total: 0,
-			list: [
-				{
-					name: "Кіоск",
-					sum: 500,
-					type: "Малий Бізнес",
-				},
-			],
-		},
-		active_income: 0,
-		salary: 0,
-		expenses: {
-			total: 0,
-			list: [
-				{
-					name: "Кіоск",
-					sum: 500,
-				},
-			],
-		},
-		stocks: {
-			ykt: {
-				totalCount: 0,
-				averagePrice: 0,
-				list: [
-					{
-						count: 500,
-						price: 20,
-					},
-				],
-			},
-			krs: {
-				totalCount: 0,
-				averagePrice: 0,
-				list: null,
-			},
-			dr: {
-				totalCount: 0,
-				averagePrice: 0,
-				list: null,
-			},
-			kchg: {
-				totalCount: 0,
-				averagePrice: 0,
-				list: null,
-			},
-			yakhz: {
-				totalCount: 0,
-				averagePrice: 0,
-				list: null,
-			},
-		},
-		debts: {
-			total: 0,
-			list: null,
-		},
-		nick: "Test",
-	};
-	test[key] = value;
-	dispatch(AddExpensesAC()); // Виклик синхронного екшену
-	debugger;
-	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/recJCksG0BD2ak11D`, {
+export const AddDebtsThunks = (text, value) => (dispatch, getState) => {
+	dispatch(AddDebtsAC(text, value));
+	let state = getState().MainReduser;
+	console.log(state);
+	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
 		method: "PUT",
 		headers: { "Content-Type": "application/json" },
-		body: JSON.stringify(test),
-	})
-		.then((response) => {
-			return response.json();
-		})
-		.then((data) => {
-			console.log(data);
-			dispatch(UpdateStateAC(data));
-		});
+		body: JSON.stringify(state),
+	});
+};
+
+export const DeleteDebtsThunks = (index) => (dispatch, getState) => {
+	dispatch(DeleteDebtsAC(index));
+	let state = getState().MainReduser;
+	console.log(state);
+	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
+		method: "PUT",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(state),
+	});
+};
+
+export const addSharesThunks = (nameShares, count, price) => (dispatch, getState) => {
+	let transformNameShares = () => {
+		switch (nameShares) {
+			case "УКТ": {
+				return "ykt";
+			}
+			case "КРС": {
+				return "krs";
+			}
+			case "ДР": {
+				return "dr";
+			}
+			case "КЧГ": {
+				return "kchg";
+			}
+			case "ЯКХЗ": {
+				return "yakhz";
+			}
+			default:
+				console.log('error "addSharesThunks"');
+		}
+	};
+	let challengeTransformNameShares = transformNameShares();
+	dispatch(AddSharesAC(challengeTransformNameShares, count, price));
+	let state = getState().MainReduser;
+	console.log(state);
+	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
+		method: "PUT",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(state),
+	});
+};
+
+export const sellingSharesThunks = (nameShares, count, price) => (dispatch, getState) => {
+	let transformNameShares = () => {
+		switch (nameShares) {
+			case "УКТ": {
+				return "ykt";
+			}
+			case "КРС": {
+				return "krs";
+			}
+			case "ДР": {
+				return "dr";
+			}
+			case "КЧГ": {
+				return "kchg";
+			}
+			case "ЯКХЗ": {
+				return "yakhz";
+			}
+			default:
+				console.log('error "addSharesThunks"');
+		}
+	};
+	let challengeTransformNameShares = transformNameShares();
+	dispatch(sellingSharesAC(challengeTransformNameShares, count, price));
+	let state = getState().MainReduser;
+	console.log(state);
+	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
+		method: "PUT",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(state),
+	});
+};
+
+export const PurseThunks = (action, value) => (dispatch, getState) => {
+	dispatch(PurseAC(action, value));
+	let state = getState().MainReduser;
+	console.log(state);
+	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
+		method: "PUT",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(state),
+	});
 };

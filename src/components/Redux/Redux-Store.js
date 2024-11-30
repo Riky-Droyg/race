@@ -14,7 +14,7 @@ let redusers = combineReducers({
     MainMenuReduser,
     // PassiveIncomeReduser,
     // ExpensesReduser,
-    // ActiveIncomeReduser,
+    // ActiveIncomeReduser,§§
     // DebtsReduser,
     // SharesReduser,
     MainReduser,
