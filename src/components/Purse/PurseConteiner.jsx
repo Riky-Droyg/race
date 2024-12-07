@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import ActiveIncome from "./Purse";
 import { AddActiveIncomeAC, DeleteActiveIncomeAC, PurseAC } from "../Redux/MainReduser";
 import Purse from "./Purse";
+import { PaycheckThunks, PurseThunks } from "../Redux/Redux-Thunk";
 
 let mapStatetoProps = (state) => {
 	return {
@@ -12,8 +13,11 @@ let mapStatetoProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
 	return {
-		PurseAC: (action, value) => {
-			dispatch(PurseAC(action, value));
+		PurseThunks: (action, value) => {
+			dispatch(PurseThunks(action, value));
+		},
+		PaycheckAC: () => {
+			dispatch(PaycheckThunks());
 		},
 	};
 };

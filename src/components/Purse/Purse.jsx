@@ -16,10 +16,15 @@ function Purse(props) {
 	};
 
 	let addPurseAC = () => {
-		props.PurseAC("+", value);
+		props.PurseThunks("+", value);
 	};
 	let minusPurseAC = () => {
-		props.PurseAC("-", value);
+		props.PurseThunks("-", value);
+		setValue = 0
+	};
+	let PaycheckAC = () => {
+		props.PaycheckAC();
+		setValue = 0
 	};
 	// let content = props.state.active_income.active_income.active_income_data.map((el, index) => (
 	// 	<div onClick={() => deleteBuisnes(index)} key={index} className={s.businessItem}>
@@ -68,7 +73,7 @@ function Purse(props) {
 				-Разова витрата
 			</div>
 			<div
-				onClick={AddActiveIncome}
+				onClick={PaycheckAC}
 				className={s.buttom__salary}
 			>
 				Получка

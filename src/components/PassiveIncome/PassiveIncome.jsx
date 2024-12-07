@@ -5,7 +5,7 @@ import ButtonReturn from "../ButtonReturn/ButtonReturn";
 
 function PassiveIncome(props) {
 	let [sizeBuisnes, setSizeBuisnes] = useState("Малий Бізнес");
-	let [value, setValue] = useState(""); // Початкове значення — пустий рядок
+	let [value, setValue] = useState(0); // Початкове значення — пустий рядок
 
 	const handleChange = (event) => {
 		setValue(event.target.value); // Оновлення стану при зміні значення
@@ -27,6 +27,7 @@ function PassiveIncome(props) {
 					<img className={s.buisnesDelete} src={daggerImg} alt="dagger" />
 					{/* <div className={s.businessSize}>{el.name}</div> */}
 					<div className={s.businessSize}>{el.type}</div>
+
 					<div className={s.businessIncome}>{el.sum}</div>
 				</div>
 			));
@@ -57,15 +58,17 @@ function PassiveIncome(props) {
 					<label htmlFor="radioButtonExpansion" className={s.optionLabel}>
 						Розширення
 					</label>
+
 					<input onChange={() => setSizeBuisnes("Розширення")} type="radio" name="o" id="radioButtonExpansion" className={s.optionInput} />
 				</div>
-				<input
+				
+			</div>
+			<input
 					type="number"
 					value={value} // Прив'язка значення до стану
 					onChange={handleChange} // Встановлення обробника зміни
 					className={s.numberInput}
 				/>
-			</div>
 
 			<div onClick={addBuisnes} className={s.purse}>
 				Новий бізнес

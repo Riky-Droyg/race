@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Expenses from "./Expenses";
-import { AddExpensesThunks } from "../Redux/Redux-Thunk";
+import { AddExpensesThunks, DeleteExpensesThunks } from "../Redux/Redux-Thunk";
 import { DeleteExpensesAC } from "../Redux/MainReduser";
 
 let mapStatetoProps = (state) => {
@@ -16,7 +16,7 @@ let mapDispatchToProps = (dispatch) => {
             dispatch(AddExpensesThunks(text, value));
         },
         DeleleExpenses: (index) => {
-            dispatch(DeleteExpensesAC(index))
+            dispatch(DeleteExpensesThunks(index))
         }, 
 
 

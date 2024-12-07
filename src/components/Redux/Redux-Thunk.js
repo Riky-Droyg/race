@@ -1,4 +1,4 @@
-import { AddExpensesAC, AddBuisnesAC, DeleteBuisnesAC, АuthorizationAC, DeleteExpensesAC, AddActiveIncomeAC, DeleteActiveIncomeAC, AddDebetsAC, AddDebtsAC, DeleteDebtsAC, AddSharesAC, sellingSharesAC, PurseAC } from "./MainReduser";
+import { AddExpensesAC, AddBuisnesAC, DeleteBuisnesAC, АuthorizationAC, DeleteExpensesAC, AddActiveIncomeAC, DeleteActiveIncomeAC, AddDebetsAC, AddDebtsAC, DeleteDebtsAC, AddSharesAC, sellingSharesAC, PurseAC, PaycheckAC } from "./MainReduser";
 
 export const АuthorizationThunks = (name, navigate) => (dispatch) => {
 	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/new_user/${name}`)
@@ -170,6 +170,16 @@ export const sellingSharesThunks = (nameShares, count, price) => (dispatch, getS
 
 export const PurseThunks = (action, value) => (dispatch, getState) => {
 	dispatch(PurseAC(action, value));
+	let state = getState().MainReduser;
+	console.log(state);
+	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
+		method: "PUT",
+		headers: { "Content-Type": "application/json" },
+		body: JSON.stringify(state),
+	});
+};
+export const PaycheckThunks = () => (dispatch, getState) => {
+	dispatch(PaycheckAC());
 	let state = getState().MainReduser;
 	console.log(state);
 	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {

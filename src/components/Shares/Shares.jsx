@@ -14,8 +14,8 @@ function Shares(props) {
 		setPrice(newPrice);
 
 		if (newPrice && number) {
-			let a = +number * +newPrice;
-			setTotalPrice(a);
+			let a = parseInt(number) * parseInt(newPrice);
+			setTotalPrice(Math.round(a));
 		} else {
 			return setTotalPrice("");
 		}
@@ -25,8 +25,8 @@ function Shares(props) {
 		setNumber(newNumber);
 
 		if (price && newNumber) {
-			let a = +newNumber * +price;
-			setTotalPrice(a);
+			let a = parseInt(newNumber) * parseInt(price);
+			setTotalPrice(Math.round(a));
 		} else {
 			return setTotalPrice("");
 		}
@@ -37,11 +37,38 @@ function Shares(props) {
 	};
 
 	let AddShares = () => {
-		props.AddShares(selectShares, number, price);
+		if (props.state.cash_on_hand < totalPrice) {
+			alert("Не достатньо готівки");
+			console.log("Не достатньо готівки");
+
+		} else {
+			props.AddShares(selectShares, number, price);
+		}
 	};
 	let DeleteShares = () => {
-		if (props.state.stocks.ykt.totalCount < +number) {
-            alert("кількість наявних акцій не достання для продажу")
+		let transformNameShares = () => {
+			switch (selectShares) {
+				case "УКТ": {
+					return "ykt";
+				}
+				case "КРС": {
+					return "krs";
+				}
+				case "ДР": {
+					return "dr";
+				}
+				case "КЧГ": {
+					return "kchg";
+				}
+				case "ЯКХЗ": {
+					return "yakhz";
+				}
+				default:
+					console.log('error "addSharesThunks"');
+			}
+		};
+			if (props.state.stocks[transformNameShares()].totalCount < +number) {
+		    alert("кількість наявних акцій не достання для продажу")
 			console.log("кількість наявних акцій не достання для продажу");
 		} else {
 			props.DeleteShares(selectShares, number, totalPrice);
@@ -51,7 +78,10 @@ function Shares(props) {
 	return (
 		<div className={s.financialOverview}>
 			<ButtonReturn />
-
+			<div className={s.cashOnHand}>
+				<div className={s.amount}>{props.state.cash_on_hand}</div>
+				<div className={s.label}>Готівки на руках</div>
+			</div>
 			<div className={s.stocksOverview}>
 				<div className={s.headerRow}>
 					<div className={s.headerItem}>Акції</div>

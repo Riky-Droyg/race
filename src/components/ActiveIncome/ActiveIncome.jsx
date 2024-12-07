@@ -4,7 +4,7 @@ import daggerImg from "../../img/dagger.png";
 import ButtonReturn from "../ButtonReturn/ButtonReturn";
 
 function ActiveIncome(props) {
-	let [value, setValue] = useState(""); // Початкове значення — пустий рядок
+	let [value, setValue] = useState(0); // Початкове значення — пустий рядок
 
 	const handleChange = (event) => {
 		setValue(event.target.value); // Оновлення стану при зміні значення
@@ -38,6 +38,7 @@ function ActiveIncome(props) {
 				<div className={s.businessIncome}>Зарплата</div>
 				<div className={s.businessSize}>{props.state.active_income.salary}</div>
 			</div>
+
 			<div className={s.optionSection}>
 				<input onChange={handleChange} value={value} type="number" className={s.numberInput} placeholder="Введи зарплату з картки" />
 			</div>
