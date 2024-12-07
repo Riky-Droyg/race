@@ -307,6 +307,10 @@ template {
 	display: none;
 }
 
+::placeholder{
+	color: #C3C3C3;
+}
+
 .app {
 	width: 100vw;
 	height: 100vh;

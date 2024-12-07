@@ -1,11 +1,11 @@
 import React from "react";
 import { connect } from "react-redux";
-import { АuthorizationThunks } from "../Redux/Redux-Thunk";
+import { АuthorizationThunks } from "./LoginMenuThunk";
 import LoginMenu from "./LoginMenu";
 
 let mapStateToProps = (state) => {
 	return {
-		state: state.MainMenuReduser,
+		state: state.MainReduser,
 	};
 };
 

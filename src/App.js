@@ -6,9 +6,9 @@ import ExpensesConteiner from "./components/Expenses/ExpensesConteiner";
 import ActiveIncomeConteiner from "./components/ActiveIncome/ActiveIncomeConteiner";
 import DebetsConteiner from "./components/Debets/DebetsConteiner";
 import SharesConteiner from "./components/Shares/SharesConteiner";
-import LoginMenuContainer from "./components/LoginMenu/LoginMenuConteiner";
+import LoginMenuContainer from "./pages/LoginMenu/LoginMenuConteiner";
 import { useEffect } from "react";
-import { АuthorizationThunks } from "./components/Redux/Redux-Thunk";
+import { АuthorizationThunks } from "../src/pages/LoginMenu/LoginMenuThunk";
 import { useDispatch } from "react-redux";
 import PurseConteiner from "./components/Purse/PurseConteiner";
 

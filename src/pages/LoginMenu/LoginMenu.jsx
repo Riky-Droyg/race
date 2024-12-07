@@ -14,9 +14,9 @@ function LoginMenu(props) {
 	};
 	return (
 		<div className={s.loginMenu}>
-			<div>Nick name</div>
-			<input onChange={handleChange} value={text} type="text" className={s.numberInput} placeholder="Сума" />
-			<button onClick={АuthorizationThunks}>Увійти</button>
+			<div className={s.nameGames}>Щурячі перегони</div>
+			<input onChange={handleChange} value={text} type="text" className={s.numberInput} placeholder="Введи свій нік" />
+			<button className={s.button} onClick={АuthorizationThunks}>Увійти</button>
 		</div>
 	);
 }
