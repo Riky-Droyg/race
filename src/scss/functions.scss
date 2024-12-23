@@ -1,0 +1,16 @@
+@function dvh($pixels, $screen-height: 662) {
+	@return calc(#{$pixels} / $screen-height * 100dvh);
+}
+@function dvw($pixels, $screen-height: 346) {
+	@return calc(#{$pixels} / $screen-height * 100dvh);
+}
+
+// @function percent-of($percent, $size: 662) {
+// 	@return $size * ($percent / 100);
+// }
+@function percent-of-h($value, $total: 618) {
+	@return ($value / $total) * 100%;
+  }
+@function percent-of-w($value, $total: 346) {
+	@return ($value / $total) * 100%;
+  }

@@ -1,16 +1,19 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import MainMenuConteiner from "./components/MainMenu/MainMenuConteiner";
-import PassiveIncomeConteiner from "./components/PassiveIncome/PassiveIncomeConteiner";
-import ExpensesConteiner from "./components/Expenses/ExpensesConteiner";
-import ActiveIncomeConteiner from "./components/ActiveIncome/ActiveIncomeConteiner";
-import DebetsConteiner from "./components/Debets/DebetsConteiner";
+import MainMenuConteiner from "./pages/MainMenu/MainMenuConteiner";
+
 import SharesConteiner from "./components/Shares/SharesConteiner";
 import LoginMenuContainer from "./pages/LoginMenu/LoginMenuConteiner";
 import { useEffect } from "react";
 import { АuthorizationThunks } from "../src/pages/LoginMenu/LoginMenuThunk";
 import { useDispatch } from "react-redux";
 import PurseConteiner from "./components/Purse/PurseConteiner";
+import ExpensesConteiner from "./pages/Expenses/ExpensesConteiner";
+import DebetsConteiner from "./pages/Debets/DebetsConteiner";
+import ActiveIncomeConteiner from "./pages/ActiveIncome/ActiveIncomeConteiner";
+import PassiveIncomeConteiner from "./pages/PassiveIncome/PassiveIncomeConteiner";
+import ExpenseFormConteiner from "./pages/ExpenseForm/ExpenseFormConteiner";
+import DebetsFormConteiner from "./pages/DebetsForm/DebetsFormConteiner";
 
 function App(props) {
 	const dispatch = useDispatch();
@@ -41,20 +44,52 @@ function App(props) {
 				<div className="wrapper">
 					<Routes>
 						{/* Меню входу користувача */}
-						<Route path="/" element={<LoginMenuContainer />} />
+						<Route
+							path="/"
+							element={<LoginMenuContainer />}
+						/>
 						{/* END Меню користувача */}
 
 						{/* <Route path="/" element={<MainMenuConteiner />} /> */}
-						<Route path="/MainMenu" element={<MainMenuConteiner />} />
-						<Route path="/Purse" element={<PurseConteiner />} />
-						<Route path="/PassiveIncome" element={<PassiveIncomeConteiner />} />
-						<Route path="/Expenses" element={<ExpensesConteiner />} />
+						<Route
+							path="/MainMenu"
+							element={<MainMenuConteiner />}
+						/>
+						<Route
+							path="/Purse"
+							element={<PurseConteiner />}
+						/>
+						<Route
+							path="/PassiveIncome"
+							element={<PassiveIncomeConteiner />}
+						/>
+						<Route
+							path="/Expenses"
+							element={<ExpensesConteiner />}
+						/>
 
-						<Route path="/ActiveIncome" element={<ActiveIncomeConteiner />} />
+						<Route
+							path="/ActiveIncome"
+							element={<ActiveIncomeConteiner />}
+						/>
 
-						<Route path="/Debets" element={<DebetsConteiner />} />
+						<Route
+							path="/Debets"
+							element={<DebetsConteiner />}
+						/>
 
-						<Route path="/Shares" element={<SharesConteiner />} />
+						<Route
+							path="/Shares"
+							element={<SharesConteiner />}
+						/>
+						<Route
+							path="/ExpensesForm"
+							element={<ExpenseFormConteiner />}
+						/>
+						<Route
+							path="/DebetsForm"
+							element={<DebetsFormConteiner />}
+						/>
 					</Routes>
 					{/* CONTENT */}
 					{/* <Profile /> */}

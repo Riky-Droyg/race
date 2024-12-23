@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 // import { AddExpensesAC, DeleleExpensesAC, UpdateOneChangeActiveInputAC, UpdateOneChangeActiveInputNameAC } from "../Redux/ExpensesReduser";
 import Debets from "./Debets";
-import { AddDebtsThunks, DeleteDebtsThunks } from "../Redux/Redux-Thunk";
+import { AddDebtsThunks, DeleteDebtsThunks } from "../../components/Redux/Redux-Thunk";
+// import { AddDebtsThunks, DeleteDebtsThunks } from "../Redux/Redux-Thunk";
 
 let mapStatetoProps = (state) => {
 	return {

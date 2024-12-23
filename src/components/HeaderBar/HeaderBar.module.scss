@@ -1,0 +1,29 @@
+@use "../../scss/functions.scss";
+
+.wrapper {
+    overflow: hidden;
+	width: 100%;
+    min-height: 84px;
+	height: functions.percent-of-h(84);
+	border-radius: 16px;
+	background-color: #000000;
+	color: rgb(255, 255, 255);
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	flex-direction: column;
+	margin-bottom: 16px;
+	padding: 10px 15px;
+}
+.number {
+	font-size: 32px;
+	padding-bottom: 5px;
+	font-weight: 500;
+}
+.text {
+	font-size: 16px;
+	font-weight: 400;
+}
+.number, .text {
+    white-space: nowrap;
+}

@@ -1,0 +1,15 @@
+@use "../../scss/functions.scss";
+
+.button__add {
+	min-height: 60px;
+	height: functions.percent-of-h(60);
+	font-size: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #b7e5c1;
+	border-radius: 16px;
+	color: white;
+	font-weight: 600;
+}
+

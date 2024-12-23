@@ -11,12 +11,7 @@ import { getTestThunks, getThunks, putTestThunks,  } from "./Redux-Thunk";
 
 
 let redusers = combineReducers({
-    MainMenuReduser,
-    // PassiveIncomeReduser,
-    // ExpensesReduser,
-    // ActiveIncomeReduser,§§
-    // DebtsReduser,
-    // SharesReduser,
+   
     MainReduser,
     
 });

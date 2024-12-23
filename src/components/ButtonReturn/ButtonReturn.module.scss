@@ -1,0 +1,22 @@
+@use "../../scss/functions.scss";
+
+.wrapper {
+	// border: solid 3px red;
+	height: functions.percent-of-h(36);
+	width: 100%;
+	// padding: functions.dvh(9) 0px;
+	display: flex;
+	color: black;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 20px;
+}
+.ImgArrow {
+	width: 20px;
+}
+.Text {
+	font-size: 16px;
+}
+.block {
+	width: 20px;
+}

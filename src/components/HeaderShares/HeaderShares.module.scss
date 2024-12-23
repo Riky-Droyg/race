@@ -1,0 +1,22 @@
+@use "../../scss/functions.scss";
+
+.dataRow {
+	display: flex;
+	justify-content: space-between;
+	align-content: center;
+	margin-bottom: 1.6dvh;
+
+}
+
+.headerItem {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 33.33%;
+
+	padding-bottom: functions.dvh(6);
+	font-size: 15px;
+	color: black;
+	font-family: 'e-Ukraine';
+	font-weight: 300;
+}
