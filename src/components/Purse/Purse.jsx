@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import s from "./Purse.module.css";
 import daggerImg from "../../img/dagger.png";
-import ButtonReturn from "../ButtonReturn/ButtonReturn";
+import ButtonReturnConteiner from "../ButtonReturn/ButtonReturnConteiner";
 
 function Purse(props) {
 	let [value, setValue] = useState(""); // Початкове значення — пустий рядок
@@ -35,7 +35,7 @@ function Purse(props) {
 	// ));
 	return (
 		<div className={s.financialOverview}>
-			<ButtonReturn />
+			<ButtonReturnConteiner />
 			<div className={s.cashOnHand}>
 				<div className={s.amount}>{props.state.cash_on_hand}</div>
 				<div className={s.label}>Готівки на руках</div>

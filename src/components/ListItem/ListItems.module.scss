@@ -1,0 +1,47 @@
+@use "../../scss/functions.scss";
+
+.wrapper {
+	width: 100%;
+	height: functions.percent-of-h(390);
+	overflow: auto;
+	margin-bottom: 10px;
+}
+
+.businessItem {
+	/* стилі для кожного елемента бізнесу */
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	border-radius: 13px;
+	background-color: #b7e5c1;
+	min-height: 50px;
+	height: functions.percent-of-h(50);
+	margin-bottom: 10px;
+	padding: 5px 18px;
+	font-weight: 400;
+	font-size: 16px;
+}
+.businessItem:last-child {
+	margin-bottom: 0;
+}
+.buisnesDelete {
+	width: 14px;
+	height: 14px;
+}
+.businessSize {
+	/* стилі для розміру бізнесу */
+	width: 60%;
+	padding-left: 8%;
+	font-weight: 500;
+}
+
+.businessIncome {
+	/* стилі для доходу бізнесу */
+	width: 40%;
+	font-size: 24px;
+	font-weight: 500;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	overflow: hidden;
+}

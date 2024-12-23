@@ -1,0 +1,16 @@
+@use "../../scss/functions.scss";
+
+.button {
+	height: min(functions.dvh(47), 60px);
+	width: 100%;
+	font-size: 24px;
+	// padding: functions.dvh(18) functions.dvh(0);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #b7e5c1;
+	border-radius: 16px;
+	color: white;
+	font-weight: 600;
+	background: black;
+}

@@ -10,13 +10,28 @@ function LoginMenu(props) {
 		setText(e.target.value); // Оновлюємо стан при зміні тексту
 	};
 	const АuthorizationThunks = () => {
-		props.АuthorizationThunks(text, navigate("/MainMenu"));
+		if (text == "") {
+			alert("Введіть нік");
+		} else {
+			props.АuthorizationThunks(text, navigate("/MainMenu"));
+		}
 	};
 	return (
 		<div className={s.loginMenu}>
 			<div className={s.nameGames}>Щурячі перегони</div>
-			<input onChange={handleChange} value={text} type="text" className={s.numberInput} placeholder="Введи свій нік" />
-			<button className={s.button} onClick={АuthorizationThunks}>Увійти</button>
+			<input
+				onChange={handleChange}
+				value={text}
+				type="text"
+				className={s.numberInput}
+				placeholder="Введи свій нік"
+			/>
+			<button
+				className={s.button}
+				onClick={АuthorizationThunks}
+			>
+				Увійти
+			</button>
 		</div>
 	);
 }

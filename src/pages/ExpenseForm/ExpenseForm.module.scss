@@ -1,0 +1,27 @@
+@use "../../scss/functions.scss";
+
+.financialOverview {
+	/* стилі для загального контейнера */
+	width: 100%;
+}
+.optionSection {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 13px;
+	border: 3px solid #EDA1A1;
+	border-radius: 16px;
+	min-height: 60px;
+	height: functions.percent-of-h(60);
+}
+.numberInput {
+	width: 100%;
+	text-align: center;
+	font-size: 16px;
+	border-radius: 16px;
+	font-weight: 600;
+	color: black;
+}
+.numberInput::placeholder {
+  color: #C3C3C3;
+}
