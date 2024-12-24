@@ -4,7 +4,6 @@
 	/* стилі для загального контейнера */
 	width: 100%;
 	height: 100%;
-	padding-top: 24px;
 }
 .marquee {
 	width: 100%;
@@ -35,7 +34,9 @@
 		transform: translateX(-100%);
 	}
 }
-
+.paddingTop{
+	height: functions.percent-of-h(25);
+}
 .incomeOverview {
 	width: 100%;
 	min-height: 196px;
@@ -73,7 +74,7 @@
 	overflow: hidden;
 	width: 100%;
 	min-height: 80px;
-	height: functions.percent-of-h(60);
+	height: functions.percent-of-h(80);
 	display: grid;
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr;

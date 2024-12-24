@@ -1,6 +1,6 @@
 @use "../../scss/functions.scss";
 
-.button__add {
+.Static {
 	min-height: 60px;
 	height: functions.percent-of-h(60);
 	font-size: 24px;
@@ -11,5 +11,37 @@
 	border-radius: 16px;
 	color: white;
 	font-weight: 600;
+}
+.activeGreen      {
+	min-height: 60px;
+	height: functions.percent-of-h(60);
+	font-size: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #b7e5c1;
+	border-radius: 16px;
+	color: white;
+	font-weight: 600;
+}
+.activeGreen:active        {
+	border: 2px solid #009f2273;
+	background-color: #b7e5c1;
+}
+.activeRed {
+	min-height: 60px;
+	height: functions.percent-of-h(60);
+	font-size: 24px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #b7e5c1;
+	border-radius: 16px;
+	color: white;
+	font-weight: 600;
+}
+.activeRed:active {
+	border: 2px solid #009f2273;
+	background-color: #b7e5c1;
 }
 

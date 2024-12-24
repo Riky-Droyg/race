@@ -6,8 +6,7 @@ import { NavLink } from "react-router-dom";
 const ButtonReturn = ({ link = "/MainMenu", state }) => {
 	let text = `Готівка: ${state.cash_on_hand.toLocaleString("en-US")}`;
 	return (
-		<NavLink to={link}>
-			<div className={s.wrapper}>
+			<NavLink className={s.wrapper} to={link}>
 				<img
 					className={s.ImgArrow}
 					src={ImgArrow}
@@ -15,8 +14,7 @@ const ButtonReturn = ({ link = "/MainMenu", state }) => {
 				/>
 				<div className={s.Text}>{text}</div>
 				<div className={s.block}></div>
-			</div>
-		</NavLink>
+			</NavLink>
 	);
 };
 export default ButtonReturn;

@@ -13,6 +13,7 @@ function MainMenu(props) {
 			<div className={s.marquee}>
 				<div className={s.marqueeText}>Мрія</div>
 			</div>
+			<div className={s.paddingTop}></div>
 			<NavLink to="/Purse">
 				<HeaderBar
 					number={props.state.cash_on_hand}
@@ -161,19 +162,25 @@ function MainMenu(props) {
 			</NavLink>
 
 			<div className={s.buttonContainer}>
-				<Button
-					name="Купити"
-					background="#B7E5C1"
-					color="black"
-					fontSize="24px"
-				/>
-				<Button
-					name="Продати"
-					background="#E5B7B7"
-					color="black"
-					fontSize="24px"
-
-				/>
+				<NavLink to={"/InputScreenBuy"}>
+					<Button
+						height={"100%"}
+						name="Купити"
+						background="#B7E5C1"
+						color="black"
+						fontSize="24px"
+					/>
+				</NavLink>
+				<NavLink to={"/InputScreenSale"}>
+					<Button
+						height={"100%"}
+						name="Продати"
+						background="#E5B7B7"
+						color="black"
+						fontSize="24px"
+					/>
+				</NavLink>
+				
 			</div>
 		</div>
 	);
