@@ -14,6 +14,9 @@ import ActiveIncomeConteiner from "./pages/ActiveIncome/ActiveIncomeConteiner";
 import PassiveIncomeConteiner from "./pages/PassiveIncome/PassiveIncomeConteiner";
 import ExpenseFormConteiner from "./pages/ExpenseForm/ExpenseFormConteiner";
 import DebetsFormConteiner from "./pages/DebetsForm/DebetsFormConteiner";
+import InputScreenBuyConteiner from "./pages/InputScreenBuy/InputScreenBuyConteiner";
+import InputScreenSaleConteiner from "./pages/InputScreenSale/InputScreenSaleConteiner";
+import BuyBuisneConteiner from "./pages/BuyBuisnes/BuyBuisnesConteiner";
 
 function App(props) {
 	const dispatch = useDispatch();
@@ -89,6 +92,18 @@ function App(props) {
 						<Route
 							path="/DebetsForm"
 							element={<DebetsFormConteiner />}
+						/>
+						<Route
+							path="/InputScreenBuy"
+							element={<InputScreenBuyConteiner />}
+						/>
+						<Route
+							path="/InputScreenSale"
+							element={<InputScreenSaleConteiner />}
+						/>
+						<Route
+							path="/BuyBuisnes"
+							element={<BuyBuisneConteiner />}
 						/>
 					</Routes>
 					{/* CONTENT */}

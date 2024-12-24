@@ -2,14 +2,15 @@
 
 .wrapper {
 	// border: solid 3px red;
+	min-height: 36px;
 	height: functions.percent-of-h(36);
 	width: 100%;
-	// padding: functions.dvh(9) 0px;
-	display: flex;
 	color: black;
+	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 20px;
+	// flex-grow: 1;
 }
 .ImgArrow {
 	width: 20px;

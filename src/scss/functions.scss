@@ -5,9 +5,6 @@
 	@return calc(#{$pixels} / $screen-height * 100dvh);
 }
 
-// @function percent-of($percent, $size: 662) {
-// 	@return $size * ($percent / 100);
-// }
 @function percent-of-h($value, $total: 618) {
 	@return ($value / $total) * 100%;
   }
