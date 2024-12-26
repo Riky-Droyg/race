@@ -4,19 +4,19 @@
 	/* стилі для загального контейнера */
 	width: 100%;
 	height: 100%;
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 .contentWrapper {
 	width: 100%;
-	min-height: 112px;
-	height: functions.percent-of-h(112);
+	min-height: 182px;
+	height: functions.percent-of-h(182);
 }
 
 .infoWrapper {
 	width: 100%;
 	min-height: 47px;
-	height: 42%;
+	height: 25.82%;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: 1fr;
@@ -44,15 +44,27 @@
 	align-items: center;
 }
 .type {
-	font-size: 24px;
-	min-height: 44px;
-	height: 39.4%;
+	min-height: 34px;
+	height: 18.68%;
 	display: grid;
-	grid-template-columns: 1fr 1fr 1fr;
+	grid-template-columns: repeat(5, 1fr);
 	grid-template-rows: 100%;
 	column-gap: 8px;
+	font-size: 22px;
+	
 }
 .margin {
-	min-height: 15px;
-	height: 19.6%;
+	min-height: 8px;
+	height: 4.40%;
+}
+.border{
+	border-top: 2px dashed black;
+}
+.paddingTop{
+	min-height: 20px;
+	height: 10.99%;
+}
+.paddingBottom{
+	min-height: 26px;
+	height: 14.29%;
 }

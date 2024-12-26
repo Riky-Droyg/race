@@ -17,6 +17,8 @@ import DebetsFormConteiner from "./pages/DebetsForm/DebetsFormConteiner";
 import InputScreenBuyConteiner from "./pages/InputScreenBuy/InputScreenBuyConteiner";
 import InputScreenSaleConteiner from "./pages/InputScreenSale/InputScreenSaleConteiner";
 import BuyBuisneConteiner from "./pages/BuyBuisnes/BuyBuisnesConteiner";
+import BuySharesConteiner from "./pages/BuyShares/BuySharesConteiner";
+import BuyBuisnesConteiner from "./pages/BuyBuisnes/BuyBuisnesConteiner";
 
 function App(props) {
 	const dispatch = useDispatch();
@@ -103,7 +105,11 @@ function App(props) {
 						/>
 						<Route
 							path="/BuyBuisnes"
-							element={<BuyBuisneConteiner />}
+							element={<BuyBuisnesConteiner />}
+						/>
+						<Route
+							path="/BuyShares"
+							element={<BuySharesConteiner />}
 						/>
 					</Routes>
 					{/* CONTENT */}

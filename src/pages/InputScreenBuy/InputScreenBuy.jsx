@@ -47,7 +47,7 @@ function InputScreenBuy(props) {
 					style={styleButton} // Передаємо стилі кнопки
 				/>
 			</NavLink>
-			<NavLink to={"/Hello"}>
+			<NavLink to={"/BuyShares"}>
 				<Button
 					name={"Акції"}
 					buttonActive={s.activeGreen} // Передаємо клас для активації кнопки
