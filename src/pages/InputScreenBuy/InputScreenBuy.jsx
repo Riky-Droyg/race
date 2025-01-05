@@ -27,7 +27,7 @@ function InputScreenBuy(props) {
 					style={styleButton} // Передаємо стилі кнопки
 				/>
 			</NavLink>
-			<NavLink to={"/Hello"}>
+			<NavLink to={"/BuyRealty"}>
 				<Button
 					name={"Квартира і будинок "}
 					buttonActive={s.activeGreen} // Передаємо клас для активації кнопки
@@ -37,9 +37,9 @@ function InputScreenBuy(props) {
 					style={styleButton} // Передаємо стилі кнопки
 				/>
 			</NavLink>
-			<NavLink to={"/Hello"}>
+			<NavLink to={"/BuyEarth"}>
 				<Button
-					name={"Бізнес"}
+					name={"Земля"}
 					buttonActive={s.activeGreen} // Передаємо клас для активації кнопки
 					fontSize="16px" // Передаємо шрифт
 					color="black" // Колір тексту

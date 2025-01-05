@@ -1,9 +1,9 @@
-import { AddExpensesAC, AddBuisnesAC, DeleteBuisnesAC, АuthorizationAC, DeleteExpensesAC, AddActiveIncomeAC, DeleteActiveIncomeAC, AddDebetsAC, AddDebtsAC, DeleteDebtsAC, AddSharesAC, sellingSharesAC, PurseAC, PaycheckAC } from "./MainReduser";
+import { AddExpensesAC, AddBuisnesAC, DeleteBuisnesAC, АuthorizationAC, DeleteExpensesAC, AddActiveIncomeAC, DeleteActiveIncomeAC, AddDebetsAC, AddDebtsAC, DeleteDebtsAC, AddSharesAC, sellingSharesAC, PurseAC, PaycheckAC } from "./ActionCreators";
 
 
 
-export const AddBuisnesThunks = (text, value) => (dispatch, getState) => {
-	dispatch(AddBuisnesAC(text, value));
+export const AddBuisnesThunks = (sizeBuisnes, investment, income) => (dispatch, getState) => {
+	dispatch(AddBuisnesAC(sizeBuisnes, investment, income));
 	let state = getState().MainReduser;
 	console.log(state);
 	fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {

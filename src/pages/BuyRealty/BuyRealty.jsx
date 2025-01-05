@@ -1,14 +1,16 @@
 import React, { useRef, useState } from "react";
-import s from "./BuyShares.module.scss";
+import s from "./BuyRealty.module.scss";
 import Button from "../../components/Button/Button";
 import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnConteiner";
 import HeaderText from "../../components/HeaderText/HeaderText";
-import { NavLink } from "react-router-dom";
+import EarnIcon from "../../img/Earn.svg";
+import Home from "../../img/home.svg";
+import TypeHome from "../../img/TypeHome.svg";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
 
-function BuyShares(props) {
+function BuyRealty(props) {
 	// Створюємо стан для збереження вибраної кнопки
-	const [selectedButton, setSelectedButton] = useState("ВБ");
+	const [selectedButton, setSelectedButton] = useState("К1");
 	const [investment, setInvestments] = useState("");
 	const [credit, setCredit] = useState("");
 	const [deposit, setDeposit] = useState("");
@@ -84,12 +86,13 @@ function BuyShares(props) {
 		<div className={s.wrapper}>
 			<ButtonReturnConteiner />
 
-			<HeaderText text="Придбати акції" />
+			<HeaderText text="Придбати квартиру" />
 
 			<div className={s.contentWrapper}>
 				<div className={s.infoWrapper}>
-					<div className={s.info}>
-						<div className={s.infoText}>Вартість ваучера</div>
+					<div className={`${s.info} ${s.totalValue}`}>
+						<div className={s.infoText}>Загальна вартість</div>
+
 						<div
 							className={s.wrapperInput}
 							onClick={handleClickInvestmentRef}
@@ -107,14 +110,16 @@ function BuyShares(props) {
 								placeholder="0"
 								maxLength={7}
 							/>
-						</div>{" "}
+						</div>
 					</div>
-					<div className={s.info}>
-						<div className={s.infoText}> Кількість</div>
+
+					<div className={`${s.info} ${s.credit}`}>
+						<div className={s.infoText}>Кредит</div>
 						<div
 							className={s.wrapperInput}
 							onClick={handleClickCreditRef}
 						>
+							<span className={s.dolar}>$</span>
 
 							<span className={`${credit.length === 0 ? s.placeholder : ""}`}>{credit}</span>
 
@@ -127,49 +132,15 @@ function BuyShares(props) {
 								placeholder="0"
 								maxLength={7}
 							/>
-						</div>{" "}
+						</div>
 					</div>
-				</div>
-				<div className={s.margin}></div>
-				<div className={s.type}>
-					<SelectionButtom
-						text={"КРС"}
-						isSelected={selectedButton === "КРС"}
-						onClick={() => handleButtonClick("КРС")}
-					/>
-					<SelectionButtom
-						text={"КЧГ"}
-						isSelected={selectedButton === "КЧГ"}
-						onClick={() => handleButtonClick("КЧГ")}
-					/>
-					<SelectionButtom
-						text={"УКТ"}
-						isSelected={selectedButton === "УКТ"}
-						onClick={() => handleButtonClick("УКТ")}
-					/>
-					<SelectionButtom
-						text={"ДР"}
-						isSelected={selectedButton === "ДР"}
-						onClick={() => handleButtonClick("ДР")}
-					/>
-					<SelectionButtom
-						text={"ЯКХЗ"}
-						isSelected={selectedButton === "ЯКХЗ"}
-						onClick={() => handleButtonClick("ЯКХЗ")}
-					/>
-				</div>
-
-				<div className={s.paddingTop}></div>
-				<div className={s.border}></div>
-				<div className={s.paddingBottom}></div>
-
-				<div className={s.infoWrapper}>
-					<div className={s.info}>
-						<div className={s.infoText}>Хочу придбати</div>
+					<div className={`${s.info} ${s.deposit}`}>
+						<div className={s.infoText}>Завдаток</div>
 						<div
 							className={s.wrapperInput}
 							onClick={handleClickDepositRef}
 						>
+							<span className={s.dolar}>$</span>
 
 							<span className={`${deposit.length === 0 ? s.placeholder : ""}`}>{deposit}</span>
 
@@ -182,10 +153,10 @@ function BuyShares(props) {
 								placeholder="0"
 								maxLength={7}
 							/>
-						</div>{" "}
+						</div>
 					</div>
-					<div className={s.info}>
-						<div className={s.infoText}> Загальна вартість</div>
+					<div className={`${s.info} ${s.monthlyInterest}`}>
+						<div className={s.infoText}>Щомісячні відсотки</div>
 						<div
 							className={s.wrapperInput}
 							onClick={handleClickInterestRef}
@@ -205,16 +176,129 @@ function BuyShares(props) {
 							/>
 						</div>
 					</div>
-				</div>
-			</div>
-			<div className={s.marginBottom}></div>
+					<div className={`${s.info} ${s.rent}`}>
+						<div className={s.infoText}> Орендна плата</div>
+						<div
+							className={s.wrapperInput}
+							onClick={handleClickIncomeRef}
+						>
+							<span className={s.dolar}>$</span>
 
+							<span className={`${income.length === 0 ? s.placeholder : ""}`}>{income}</span>
+
+							<input
+								ref={incomeRef}
+								className={s.infoNumber}
+								type="text"
+								value={income}
+								onChange={handleChangeIncome} // Виклик функції при зміні
+								placeholder="0"
+								maxLength={7}
+							/>
+						</div>
+					</div>
+					<div className={`${s.info} ${s.realCost}`}>
+						<div className={s.infoText}> Реальна вартість</div>
+						<div
+							className={s.wrapperInput}
+							onClick={handleClickRealInvestmentRef}
+						>
+							<span className={s.dolar}>$</span>
+
+							<span className={`${realInvestment.length === 0 ? s.placeholder : ""}`}>{realInvestment}</span>
+
+							<input
+								ref={realInvestmentRef}
+								className={s.infoNumber}
+								type="text"
+								value={realInvestment}
+								onChange={handleChangeRealInvestment} // Виклик функції при зміні
+								placeholder="0"
+								maxLength={7}
+							/>
+						</div>
+					</div>
+					<div className={`${s.info} ${s.gridImg}`}>
+						<Button
+						name={selectedButton}
+						height="43.27%"
+						style={{borderRadius:"0", padding:"0 10px",}}/>
+
+						<img
+							className={s.EarnIcon}
+							src={Home}
+							alt="Example SVG"
+						/>
+					</div>
+				</div>
+
+			</div>
+			<div className={s.margin}></div>
+			<div className={s.type}>
+					<SelectionButtom
+						text={"К1"}
+						isSelected={selectedButton === "К1"}
+						onClick={() => handleButtonClick("К1")}
+					/>
+					<SelectionButtom
+						text={"К2"}
+						isSelected={selectedButton === "К2"}
+						onClick={() => handleButtonClick("К2")}
+					/>
+					<SelectionButtom
+						text={"К3"}
+						isSelected={selectedButton === "К3"}
+						onClick={() => handleButtonClick("К3")}
+					/>
+					<SelectionButtom
+						text={"К4"}
+						isSelected={selectedButton === "К4"}
+						onClick={() => handleButtonClick("К4")}
+					/>
+					<SelectionButtom
+						text={"ДО"}
+						isSelected={selectedButton === "ДО"}
+						onClick={() => handleButtonClick("ДО")}
+					/>
+					<SelectionButtom
+						text={"К1с"}
+						isSelected={selectedButton === "К1с"}
+						onClick={() => handleButtonClick("К1с")}
+					/>
+					<SelectionButtom
+						text={"К2с"}
+						isSelected={selectedButton === "К2с"}
+						onClick={() => handleButtonClick("К2с")}
+					/>
+					<SelectionButtom
+						text={"К1о"}
+						isSelected={selectedButton === "К1о"}
+						onClick={() => handleButtonClick("К1о")}
+					/>
+					<SelectionButtom
+						text={"К2о"}
+						isSelected={selectedButton === "К2о"}
+						onClick={() => handleButtonClick("К2о")}
+					/>
+					<SelectionButtom
+						text={"К3о"}
+						isSelected={selectedButton === "К3о"}
+						onClick={() => handleButtonClick("К3о")}
+					/>
+				</div>
 			<Button
 				style={{ marginTop: "auto" }}
-				name={"Придбати"}
+				name={"Придбати за готівку"}
+				fontSize={24}
+			/>
+
+			<Button
+				style={{ marginTop: "11px" }}
+				fontSize={24}
+				name={"Придбати в кредит"}
 			/>
 		</div>
 	);
 }
 
-export default BuyShares;
+export default BuyRealty;

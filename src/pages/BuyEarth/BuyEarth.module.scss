@@ -1,0 +1,143 @@
+@use "../../scss/functions.scss";
+
+.wrapper {
+	/* стилі для загального контейнера */
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.contentWrapper {
+	width: 100%;
+	min-height: 203px;
+	height: functions.percent-of-h(203);
+}
+
+.infoWrapper {
+	width: 100%;
+	min-height: 140px;
+	height: 69%;
+	display: grid;
+	grid-template-areas:
+		"header header"
+		"infoA img"
+		"infoB img";
+	grid-template-columns: 1fr 1fr;
+}
+.infoWrapperBottom {
+	width: 100%;
+	min-height: 47px;
+	height: 22.66%;
+	display: flex;
+	border: 1px solid black;
+}
+.gridHeader {
+	grid-area: header;
+	border: 1px solid black;
+}
+.gridInfoA {
+	grid-area: infoA;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+}
+.gridInfoB {
+	grid-area: infoB;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	border-bottom: 1px solid black;
+}
+
+.info {
+	min-height: 47px;
+	height: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr;
+	column-gap: 10px;
+	justify-content: space-between;
+	align-items: center;
+	// border: 1px solid black;
+	padding: 10px;
+	font-size: 12px;
+	font-weight: 400;
+}
+.gridImg {
+	grid-area: img;
+	align-self: end;
+	padding-top: 0px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 23px;
+}
+.typeIcon {
+	align-self: end;
+	justify-self: end;
+}
+.EarnIcon {
+	align-self: end;
+	justify-self: start;
+}
+.infoNumber {
+	opacity: 0;
+	position: absolute;
+	pointer-events: auto;
+	font-size: 14px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 1ch;
+	height: 100%;
+	text-align: right;
+}
+
+.type {
+	min-height: 34px;
+	height: 18.68%;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	grid-template-rows: 100%;
+	column-gap: 8px;
+	font-size: 22px;
+}
+.margin {
+	min-height: 27px;
+	height: 4.4%;
+}
+.border {
+	border-top: 2px dashed black;
+}
+.paddingTop {
+	min-height: 7px;
+	height: 3.7%;
+}
+.paddingBottom {
+	min-height: 7px;
+	height: 3.7%;
+}
+.TypeIcon {
+	min-height: 44px;
+	height: 50%;
+	justify-self: end; /* Горизонтальне центрування */
+	align-self: end; /* Вертикальне центрування */
+}
+.EarnIcon {
+	min-height: 70px;
+	height: 75%;
+	justify-self: start; /* Горизонтальне центрування */
+	align-self: end; /* Вертикальне центрування */
+}
+.wrapperInput {
+	font-size: 14px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	text-align: right;
+	position: relative;
+}
+.placeholder::before {
+	content: "0";
+	color: #b3b3b3;
+}

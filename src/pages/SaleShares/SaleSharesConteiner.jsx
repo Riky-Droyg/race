@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import BuyShares from "./BuyShares";
+import SaleShares from "./SaleShares";
 
 let mapStatetoProps = (state) => {
 	return {
@@ -18,6 +18,6 @@ let mapDispatchToProps = (dispatch) => {
 	};
 };
 
-const BuySharesConteiner = connect(mapStatetoProps, mapDispatchToProps)(BuyShares);
+const SaleSharesConteiner = connect(mapStatetoProps, mapDispatchToProps)(SaleShares);
 
-export default BuySharesConteiner;
+export default SaleSharesConteiner;

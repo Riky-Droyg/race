@@ -20,7 +20,7 @@ function MainMenu(props) {
 					text={"Готівки на руках"}
 					styleFontText={{ fontSize: "15px" }}
 					style={{
-						height: "14.15%",
+						height: "12.69%",
 					}}
 				/>
 			</NavLink>

@@ -17,7 +17,7 @@ function InputScreenSale(props) {
 		<div className={s.financialOverview}>
 			<ButtonReturnConteiner />
 			<HeaderText text="Що будеш продавати?" />
-			<NavLink to={"/Hello"}>
+			<NavLink to={"/SaleShares"}>
 				<Button
 					name={"Акції"}
 					buttonActive={s.activeGreen} // Передаємо клас для активації кнопки
@@ -27,7 +27,7 @@ function InputScreenSale(props) {
 					style={styleButton} // Передаємо стилі кнопки
 				/>
 			</NavLink>
-			<NavLink to={"/Hello"}>
+			<NavLink to={"/SaleRealty"}>
 				<Button
 					name={"Квартира | Будинок"}
 					buttonActive={s.activeGreen} // Передаємо клас для активації кнопки
@@ -37,7 +37,7 @@ function InputScreenSale(props) {
 					style={styleButton} // Передаємо стилі кнопки
 				/>
 			</NavLink>
-			<NavLink to={"/Hello"}>
+			<NavLink to={"/SaleEarn"}>
 				<Button
 					name={"Земля"}
 					buttonActive={s.activeGreen} // Передаємо клас для активації кнопки

@@ -321,7 +321,7 @@ template {
 .app {
 	width: 100vw;
 	height: 100dvh;
-	padding: 22px;
+	padding: 0px 22px 22px 22px;
 	margin: 0 auto;
 }
 .wrapper {

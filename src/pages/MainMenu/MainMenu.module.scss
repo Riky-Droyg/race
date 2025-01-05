@@ -35,12 +35,12 @@
 	}
 }
 .paddingTop{
-	height: functions.percent-of-h(25);
+	height: functions.percent-of-h(45);
 }
 .incomeOverview {
 	width: 100%;
 	min-height: 196px;
-	height: functions.percent-of-h(196);
+	height: functions.percent-of-h(189);
 	display: grid;
 	grid-template-columns: calc(50% - 3px) calc(50% - 3px);
 	grid-template-rows: 1fr 1fr 1fr;
@@ -55,7 +55,7 @@
 	overflow: hidden;
 	width: 100%;
 	min-height: 192px;
-	height: functions.percent-of-h(192);
+	height: functions.percent-of-h(185);
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-template-rows: 1fr 1fr;

@@ -9,17 +9,21 @@
 }
 .contentWrapper {
 	width: 100%;
-	min-height: 182px;
-	height: functions.percent-of-h(182);
+	min-height: 214px;
+	height: functions.percent-of-h(214);
 }
 
 .infoWrapper {
 	width: 100%;
 	min-height: 47px;
-	height: 25.82%;
+	height: 21.96%;
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
 	grid-template-rows: 1fr;
+	box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
+}
+.infoGrid {
+	border-right: none;
 }
 
 .info {
@@ -49,9 +53,10 @@
 	height: 100%;
 	text-align: right;
 }
+
 .type {
 	min-height: 34px;
-	height: 18.68%;
+	height: 15.89%;
 	display: grid;
 	grid-template-columns: repeat(5, 1fr);
 	grid-template-rows: 100%;
@@ -59,24 +64,46 @@
 	font-size: 22px;
 }
 .margin {
-	min-height: 8px;
-	height: 4.4%;
+	min-height: 6px;
+	height: 2.8%;
 }
 .border {
 	border-top: 2px dashed black;
 }
 .paddingTop {
-	min-height: 20px;
-	height: 10.99%;
+	min-height: 50px;
+	height: 23.36%;
 }
 .paddingBottom {
-	min-height: 26px;
-	height: 14.29%;
+	min-height: 13px;
+	height: 6.07%;
 }
 .marginBottom {
 	min-height: 27px;
 	height: 4.4%;
 }
+.infoWrapperTwo {
+	width: 100%;
+	min-height: 47px;
+	height: 43.93%;
+	display: grid;
+	grid-template-areas: "a b" "c c";
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: 1fr;
+}
+.gridInfoA {
+	grid-area: a;
+	border-bottom: none;
+	border-right: none;
+}
+.gridInfoB {
+	grid-area: b;
+	border-bottom: none;
+}
+.gridInfoC {
+	grid-area: c;
+}
+
 .wrapperInput {
 	font-size: 14px;
 	display: flex;

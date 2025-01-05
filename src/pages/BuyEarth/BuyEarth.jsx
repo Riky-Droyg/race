@@ -1,14 +1,14 @@
 import React, { useRef, useState } from "react";
-import s from "./BuyShares.module.scss";
+import s from "./BuyEarth.module.scss";
 import Button from "../../components/Button/Button";
 import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnConteiner";
 import HeaderText from "../../components/HeaderText/HeaderText";
-import { NavLink } from "react-router-dom";
-import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
+import EarnIcon from "../../img/Earn.svg";
+import TypeIcon from "../../img/TypeIcon.svg";
 
-function BuyShares(props) {
+function BuyEarth(props) {
 	// Створюємо стан для збереження вибраної кнопки
-	const [selectedButton, setSelectedButton] = useState("ВБ");
+	const [selectedButton, setSelectedButton] = useState("К1");
 	const [investment, setInvestments] = useState("");
 	const [credit, setCredit] = useState("");
 	const [deposit, setDeposit] = useState("");
@@ -84,12 +84,12 @@ function BuyShares(props) {
 		<div className={s.wrapper}>
 			<ButtonReturnConteiner />
 
-			<HeaderText text="Придбати акції" />
+			<HeaderText text="Придбати бізнес" />
 
 			<div className={s.contentWrapper}>
 				<div className={s.infoWrapper}>
-					<div className={s.info}>
-						<div className={s.infoText}>Вартість ваучера</div>
+					<div className={`${s.info} ${s.gridHeader}`}>
+						<div className={s.infoText}>Площа ділянки (соток)</div>
 						<div
 							className={s.wrapperInput}
 							onClick={handleClickInvestmentRef}
@@ -107,14 +107,15 @@ function BuyShares(props) {
 								placeholder="0"
 								maxLength={7}
 							/>
-						</div>{" "}
+						</div>
 					</div>
-					<div className={s.info}>
-						<div className={s.infoText}> Кількість</div>
+					<div className={`${s.info} ${s.gridInfoA}`}>
+						<div className={s.infoText}> Загальна вартість</div>
 						<div
 							className={s.wrapperInput}
 							onClick={handleClickCreditRef}
 						>
+							<span className={s.dolar}>$</span>
 
 							<span className={`${credit.length === 0 ? s.placeholder : ""}`}>{credit}</span>
 
@@ -127,49 +128,15 @@ function BuyShares(props) {
 								placeholder="0"
 								maxLength={7}
 							/>
-						</div>{" "}
+						</div>
 					</div>
-				</div>
-				<div className={s.margin}></div>
-				<div className={s.type}>
-					<SelectionButtom
-						text={"КРС"}
-						isSelected={selectedButton === "КРС"}
-						onClick={() => handleButtonClick("КРС")}
-					/>
-					<SelectionButtom
-						text={"КЧГ"}
-						isSelected={selectedButton === "КЧГ"}
-						onClick={() => handleButtonClick("КЧГ")}
-					/>
-					<SelectionButtom
-						text={"УКТ"}
-						isSelected={selectedButton === "УКТ"}
-						onClick={() => handleButtonClick("УКТ")}
-					/>
-					<SelectionButtom
-						text={"ДР"}
-						isSelected={selectedButton === "ДР"}
-						onClick={() => handleButtonClick("ДР")}
-					/>
-					<SelectionButtom
-						text={"ЯКХЗ"}
-						isSelected={selectedButton === "ЯКХЗ"}
-						onClick={() => handleButtonClick("ЯКХЗ")}
-					/>
-				</div>
-
-				<div className={s.paddingTop}></div>
-				<div className={s.border}></div>
-				<div className={s.paddingBottom}></div>
-
-				<div className={s.infoWrapper}>
-					<div className={s.info}>
-						<div className={s.infoText}>Хочу придбати</div>
+					<div className={`${s.info} ${s.gridInfoB}`}>
+						<div className={s.infoText}> Ціна за сотку</div>
 						<div
 							className={s.wrapperInput}
 							onClick={handleClickDepositRef}
 						>
+							<span className={s.dolar}>$</span>
 
 							<span className={`${deposit.length === 0 ? s.placeholder : ""}`}>{deposit}</span>
 
@@ -182,10 +149,29 @@ function BuyShares(props) {
 								placeholder="0"
 								maxLength={7}
 							/>
-						</div>{" "}
+						</div>
 					</div>
+					<div className={`${s.info} ${s.gridImg}`}>
+						<img
+							className={s.typeIcon}
+							src={TypeIcon}
+							alt="Example SVG"
+						/>
+						<img
+							className={s.EarnIcon}
+							src={EarnIcon}
+							alt="Example SVG"
+						/>
+					</div>
+				</div>
+
+				<div className={s.paddingTop}></div>
+				<div className={s.border}></div>
+				<div className={s.paddingBottom}></div>
+
+				<div className={s.infoWrapperBottom}>
 					<div className={s.info}>
-						<div className={s.infoText}> Загальна вартість</div>
+						<div className={s.infoText}>Хочу придбати</div>
 						<div
 							className={s.wrapperInput}
 							onClick={handleClickInterestRef}
@@ -205,9 +191,30 @@ function BuyShares(props) {
 							/>
 						</div>
 					</div>
+					<div className={s.info}>
+						<div className={s.infoText}> Загальна вартість</div>
+						<div
+							className={s.wrapperInput}
+							onClick={handleClickIncomeRef}
+						>
+							<span className={s.dolar}>$</span>
+
+							<span className={`${income.length === 0 ? s.placeholder : ""}`}>{income}</span>
+
+							<input
+								ref={incomeRef}
+								className={s.infoNumber}
+								type="text"
+								value={income}
+								onChange={handleChangeIncome} // Виклик функції при зміні
+								placeholder="0"
+								maxLength={7}
+							/>
+						</div>
+					</div>
 				</div>
 			</div>
-			<div className={s.marginBottom}></div>
+			<div className={s.margin}></div>
 
 			<Button
 				style={{ marginTop: "auto" }}
@@ -217,4 +224,4 @@ function BuyShares(props) {
 	);
 }
 
-export default BuyShares;
+export default BuyEarth;

@@ -18,11 +18,12 @@ export let АuthorizationAC = (data) => {
 		data,
 	};
 };
-export let AddBuisnesAC = (sizeBuisnes, value) => {
+export let AddBuisnesAC = (sizeBuisnes, investment, income) => {
 	return {
 		type: ADD_BUISNES,
 		sizeBuisnes,
-		value,
+		investment,
+		income,
 	};
 };
 

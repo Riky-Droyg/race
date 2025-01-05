@@ -1,0 +1,146 @@
+@use "../../scss/functions.scss";
+
+.wrapper {
+	/* стилі для загального контейнера */
+	width: 100%;
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+.contentWrapper {
+	width: 100%;
+	min-height: 203px;
+	height: functions.percent-of-h(203);
+}
+
+.infoWrapper {
+	width: 100%;
+	// min-height: 140px;
+	height: 100%;
+	display: grid;
+	grid-template-areas:
+		"totalValue credit"
+		"deposit monthlyInterest"
+		"rent img"
+		"realCost img";
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: repeat(4, 1fr);
+}
+.info {
+	min-height: 47px;
+	height: 100%;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: 1fr ;
+	column-gap: 10px;
+	justify-content: space-between;
+	align-items: center;
+	border: 1px solid black;
+	border-bottom: none;
+	border-right: none;
+	padding: 10px;
+	font-size: 12px;
+	font-weight: 400;
+}
+.infoWrapperBottom {
+	width: 100%;
+	min-height: 47px;
+	height: 22.66%;
+	display: flex;
+	border: 1px solid black;
+}
+.totalValue {
+	grid-area: totalValue;
+}
+.credit {
+	grid-area: credit;
+	border-right: 1px solid black;
+}
+.deposit {
+	grid-area: deposit;
+}
+.monthlyInterest {
+	grid-area: monthlyInterest;
+	border-right: 1px solid black;
+}
+.realCost {
+	grid-area: realCost;
+	border-bottom: 1px solid black;
+}
+.gridImg {
+	grid-area: img;
+	padding: 0px 0px 0px 10px;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+
+}
+.infoText{
+
+}
+.infoNumber {
+	opacity: 0;
+	position: absolute;
+	pointer-events: auto;
+	font-size: 14px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 1ch;
+	height: 100%;
+	text-align: right;
+}
+.type {
+	min-height: 72px;
+	height: 10.88%;
+	display: grid;
+	grid-template-columns: repeat(5, 1fr);
+	// grid-template-rows: 100%;
+	column-gap: 9px;
+	row-gap: 4px;
+	font-size: 22px;
+	margin-bottom: 12px;
+}
+
+.margin {
+	min-height: 27px;
+	height: 4.4%;
+}
+.border {
+	border-top: 2px dashed black;
+}
+.paddingTop {
+	min-height: 7px;
+	height: 3.7%;
+}
+.paddingBottom {
+	min-height: 7px;
+	height: 3.7%;
+}
+.TypeIcon {
+	min-height: 44px;
+	height: 50%;
+	justify-self: end; /* Горизонтальне центрування */
+	align-self: end; /* Вертикальне центрування */
+}
+.EarnIcon {
+	min-height: 70px;
+	height: 75%;
+	justify-self: start; /* Горизонтальне центрування */
+	align-self: end; /* Вертикальне центрування */
+}
+
+.wrapperInput {
+	font-size: 14px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	text-align: right;
+	position: relative;
+}
+.placeholder::before {
+	content: "0";
+	color: #B3B3B3;
+}

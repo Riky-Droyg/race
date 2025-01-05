@@ -1,5 +1,7 @@
 import { connect } from "react-redux";
 import BuyBuisnes from "./BuyBuisnes";
+import { AddBuisnesAC } from "../../components/Redux/ActionCreators";
+import { AddBuisnesThunks } from "../../components/Redux/Redux-Thunk";
 
 let mapStatetoProps = (state) => {
 	return {
@@ -9,12 +11,9 @@ let mapStatetoProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
 	return {
-		// AddActiveIncomeAC: (value) => {
-		// 	dispatch(AddActiveIncomeThunks(value));
-		// },
-		// DeleteActiveIncomeAC: (index) => {
-		// 	dispatch(DeleteActiveIncomeThunks(index));
-		// },
+		AddBuisnesThunks: (sizeBuisnes, investment, income) => {
+			dispatch(AddBuisnesThunks(sizeBuisnes, investment, income));
+		},
 	};
 };
 

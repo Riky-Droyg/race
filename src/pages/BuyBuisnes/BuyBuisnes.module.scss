@@ -4,8 +4,8 @@
 	/* стилі для загального контейнера */
 	width: 100%;
 	height: 100%;
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 .contentWrapper {
 	width: 100%;
@@ -18,10 +18,26 @@
 	min-height: 47px;
 	height: 42%;
 	display: grid;
-	grid-template-columns: repeat(2, 1fr);
+	grid-template-columns: repeat(2, 50%);
 	grid-template-rows: 1fr;
 }
-
+.wrapperInput {
+	font-size: 14px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	text-align: right;
+	position: relative;
+}
+.dolar {
+	padding: 0px 2px 0px 5px;
+}
+.placeholder::before {
+	content: "0";
+	color: #B3B3B3;
+}
 .info {
 	min-height: 47px;
 	height: 100%;
@@ -36,12 +52,21 @@
 	font-size: 12px;
 	font-weight: 400;
 }
+.info:first-child {
+	border-right: none;
+}
 
 .infoNumber {
+	opacity: 0;
+	pointer-events: auto;
 	font-size: 14px;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
+	width: 1ch;
+	height: 100%;
+	text-align: right;
+	position: absolute;
 }
 .type {
 	font-size: 24px;
@@ -55,4 +80,8 @@
 .margin {
 	min-height: 15px;
 	height: 19.6%;
+}
+.marginBottom {
+	min-height: 27px;
+	height: 4.4%;
 }

@@ -20,9 +20,9 @@ const MainReduser = (state = initialState, action) => {
 		}
 		case ADD_BUISNES: {
 			let newInem = {
-				name: "Кіоск",
-				sum: action.value,
-				type: action.sizeBuisnes,
+				name: action.sizeBuisnes,
+				sum: +action.income,
+				type: "Малий Бізнес",
 			};
 			const updatedList = [...state.passive_income.list, newInem];
 			// Підсумовуємо всі значення sum в масиві list
@@ -33,11 +33,12 @@ const MainReduser = (state = initialState, action) => {
 			let newPaycheck = +newTotalInconme - +state.expenses.total;
 			const updatedState = {
 				...state,
+				cash_on_hand: state.cash_on_hand - action.investment,
 				total_income: newTotalInconme,
 				paycheck: +newPaycheck,
 				passive_income: {
 					...state.passive_income,
-					total: totalSum,
+					total: +totalSum,
 					list: updatedList,
 				},
 			};
@@ -296,93 +297,4 @@ const MainReduser = (state = initialState, action) => {
 	}
 };
 
-export let АuthorizationAC = (data) => {
-	return {
-		type: AUTORIZATION,
-		data,
-	};
-};
-export let AddBuisnesAC = (sizeBuisnes, value) => {
-	return {
-		type: ADD_BUISNES,
-		sizeBuisnes,
-		value,
-	};
-};
-
-export let DeleteBuisnesAC = (index) => {
-	return {
-		type: DELETE_BUISNES,
-		index,
-	};
-};
-
-export let AddExpensesAC = (text, value) => {
-	return {
-		type: ADD_EXPENSES,
-		text,
-		value,
-	};
-};
-export let DeleteExpensesAC = (index) => {
-	return {
-		type: DELETE_EXPENSES,
-		index,
-	};
-};
-export let AddActiveIncomeAC = (value) => {
-	return {
-		type: ADD_ACTIVE_INCOME,
-		value,
-	};
-};
-export let DeleteActiveIncomeAC = () => {
-	return {
-		type: DELETE_ACTIVE_INCOME,
-	};
-};
-
-export let AddDebtsAC = (text, value) => {
-	return {
-		type: ADD_DEBTS,
-		text,
-		value,
-	};
-};
-
-export let DeleteDebtsAC = (index) => {
-	return {
-		type: DELETE_DEBTS,
-		index,
-	};
-};
-
-export let AddSharesAC = (nameShares, count, price) => {
-	return {
-		type: ADD_SHARES,
-		nameShares,
-		count,
-		price,
-	};
-};
-export let sellingSharesAC = (nameShares, count, price) => {
-	return {
-		type: SELLING_SHARES,
-		nameShares,
-		count,
-		price,
-	};
-};
-export let PurseAC = (action, value) => {
-	return {
-		type: PURSE,
-		action,
-		value,
-	};
-};
-export let PaycheckAC = () => {
-	return {
-		type: PAYCHECK,
-	};
-};
 export default MainReduser;

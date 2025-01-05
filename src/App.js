@@ -19,6 +19,11 @@ import InputScreenSaleConteiner from "./pages/InputScreenSale/InputScreenSaleCon
 import BuyBuisneConteiner from "./pages/BuyBuisnes/BuyBuisnesConteiner";
 import BuySharesConteiner from "./pages/BuyShares/BuySharesConteiner";
 import BuyBuisnesConteiner from "./pages/BuyBuisnes/BuyBuisnesConteiner";
+import BuyEarthConteiner from "./pages/BuyEarth/BuyEarthConteiner";
+import BuyRealtyConteiner from "./pages/BuyRealty/BuyRealtyConteiner";
+import SaleSharesConteiner from "./pages/SaleShares/SaleSharesConteiner";
+import SaleEarnConteiner from "./pages/SaleEarn/SaleEarnConteiner";
+import SaleRealtyConteiner from "./pages/SaleRealty/SaleRealtyConteiner";
 
 function App(props) {
 	const dispatch = useDispatch();
@@ -110,6 +115,26 @@ function App(props) {
 						<Route
 							path="/BuyShares"
 							element={<BuySharesConteiner />}
+						/>
+						<Route
+							path="/BuyEarth"
+							element={<BuyEarthConteiner />}
+						/>
+						<Route
+							path="/BuyRealty"
+							element={<BuyRealtyConteiner />}
+						/>
+						<Route
+							path="/SaleShares"
+							element={<SaleSharesConteiner />}
+						/>
+						<Route
+							path="/SaleEarn"
+							element={<SaleEarnConteiner />}
+						/>
+						<Route
+							path="/SaleRealty"
+							element={<SaleRealtyConteiner />}
 						/>
 					</Routes>
 					{/* CONTENT */}
