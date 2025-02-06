@@ -1,9 +1,6 @@
-import React from "react";
 import { connect } from "react-redux";
-import ActiveIncome from "./Purse";
-import { AddActiveIncomeAC, DeleteActiveIncomeAC, PurseAC } from "../Redux/MainReduser";
 import Purse from "./Purse";
-import { PaycheckThunks, PurseThunks } from "../Redux/Redux-Thunk";
+import { PaycheckThunks, PurseThunks } from "../../components/Redux/Redux-Thunk";
 
 let mapStatetoProps = (state) => {
 	return {

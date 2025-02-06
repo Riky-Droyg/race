@@ -6,7 +6,7 @@ import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnCon
 import Button from "../../components/Button/Button";
 
 function ActiveIncome(props) {
-	let [value, setValue] = useState(0); // Початкове значення — пустий рядок
+	let [value, setValue] = useState(""); // Початкове значення — пустий рядок
 
 	const handleChange = (event) => {
 		setValue(event.target.value); // Оновлення стану при зміні значення
