@@ -12,6 +12,8 @@ let ADD_SHARES = "ADD_SHARES";
 let SELLING_SHARES = "SELLING_SHARES";
 let PURSE = "PURSE";
 let PAYCHECK = "PAYCHECK";
+let ADD_EARN = "ADD_EARN";
+let ADD_REALTY_CASH = "ADD_REALTY_CASH";
 
 const MainReduser = (state = initialState, action) => {
 	switch (action.type) {
@@ -19,10 +21,11 @@ const MainReduser = (state = initialState, action) => {
 			return action.data;
 		}
 		case ADD_BUISNES: {
+			debugger
 			let newInem = {
-				name: action.sizeBuisnes,
+				id: 113123,
 				sum: +action.income,
-				type: "Малий Бізнес",
+				type: action.sizeBuisnes,
 			};
 			const updatedList = [...state.passive_income.list, newInem];
 			// Підсумовуємо всі значення sum в масиві list
@@ -291,6 +294,75 @@ const MainReduser = (state = initialState, action) => {
 				};
 				return updatedState; // Повертаємо новий стан
 			}
+		}
+		case ADD_EARN: {
+			let newCount = +state.plots.count + +action.count;
+
+			let oldTotalPrice = state.plots.count * state.plots.average_price;
+			let combinedTotalPrice = oldTotalPrice + +action.total_price;
+
+			// Захист від ділення на 0
+			let newAveragePrice = newCount > 0 ? combinedTotalPrice / newCount : 0;
+
+			// Округлення до цілого числа
+			newAveragePrice = Math.round(newAveragePrice);
+
+			return {
+				...state,
+				plots: {
+					...state.plots,
+					count: newCount,
+					average_price: newAveragePrice,
+				},
+			};
+		}
+		case ADD_REALTY_CASH: {
+			function generateNextId(dataArray = state.apartments) {
+				if (dataArray.length === 0) return 0; // якщо масив порожній, повертає 0
+				const lastItem = dataArray[dataArray.length - 1];
+				return lastItem.id + 1;
+			  }
+			  
+			console.log(state);
+			// Перевірка на достатність готівки та коректність суми
+			if (+action.total_price > state.cash_on_hand || +action.total_price <= 0) {
+				alert("Недостатньо готівки або некоректна сума покупки.");
+				return state;
+			}
+			let newId = generateNextId();
+			let newCashOnHand = state.cash_on_hand - action.total_price;
+			return {
+				...state,
+				passive_income: {
+					...state.passive_income,
+					list: [
+						...state.passive_income.list,
+						{
+							id: newId,
+							sum: +action.rent_price,
+							type: "Нерухомість",
+						},
+					],
+					total: +state.passive_income.total + +action.rent_price,
+				},
+
+				
+
+				cash_on_hand: newCashOnHand,
+				apartments: [
+					...state.apartments, // додаємо всі існуючі об'єкти з масиву plots
+					{
+						id: newId,
+						property_type: action.property_type,
+						total_price: +action.total_price,
+						credit: +action.credit,
+						deposit: +action.deposit,
+						rent_price: +action.rent_price,
+						real_price: +action.real_price,
+						monthly_interest: +action.monthly_interest,
+					}, // додаємо новий об'єкт
+				],
+			};
 		}
 		default:
 			return state;

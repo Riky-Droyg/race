@@ -2,7 +2,6 @@ import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainMenuConteiner from "./pages/MainMenu/MainMenuConteiner";
 
-import SharesConteiner from "./components/Shares/SharesConteiner";
 import LoginMenuContainer from "./pages/LoginMenu/LoginMenuConteiner";
 import { useEffect } from "react";
 import { АuthorizationThunks } from "../src/pages/LoginMenu/LoginMenuThunk";
@@ -87,10 +86,6 @@ function App(props) {
 							element={<DebetsConteiner />}
 						/>
 
-						<Route
-							path="/Shares"
-							element={<SharesConteiner />}
-						/>
 						<Route
 							path="/ExpensesForm"
 							element={<ExpenseFormConteiner />}

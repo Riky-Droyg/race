@@ -11,6 +11,8 @@ let ADD_SHARES = "ADD_SHARES";
 let SELLING_SHARES = "SELLING_SHARES";
 let PURSE = "PURSE";
 let PAYCHECK = "PAYCHECK";
+let ADD_EARN = "ADD_EARN";
+let ADD_REALTY_CASH = "ADD_REALTY_CASH";
 
 export let АuthorizationAC = (data) => {
 	return {
@@ -100,5 +102,25 @@ export let PurseAC = (action, value) => {
 export let PaycheckAC = () => {
 	return {
 		type: PAYCHECK,
+	};
+};
+export let AddEarnkAC = (count, average_price, total_price) => {
+	return {
+		type: ADD_EARN,
+		count,
+		average_price,
+		total_price,
+	};
+};
+export let addRealtyCashAC = (property_type, total_price, credit, deposit, rent_price, real_price, monthly_interest) => {
+	return {
+		type: ADD_REALTY_CASH,
+		property_type,
+		total_price,
+		credit,
+		deposit,
+		rent_price,
+		real_price,
+		monthly_interest,
 	};
 };

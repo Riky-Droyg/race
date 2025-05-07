@@ -45,6 +45,7 @@ let State = {
 		total: 0,
 		list: [],
 	},
+	apartments:[],
 };
 export default State;
 

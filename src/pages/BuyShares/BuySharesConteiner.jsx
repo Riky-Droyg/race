@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import BuyShares from "./BuyShares";
+import { addSharesThunks } from "../../components/Redux/Redux-Thunk";
 
 let mapStatetoProps = (state) => {
 	return {
@@ -9,12 +10,10 @@ let mapStatetoProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
 	return {
-		// AddActiveIncomeAC: (value) => {
-		// 	dispatch(AddActiveIncomeThunks(value));
-		// },
-		// DeleteActiveIncomeAC: (index) => {
-		// 	dispatch(DeleteActiveIncomeThunks(index));
-		// },
+		addSharesThunks: (selectedButton,wantToBuy,valueVoucher,totalCost) => {
+			dispatch(addSharesThunks(selectedButton,wantToBuy,valueVoucher,totalCost));
+		},
+		
 	};
 };
 

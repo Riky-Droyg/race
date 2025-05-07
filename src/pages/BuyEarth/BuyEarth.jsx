@@ -8,83 +8,42 @@ import TypeIcon from "../../img/TypeIcon.svg";
 
 function BuyEarth(props) {
 	// Створюємо стан для збереження вибраної кнопки
-	const [selectedButton, setSelectedButton] = useState("К1");
-	const [investment, setInvestments] = useState("");
-	const [credit, setCredit] = useState("");
-	const [deposit, setDeposit] = useState("");
-	const [interest, setInterest] = useState("");
-	const [income, setIncome] = useState("");
-	const [realInvestment, setRealInvestment] = useState("");
+	const [count, setCount] = useState("1"); // кількість
+	const [average_price, setAverage_price] = useState("1"); // ціна покупки разово
+	// const [total_price, settotal_price] = useState(""); // ціна покупки разово
+
+	let total_price = count * average_price;
 
 	// Обробник для оновлення вибраної кнопки
-	const handleButtonClick = (buttonName) => {
-		setSelectedButton(buttonName);
+	const handleChangecount = (event) => {
+		setCount(event.target.value);
 	};
-	const handleChangeInvestment = (event) => {
-		setInvestments(event.target.value);
+	const handleChangeaverage_price = (event) => {
+		setAverage_price(event.target.value);
 	};
-	const handleChangeCredit = (event) => {
-		setCredit(event.target.value);
-	};
-	const handleChangeDeposit = (event) => {
-		setDeposit(event.target.value);
-	};
-	const handleChangeInterest = (event) => {
-		setInterest(event.target.value);
+	const AddEarn = () => {
+		props.AddEarnThunks(count, average_price, total_price);
 	};
 
-	const handleChangeIncome = (event) => {
-		setIncome(event.target.value);
+	const countRef = useRef(null); // Реф для доступу до інпуту
+	const average_priceRef = useRef(null); // Реф для доступу до інпуту
+
+	const handleClickCountRef = () => {
+		if (countRef.current) {
+			countRef.current.focus(); //  Фокусуємо інпут
+		}
 	};
-	const handleChangeRealInvestment = (event) => {
-		setRealInvestment(event.target.value);
-	};
-	const AddBuisnes = () => {
-		props.AddBuisnesThunks(selectedButton, investment, income);
+	const handleClickAverage_priceRef = () => {
+		if (average_priceRef.current) {
+			average_priceRef.current.focus(); // Фокусуємо інпут
+		}
 	};
 
-	const investmentRef = useRef(null); // Реф для доступу до інпуту
-	const creditRef = useRef(null); // Реф для доступу до інпуту
-	const depositRef = useRef(null); // Реф для доступу до інпуту
-	const interestRef = useRef(null); // Реф для доступу до інпуту
-	const incomeRef = useRef(null); // Реф для доступу до інпуту
-	const realInvestmentRef = useRef(null); // Реф для доступу до інпуту
-
-	const handleClickInvestmentRef = () => {
-		if (investmentRef.current) {
-			investmentRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickCreditRef = () => {
-		if (creditRef.current) {
-			creditRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickDepositRef = () => {
-		if (depositRef.current) {
-			depositRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickInterestRef = () => {
-		if (interestRef.current) {
-			interestRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickIncomeRef = () => {
-		if (incomeRef.current) {
-			incomeRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickRealInvestmentRef = () => {
-		if (realInvestmentRef.current) {
-			realInvestmentRef.current.focus(); // Фокусуємо інпут
-		}
-	};
 	return (
 		<div className={s.wrapper}>
 			<ButtonReturnConteiner />
 
-			<HeaderText text="Придбати бізнес" />
+			<HeaderText text="Введіть дані ділянки" />
 
 			<div className={s.contentWrapper}>
 				<div className={s.infoWrapper}>
@@ -92,18 +51,18 @@ function BuyEarth(props) {
 						<div className={s.infoText}>Площа ділянки (соток)</div>
 						<div
 							className={s.wrapperInput}
-							onClick={handleClickInvestmentRef}
+							onClick={handleClickCountRef}
 						>
 							<span className={s.dolar}>$</span>
 
-							<span className={`${investment.length === 0 ? s.placeholder : ""}`}>{investment}</span>
+							<span className={`${count.length === 0 ? s.placeholder : ""}`}>{count}</span>
 
 							<input
-								ref={investmentRef}
+								ref={countRef}
 								className={s.infoNumber}
 								type="text"
-								value={investment}
-								onChange={handleChangeInvestment} // Виклик функції при зміні
+								value={count}
+								onChange={handleChangecount} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
 							/>
@@ -111,41 +70,30 @@ function BuyEarth(props) {
 					</div>
 					<div className={`${s.info} ${s.gridInfoA}`}>
 						<div className={s.infoText}> Загальна вартість</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickCreditRef}
-						>
+						<div className={s.wrapperInput}>
 							<span className={s.dolar}>$</span>
 
-							<span className={`${credit.length === 0 ? s.placeholder : ""}`}>{credit}</span>
+							<span className={`${total_price.length === 0 ? s.placeholder : ""}`}>{total_price}</span>
 
-							<input
-								ref={creditRef}
-								className={s.infoNumber}
-								type="text"
-								value={credit}
-								onChange={handleChangeCredit} // Виклик функції при зміні
-								placeholder="0"
-								maxLength={7}
-							/>
+							
 						</div>
 					</div>
 					<div className={`${s.info} ${s.gridInfoB}`}>
 						<div className={s.infoText}> Ціна за сотку</div>
 						<div
 							className={s.wrapperInput}
-							onClick={handleClickDepositRef}
+							onClick={handleClickAverage_priceRef}
 						>
 							<span className={s.dolar}>$</span>
 
-							<span className={`${deposit.length === 0 ? s.placeholder : ""}`}>{deposit}</span>
+							<span className={`${average_price.length === 0 ? s.placeholder : ""}`}>{average_price}</span>
 
 							<input
-								ref={depositRef}
+								ref={average_priceRef}
 								className={s.infoNumber}
 								type="text"
-								value={deposit}
-								onChange={handleChangeDeposit} // Виклик функції при зміні
+								value={average_price}
+								onChange={handleChangeaverage_price} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
 							/>
@@ -164,61 +112,13 @@ function BuyEarth(props) {
 						/>
 					</div>
 				</div>
-
-				<div className={s.paddingTop}></div>
-				<div className={s.border}></div>
-				<div className={s.paddingBottom}></div>
-
-				<div className={s.infoWrapperBottom}>
-					<div className={s.info}>
-						<div className={s.infoText}>Хочу придбати</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickInterestRef}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${interest.length === 0 ? s.placeholder : ""}`}>{interest}</span>
-
-							<input
-								ref={interestRef}
-								className={s.infoNumber}
-								type="text"
-								value={interest}
-								onChange={handleChangeInterest} // Виклик функції при зміні
-								placeholder="0"
-								maxLength={7}
-							/>
-						</div>
-					</div>
-					<div className={s.info}>
-						<div className={s.infoText}> Загальна вартість</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickIncomeRef}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${income.length === 0 ? s.placeholder : ""}`}>{income}</span>
-
-							<input
-								ref={incomeRef}
-								className={s.infoNumber}
-								type="text"
-								value={income}
-								onChange={handleChangeIncome} // Виклик функції при зміні
-								placeholder="0"
-								maxLength={7}
-							/>
-						</div>
-					</div>
-				</div>
 			</div>
 			<div className={s.margin}></div>
 
 			<Button
 				style={{ marginTop: "auto" }}
 				name={"Придбати"}
+				onClick={AddEarn}
 			/>
 		</div>
 	);

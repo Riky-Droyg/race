@@ -1,7 +1,9 @@
 import { connect } from "react-redux";
 import BuyRealty from "./BuyRealty";
+import { addRealtyCashThunks } from "../../components/Redux/Redux-Thunk";
 
 let mapStatetoProps = (state) => {
+	
 	return {
 		state: state.MainReduser,
 	};
@@ -9,12 +11,10 @@ let mapStatetoProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
 	return {
-		// AddActiveIncomeAC: (value) => {
-		// 	dispatch(AddActiveIncomeThunks(value));
-		// },
-		// DeleteActiveIncomeAC: (index) => {
-		// 	dispatch(DeleteActiveIncomeThunks(index));
-		// },
+		addRealtyCash: (property_type, total_price, credit, deposit, rent_price, real_price, monthly_interest) => {
+			dispatch(addRealtyCashThunks(property_type, total_price, credit, deposit, rent_price, real_price, monthly_interest));
+		},
+	
 	};
 };
 

@@ -4,19 +4,21 @@ import Button from "../../components/Button/Button";
 import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnConteiner";
 import HeaderText from "../../components/HeaderText/HeaderText";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
+import { useNavigate } from "react-router-dom";
 
 function BuyBuisnes(props) {
 	// Створюємо стан для збереження вибраної кнопки
 	const [selectedButton, setSelectedButton] = useState("ВБ");
 	const [investment, setInvestments] = useState("");
 	const [income, setIncome] = useState("");
+	const navigate = useNavigate();
 
 	// Обробник для оновлення вибраної кнопки
 	const handleButtonClick = (buttonName) => {
 		setSelectedButton(buttonName);
 	};
 	const handleChangeInvestment = (event) => {
-		setInvestments( event.target.value );
+		setInvestments(event.target.value);
 	};
 
 	const handleChangeIncome = (event) => {
@@ -95,13 +97,13 @@ function BuyBuisnes(props) {
 				<div className={s.type}>
 					<SelectionButtom
 						text={"ВБ"}
-						isSelected={selectedButton === "ВБ"}
-						onClick={() => handleButtonClick("ВБ")}
+						isSelected={selectedButton === "Великий Бізнес"}
+						onClick={() => handleButtonClick("Великий Бізнес")}
 					/>
 					<SelectionButtom
 						text={"МБ"}
-						isSelected={selectedButton === "МБ"}
-						onClick={() => handleButtonClick("МБ")}
+						isSelected={selectedButton === "Малий Бізнес"}
+						onClick={() => handleButtonClick("Малий Бізнес")}
 					/>
 					<SelectionButtom
 						text={"Розширення"}
@@ -115,7 +117,10 @@ function BuyBuisnes(props) {
 			<Button
 				style={{ marginTop: "auto" }}
 				name={"Придбати"}
-				onClick={AddBuisnes}
+				onClick={() => {
+					AddBuisnes();
+					navigate("/PassiveIncome");
+				}}
 			/>
 		</div>
 	);

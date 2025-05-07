@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import BuyEarth from "./BuyEarth";
+import { AddEarnThunks } from "../../components/Redux/Redux-Thunk";
 
 let mapStatetoProps = (state) => {
 	return {
@@ -9,12 +10,10 @@ let mapStatetoProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
 	return {
-		// AddActiveIncomeAC: (value) => {
-		// 	dispatch(AddActiveIncomeThunks(value));
-		// },
-		// DeleteActiveIncomeAC: (index) => {
-		// 	dispatch(DeleteActiveIncomeThunks(index));
-		// },
+		AddEarnThunks: (count,average_price,total_price) => {
+			dispatch(AddEarnThunks(count,average_price,total_price));
+		},
+		
 	};
 };
 

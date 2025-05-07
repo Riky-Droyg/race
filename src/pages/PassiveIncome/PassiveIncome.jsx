@@ -5,6 +5,10 @@ import ListItems from "../../components/ListItem/ListItems";
 import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnConteiner";
 
 function PassiveIncome(props) {
+	// debugger;
+	let totalRent = props.state.apartments.reduce((sum, apartment) => {
+		return sum + apartment.rent_price;
+	}, 0);
 	let deleteBuisnes = (index) => {
 		props.DeleteBuisnes(index);
 	};
@@ -12,20 +16,23 @@ function PassiveIncome(props) {
 	return (
 		<div className={s.financialOverview}>
 			<ButtonReturnConteiner />
-			<HeaderBar
-				number={props.state.passive_income.total}
-				text={"Пасивний дохід"}
-				style={{
-					background: "#B7E5C1",
-					color: "black",
-				}}
-				styleFontNumber={{
-					fontSize: "32px",
-				}}
-				styleFontText={{
-					fontSize: "16px",
-				}}
-			/>
+			<div>
+				<HeaderBar
+					number={props.state.passive_income.total}
+					text={"Пасивний дохід"}
+					style={{
+						background: "#B7E5C1",
+						color: "black",
+					}}
+					styleFontNumber={{
+						fontSize: "32px",
+					}}
+					styleFontText={{
+						fontSize: "16px",
+					}}
+				/>
+				{totalRent} 
+			</div>
 
 			<ListItems
 				del={deleteBuisnes}

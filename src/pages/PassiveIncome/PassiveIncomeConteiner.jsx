@@ -1,8 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import PassiveIncome from "./PassiveIncome";
+import { DeleteBuisnesThunks } from "../../components/Redux/Redux-Thunk";
+
+
 
 let mapStatetoProps = (state) => {
+	
 	return {
 		state: state.MainReduser,
 	};
@@ -13,9 +17,9 @@ let mapDispatchToProps = (dispatch) => {
 		// addBuisnes: (sizeBuisnes, value) => {
 		// 	dispatch(AddBuisnesThunks(sizeBuisnes, value));
 		// },
-		// DeleteBuisnes: (index) => {
-		// 	dispatch(DeleteBuisnesThunks(index));
-		// },
+		DeleteBuisnes: (index) => {
+			dispatch(DeleteBuisnesThunks(index));
+		},
 	};
 };
 

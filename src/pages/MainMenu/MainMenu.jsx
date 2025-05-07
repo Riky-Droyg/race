@@ -124,7 +124,7 @@ function MainMenu(props) {
 				</NavLink>
 			</div>
 
-			<NavLink to="/Shares">
+			<NavLink to="/BuyShares">
 				<div className={s.stocksOverview}>
 					<LineShares
 						nameShares={"УКТ"}
