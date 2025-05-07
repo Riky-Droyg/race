@@ -15,7 +15,7 @@ function Expenses(props) {
 		<div className={s.wrpapper}>
 			<ButtonReturnConteiner />
 			<HeaderBar
-				number={props.state.passive_income.total}
+				number={props.state.expenses.total}
 				text={"Витрати"}
 				style={{
 					background: "#E5B7B7",

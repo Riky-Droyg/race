@@ -5,46 +5,49 @@ import HeaderText from "../../components/HeaderText/HeaderText";
 import Button from "../../components/Button/Button";
 
 function ExpenseForm(props) {
-	let [Number, setNumber] = useState(0); // Початкове значення — пустий рядок
+	let [number, setNumber] = useState(""); // Початкове значення — пустий рядок
 
 	const handleChangeNumber = (event) => {
 		setNumber(event.target.value); // Оновлення стану при зміні значення
 	};
-	let [Name, setName] = useState(0); // Початкове значення — пустий рядок
+	let [name, setName] = useState(""); // Початкове значення — пустий рядок
 
 	const handleChangeName = (event) => {
 		setName(event.target.value); // Оновлення стану при зміні значення
 	};
-	
-	// 
+
+	const addExpenses = () => {
+		props.AddExpensesThunks(name, number);
+	};
 
 	return (
 		<div className={s.financialOverview}>
-			<ButtonReturnConteiner link="/Expenses"/>
+			<ButtonReturnConteiner link="/Expenses" />
 
 			<HeaderText text="Введи витрату" />
-
 			<div className={s.optionSection}>
 				<input
-					onChange={handleChangeNumber}
-					value={Number}
+					onChange={handleChangeName}
+					value={name}
 					type="text"
 					className={s.numberInput}
 					placeholder="Введи назву витрати"
 				/>
 			</div>
-
 			<div className={s.optionSection}>
 				<input
-					onChange={handleChangeName}
-					value={Name}
-					type="number"
+					onChange={handleChangeNumber}
+					value={number}
+					type=" number"
 					className={s.numberInput}
 					placeholder="Введи суму витрат"
 				/>
 			</div>
 
-			<Button name={"Додати"} />
+			<Button
+				name={"Додати"}
+				onClick={addExpenses}
+			/>
 		</div>
 	);
 }

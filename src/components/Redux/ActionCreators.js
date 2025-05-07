@@ -36,11 +36,11 @@ export let DeleteBuisnesAC = (index) => {
 	};
 };
 
-export let AddExpensesAC = (text, value) => {
+export let AddExpensesAC = (name, number) => {
 	return {
 		type: ADD_EXPENSES,
-		text,
-		value,
+		name, 
+		number,
 	};
 };
 export let DeleteExpensesAC = (index) => {

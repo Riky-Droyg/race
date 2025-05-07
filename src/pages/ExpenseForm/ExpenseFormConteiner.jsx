@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import ExpenseForm from "./ExpenseForm";
+import { AddExpensesThunks } from "../../components/Redux/Redux-Thunk";
 
 let mapStatetoProps = (state) => {
 	return {
@@ -9,9 +10,9 @@ let mapStatetoProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
 	return {
-		// AddActiveIncomeAC: (value) => {
-		// 	dispatch(AddActiveIncomeThunks(value));
-		// },
+		AddExpensesThunks: (name, number) => {
+			dispatch(AddExpensesThunks(name, number));
+		},
 		// DeleteActiveIncomeAC: (index) => {
 		// 	dispatch(DeleteActiveIncomeThunks(index));
 		// },

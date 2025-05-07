@@ -69,9 +69,12 @@ const MainReduser = (state = initialState, action) => {
 		}
 
 		case ADD_EXPENSES: {
+			debugger
+			
 			let newInem = {
-				name: action.text,
-				sum: action.value,
+				name: action.name,
+				sum: +action.number,
+				id: 11,
 			};
 
 			const updatedList = [...state.expenses.list, newInem];
@@ -89,6 +92,7 @@ const MainReduser = (state = initialState, action) => {
 					...state.expenses,
 					total: totalSum,
 					list: updatedList,
+					
 				},
 			};
 			return updatedState; // Повертаємо новий стан

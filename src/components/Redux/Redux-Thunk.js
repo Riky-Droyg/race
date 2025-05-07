@@ -39,9 +39,9 @@ export const DeleteBuisnesThunks = (index) => async (dispatch, getState) => {
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
 	}
 };
-export const AddExpensesThunks = (text, value) => async (dispatch, getState) => {
+export const AddExpensesThunks = (name, number) => async (dispatch, getState) => {
 	try {
-		dispatch(AddExpensesAC(text, value));
+		dispatch(AddExpensesAC(name, number));
 		let state = getState().MainReduser;
 		console.log(state);
 		const response = await fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
