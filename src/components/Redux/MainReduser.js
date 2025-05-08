@@ -21,11 +21,11 @@ const MainReduser = (state = initialState, action) => {
 			return action.data;
 		}
 		case ADD_BUISNES: {
-			debugger
+			debugger;
 			let newInem = {
 				id: 113123,
 				sum: +action.income,
-				type: action.sizeBuisnes,
+				name: action.sizeBuisnes,
 			};
 			const updatedList = [...state.passive_income.list, newInem];
 			// Підсумовуємо всі значення sum в масиві list
@@ -69,12 +69,16 @@ const MainReduser = (state = initialState, action) => {
 		}
 
 		case ADD_EXPENSES: {
-			debugger
-			
+			function generateNextId(dataArray = state.expenses.list) {
+				if (dataArray.length === 0) return 0; // якщо масив порожній, повертає 0
+				const lastItem = dataArray[dataArray.length - 1];
+				return lastItem.id + 1;
+			}
+
 			let newInem = {
 				name: action.name,
 				sum: +action.number,
-				id: 11,
+				id: generateNextId(),
 			};
 
 			const updatedList = [...state.expenses.list, newInem];
@@ -92,7 +96,6 @@ const MainReduser = (state = initialState, action) => {
 					...state.expenses,
 					total: totalSum,
 					list: updatedList,
-					
 				},
 			};
 			return updatedState; // Повертаємо новий стан
@@ -148,9 +151,11 @@ const MainReduser = (state = initialState, action) => {
 		}
 
 		case ADD_DEBTS: {
+			debugger;
 			let newInem = {
 				name: action.text,
 				sum: action.value,
+				id: 1,
 			};
 			const updatedList = [...state.debts.list, newInem];
 			// Підсумовуємо всі значення sum в масиві list
@@ -325,8 +330,8 @@ const MainReduser = (state = initialState, action) => {
 				if (dataArray.length === 0) return 0; // якщо масив порожній, повертає 0
 				const lastItem = dataArray[dataArray.length - 1];
 				return lastItem.id + 1;
-			  }
-			  
+			}
+
 			console.log(state);
 			// Перевірка на достатність готівки та коректність суми
 			if (+action.total_price > state.cash_on_hand || +action.total_price <= 0) {
@@ -349,8 +354,6 @@ const MainReduser = (state = initialState, action) => {
 					],
 					total: +state.passive_income.total + +action.rent_price,
 				},
-
-				
 
 				cash_on_hand: newCashOnHand,
 				apartments: [

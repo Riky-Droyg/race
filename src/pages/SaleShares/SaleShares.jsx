@@ -8,7 +8,7 @@ import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
 
 function SaleShares(props) {
 	// Створюємо стан для збереження вибраної кнопки
-	const [selectedButton, setSelectedButton] = useState("ВБ");
+	const [selectedButton, setSelectedButton] = useState("КРС");
 
 	const [investment, setInvestments] = useState("");
 	const [credit, setCredit] = useState("");
@@ -81,7 +81,38 @@ function SaleShares(props) {
 			realInvestmentRef.current.focus(); // Фокусуємо інпут
 		}
 	};
-
+	const availability = () => {
+		switch (selectedButton) {
+			case "КРС":
+				return props.state.stocks.krs.totalCount || 0;
+			case "КЧГ":
+				return props.state.stocks.kchg.totalCount || 0;
+			case "УКТ":
+				return props.state.stocks.ykt.totalCount || 0;
+			case "ДР":
+				return props.state.stocks.dr.totalCount || 0;
+			case "ЯКХЗ":
+				return props.state.stocks.yakhz.totalCount || 0;
+			default:
+				return 0;
+		}
+	};
+	const averagePrice = () => {
+		switch (selectedButton) {
+			case "КРС":
+				return props.state.stocks.krs.averagePrice || 0;
+			case "КЧГ":
+				return props.state.stocks.kchg.averagePrice || 0;
+			case "УКТ":
+				return props.state.stocks.ykt.averagePrice || 0;
+			case "ДР":
+				return props.state.stocks.dr.averagePrice || 0;
+			case "ЯКХЗ":
+				return props.state.stocks.yakhz.averagePrice || 0;
+			default:
+				return 0;
+		}
+	};
 	return (
 		<div className={s.wrapper}>
 			<ButtonReturnConteiner />
@@ -92,11 +123,11 @@ function SaleShares(props) {
 				<div className={s.infoWrapper}>
 					<div className={`${s.info} ${s.infoGrid}`}>
 						<div className={s.infoText}>Наявність</div>
-						<div className={s.infoNumberOrigin}>250</div>
+						<div className={s.infoNumberOrigin}>{availability()}</div>
 					</div>
 					<div className={s.info}>
 						<div className={s.infoText}> Середня ціна за шт</div>
-						<div className={s.infoNumberOrigin}>$20</div>
+						<div className={s.infoNumberOrigin}>${averagePrice()}</div>
 					</div>
 				</div>
 				<div className={s.margin}></div>
@@ -152,7 +183,8 @@ function SaleShares(props) {
 								placeholder="0"
 								maxLength={7}
 							/>
-						</div>					</div>
+						</div>{" "}
+					</div>
 					<div className={`${s.info} ${s.gridInfoB}`}>
 						<div className={s.infoText}> Кількість</div>
 						<div
@@ -172,7 +204,8 @@ function SaleShares(props) {
 								placeholder="0"
 								maxLength={7}
 							/>
-						</div>					</div>
+						</div>{" "}
+					</div>
 					<div className={`${s.info} ${s.gridInfoC}`}>
 						<div className={s.infoText}> Загальна вартість</div>
 						<div
@@ -192,7 +225,8 @@ function SaleShares(props) {
 								placeholder="0"
 								maxLength={7}
 							/>
-						</div>					</div>
+						</div>{" "}
+					</div>
 				</div>
 			</div>
 			<div className={s.marginBottom}></div>

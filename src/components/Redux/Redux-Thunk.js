@@ -1,4 +1,4 @@
-import { AddExpensesAC, AddBuisnesAC, DeleteBuisnesAC, АuthorizationAC, DeleteExpensesAC, AddActiveIncomeAC, DeleteActiveIncomeAC, AddDebetsAC, AddDebtsAC, DeleteDebtsAC, AddSharesAC, sellingSharesAC, PurseAC, PaycheckAC, AddEarnkAC, addRealtyAC, addRealtyCashAC } from "./ActionCreators";
+import { AddExpensesAC, AddBuisnesAC, DeleteBuisnesAC, DeleteExpensesAC, AddActiveIncomeAC, DeleteActiveIncomeAC, AddDebtsAC, DeleteDebtsAC, AddSharesAC, sellingSharesAC, PurseAC, PaycheckAC, AddEarnkAC, addRealtyCashAC } from "./ActionCreators";
 
 export const AddBuisnesThunks = (sizeBuisnes, investment, income) => async (dispatch, getState) => {
 	try {

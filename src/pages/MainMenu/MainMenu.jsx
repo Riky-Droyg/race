@@ -106,7 +106,7 @@ function MainMenu(props) {
 						}}
 					/>
 				</NavLink>
-				<NavLink to="/Debets">
+				<NavLink to="/Debts">
 					<HeaderBar
 						number={props.state.debts.total}
 						styleFontNumber={{ fontSize: "22px" }}

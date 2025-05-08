@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import s from "./Debets.module.scss";
-import daggerImg from "../../img/dagger.png";
+import React from "react";
+import s from "./Debts.module.scss";
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import ListItems from "../../components/ListItem/ListItems";
 import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnConteiner";
@@ -11,22 +10,15 @@ function Debts(props) {
 	let DeleteDebts = (index) => {
 		props.DeleteDebts(index);
 	};
-
 	return (
-		<div className={s.financialOverview}>
+		<div className={s.wrpapper}>
 			<ButtonReturnConteiner />
 			<HeaderBar
 				number={props.state.debts.total}
-				text={"Борги"}
+				text={"Витрати"}
 				style={{
 					background: "#E5B7B7",
 					color: "black",
-				}}
-				styleFontNumber={{
-					fontSize: "32px",
-				}}
-				styleFontText={{
-					fontSize: "16px",
 				}}
 			/>
 
@@ -36,7 +28,7 @@ function Debts(props) {
 				style={{ background: "#E5B7B7" }}
 			/>
 
-			<NavLink to={"/DebetsForm"}>
+			<NavLink to={"/DebtsForm"}>
 				<Button name={"Додати"} />
 			</NavLink>
 		</div>

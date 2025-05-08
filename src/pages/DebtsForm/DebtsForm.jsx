@@ -1,52 +1,55 @@
 import React, { useState } from "react";
-import s from "./DebetsForm.module.scss";
+import s from "./DebtsForm.module.scss";
 import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnConteiner";
 import HeaderText from "../../components/HeaderText/HeaderText";
 import Button from "../../components/Button/Button";
 
-function DebetsForm (props) {
-	let [Number, setNumber] = useState(0); // Початкове значення — пустий рядок
+function DebtsForm(props) {
+	let [number, setNumber] = useState(""); // Початкове значення — пустий рядок
 
 	const handleChangeNumber = (event) => {
 		setNumber(event.target.value); // Оновлення стану при зміні значення
 	};
-	let [Name, setName] = useState(0); // Початкове значення — пустий рядок
+	let [name, setName] = useState(""); // Початкове значення — пустий рядок
 
 	const handleChangeName = (event) => {
 		setName(event.target.value); // Оновлення стану при зміні значення
 	};
-	
-	// 
+
+	const addDebts = () => {
+		props.AddDebtsThunks(name, number);
+	};
 
 	return (
 		<div className={s.financialOverview}>
-			<ButtonReturnConteiner link="/Debets"/>
+			<ButtonReturnConteiner link="/Debts" />
 
-			<HeaderText text="Введи витрату" />
-
+			<HeaderText text="Введи борг" />
 			<div className={s.optionSection}>
 				<input
-					onChange={handleChangeNumber}
-					value={Number}
+					onChange={handleChangeName}
+					value={name}
 					type="text"
 					className={s.numberInput}
 					placeholder="Введи назву боргу"
 				/>
 			</div>
-
 			<div className={s.optionSection}>
 				<input
-					onChange={handleChangeName}
-					value={Name}
-					type="number"
+					onChange={handleChangeNumber}
+					value={number}
+					type=" number"
 					className={s.numberInput}
 					placeholder="Введи суму боргу"
 				/>
 			</div>
 
-			<Button name={"Додати"} />
+			<Button
+				name={"Додати"}
+				onClick={addDebts}
+			/>
 		</div>
 	);
 }
 
-export default DebetsForm;
+export default DebtsForm;

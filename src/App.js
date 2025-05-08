@@ -8,11 +8,11 @@ import { АuthorizationThunks } from "../src/pages/LoginMenu/LoginMenuThunk";
 import { useDispatch } from "react-redux";
 import PurseConteiner from "./pages/Purse/PurseConteiner";
 import ExpensesConteiner from "./pages/Expenses/ExpensesConteiner";
-import DebetsConteiner from "./pages/Debets/DebetsConteiner";
+import DebtsConteiner from "./pages/Debts/DebtsConteiner";
 import ActiveIncomeConteiner from "./pages/ActiveIncome/ActiveIncomeConteiner";
 import PassiveIncomeConteiner from "./pages/PassiveIncome/PassiveIncomeConteiner";
 import ExpenseFormConteiner from "./pages/ExpenseForm/ExpenseFormConteiner";
-import DebetsFormConteiner from "./pages/DebetsForm/DebetsFormConteiner";
+import DebtsFormConteiner from "./pages/DebtsForm/DebtsFormConteiner";
 import InputScreenBuyConteiner from "./pages/InputScreenBuy/InputScreenBuyConteiner";
 import InputScreenSaleConteiner from "./pages/InputScreenSale/InputScreenSaleConteiner";
 import BuySharesConteiner from "./pages/BuyShares/BuySharesConteiner";
@@ -82,8 +82,8 @@ function App(props) {
 						/>
 
 						<Route
-							path="/Debets"
-							element={<DebetsConteiner />}
+							path="/Debts"
+							element={<DebtsConteiner />}
 						/>
 
 						<Route
@@ -91,8 +91,8 @@ function App(props) {
 							element={<ExpenseFormConteiner />}
 						/>
 						<Route
-							path="/DebetsForm"
-							element={<DebetsFormConteiner />}
+							path="/DebtsForm"
+							element={<DebtsFormConteiner />}
 						/>
 						<Route
 							path="/InputScreenBuy"

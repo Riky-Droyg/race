@@ -10,6 +10,7 @@ const ListItems = ({ list = [], del, style, wrapperStyle }) => {
 			container.scrollTop = container.scrollHeight; // Прокручування до кінця
 		}
 	}, [list]); // Викликається кожен раз, коли список змінюється
+	
 	let content = list.map((el, index) => (
 		<div
 			onClick={() => del(index)}
@@ -23,7 +24,7 @@ const ListItems = ({ list = [], del, style, wrapperStyle }) => {
 				alt="dagger"
 			/>
 
-			<div className={s.businessSize}>{el.type}</div>
+			<div className={s.businessSize}>{el.name}</div>
 			<div className={s.businessIncome}>+{el.sum}</div>
 		</div>
 	));
