@@ -7,6 +7,7 @@ let mapStatetoProps = (state) => {
 	};
 };
 
+// delete
 let mapDispatchToProps = (dispatch) => {
 	return {
 		// AddActiveIncomeAC: (value) => {
