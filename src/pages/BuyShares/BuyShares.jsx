@@ -4,15 +4,23 @@ import Button from "../../components/Button/Button";
 import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnConteiner";
 import HeaderText from "../../components/HeaderText/HeaderText";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
+import { useNavigate } from "react-router-dom";
 
 function BuyShares(props) {
+	const navigate = useNavigate();
 	const addShares = () => {
-		debugger
 		const purchaseCost = valueVoucher * wantToBuy;
 
 		if (purchaseCost > totalCost) {
 			const maxAffordableUnits = Math.floor(totalCost / valueVoucher);
-			const message = `Сума покупки перевищує доступну кількість коштів. Ви можете купити лише ${maxAffordableUnits} одиниць за ${valueVoucher} кожна. Ваш поточний бюджет: ${maxAffordableUnits*valueVoucher}. Підтвердьте покупку або відхиліть.`;
+			const message = `⚠️ Сума покупки перевищує доступний бюджет.
+
+💰 Ви можете придбати лише: ${maxAffordableUnits} одиниць
+💵 Ціна за одиницю: $${valueVoucher}
+📉 Ваш поточний бюджет: $${maxAffordableUnits * valueVoucher}
+
+✅ Підтвердити покупку?
+❌ Відхилити дію?`;
 
 			const isConfirmed = window.confirm(message);
 
@@ -28,7 +36,9 @@ function BuyShares(props) {
 
 			if (isConfirmed) {
 				props.addSharesThunks(selectedButton, wantToBuy, valueVoucher, totalCost);
+				navigate("/SaleShares");
 				return wantToBuy;
+
 			} else {
 				return 0;
 			}
@@ -45,15 +55,6 @@ function BuyShares(props) {
 
 	const handleButtonClick = (buttonName) => {
 		setSelectedButton(buttonName);
-	};
-	const handleChangeValueVoucher = (event) => {
-		setValueVoucher(event.target.value);
-	};
-	const handleChangeWantToBuy = (event) => {
-		setWantToBuy(event.target.value);
-	};
-	const handleChangeTotalCost = (event) => {
-		setTotalCost(event.target.value);
 	};
 
 	const valueVoucherRef = useRef(null); // Реф для доступу до інпуту
@@ -76,18 +77,18 @@ function BuyShares(props) {
 		}
 	};
 
-	const handleChange = (e, field) => {
+	const handleChange = (onlyNums, field) => {
 		let b = +wantToBuy,
 			a = +valueVoucher,
 			c = +totalCost;
 		if (field === "a") {
-			a = e.target.value;
+			a = onlyNums;
 			c = a * b;
 		} else if (field === "b") {
-			b = e.target.value;
+			b = onlyNums;
 			c = a * b;
 		} else if (field === "c") {
-			c = e.target.value;
+			c = onlyNums;
 			b = a !== 0 ? c / a : 0;
 		}
 		// debugger;
@@ -119,9 +120,19 @@ function BuyShares(props) {
 								className={s.infoNumber}
 								type="text"
 								value={valueVoucher}
-								onChange={(e) => handleChange(e, "a")} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
+									handleChange(onlyNums, "a"); // Передаємо очищене значення і тип
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення непотрібних символів
+									}
+								}}
 							/>
 						</div>{" "}
 					</div>
@@ -193,9 +204,19 @@ function BuyShares(props) {
 								className={s.infoNumber}
 								type="text"
 								value={wantToBuy}
-								onChange={(e) => handleChange(e, "b")} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
+									handleChange(onlyNums, "b"); // Передаємо очищене значення і тип
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення непотрібних символів
+									}
+								}}
 							/>
 						</div>{" "}
 					</div>
@@ -214,9 +235,19 @@ function BuyShares(props) {
 								className={s.infoNumber}
 								type="text"
 								value={totalCost}
-								onChange={(e) => handleChange(e, "c")} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
+									handleChange(onlyNums, "c"); // Передаємо очищене значення і тип
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення непотрібних символів
+									}
+								}}
 							/>
 						</div>
 					</div>

@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import SaleRealty from "./SaleRealty";
+import { SaleRealtyThunks, SellRealtyThunks } from "../../components/Redux/Redux-Thunk";
 
 let mapStatetoProps = (state) => {
 	return {
@@ -9,9 +10,9 @@ let mapStatetoProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
 	return {
-		// AddActiveIncomeAC: (value) => {
-		// 	dispatch(AddActiveIncomeThunks(value));
-		// },
+		SellRealtyThunks: (salePrice, selectedID) => {
+			dispatch(SellRealtyThunks(salePrice, selectedID));
+		},
 		// DeleteActiveIncomeAC: (index) => {
 		// 	dispatch(DeleteActiveIncomeThunks(index));
 		// },

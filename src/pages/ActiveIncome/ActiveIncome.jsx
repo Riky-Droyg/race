@@ -12,14 +12,31 @@ function ActiveIncome(props) {
 		setValue(event.target.value); // Оновлення стану при зміні значення
 	};
 
-	let AddActiveIncome = () => {
-		props.AddActiveIncomeAC(value);
-		setValue("");
-	};
+let AddActiveIncome = () => {
+	if (!value || Number(value) === 0) {
+		alert("Будь ласка, введіть суму доходу (більше 0).");
+		return;
+	}
 
-	let DeleteActiveIncome = () => {
-		props.DeleteActiveIncomeAC();
-	};
+	const confirmed = window.confirm(`Додати активний дохід на суму ${value}?`);
+	if (!confirmed) return;
+
+	props.AddActiveIncomeAC(value);
+	setValue("");
+};
+
+let DeleteActiveIncome = () => {
+	if (props.state.active_income.total === 0) {
+		alert("Немає активного доходу для видалення.");
+		return;
+	}
+
+	const income = props.state.active_income.salary;
+	const confirmed = window.confirm(`Видалити активний дохід на суму ${income}?`);
+	if (!confirmed) return;
+
+	props.DeleteActiveIncomeAC();
+};
 	return (
 		<div className={s.financialOverview}>
 			<ButtonReturnConteiner />
@@ -56,6 +73,17 @@ function ActiveIncome(props) {
 					type="number"
 					className={s.numberInput}
 					placeholder="Введи зарплату з картки"
+					inputMode="numeric"
+					pattern="[0-9]*"
+					onInput={(e) => {
+						const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
+						setValue(onlyNums);
+					}}
+					onKeyDown={(e) => {
+						if (["e", "E", "-", "+"].includes(e.key)) {
+							e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
+						}
+					}}
 				/>
 			</div>
 

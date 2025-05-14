@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./MainMenu.module.scss";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import LineShares from "../../components/LineShares/LineShares";
 import Button from "../../components/Button/Button";
@@ -8,6 +8,7 @@ import Button from "../../components/Button/Button";
 function MainMenu(props) {
 	let totalIncome = +props.state.passive_income.total + +props.state.active_income.total;
 	let paycheck = totalIncome - props.state.expenses.total;
+
 	return (
 		<div className={s.financialOverview}>
 			<div className={s.marquee}>
@@ -124,42 +125,52 @@ function MainMenu(props) {
 				</NavLink>
 			</div>
 
-			<NavLink to="/BuyShares">
-				<div className={s.stocksOverview}>
+			<div className={s.stocksOverview}>
+				<NavLink to="/SaleShares">
 					<LineShares
 						nameShares={"УКТ"}
 						totalCount={props.state.stocks.ykt.totalCount}
 						averagePrice={props.state.stocks.ykt.averagePrice}
+						onClick={"/BuyEarth"}
 					/>
-
+				</NavLink>
+				<NavLink to="/SaleShares">
 					<LineShares
 						nameShares={"КРС"}
 						totalCount={props.state.stocks.krs.totalCount}
 						averagePrice={props.state.stocks.krs.averagePrice}
 					/>
+				</NavLink>
+				<NavLink to="/SaleShares">
 					<LineShares
 						nameShares={"ДР"}
 						totalCount={props.state.stocks.dr.totalCount}
 						averagePrice={props.state.stocks.dr.averagePrice}
-					/>
+					/>{" "}
+				</NavLink>{" "}
+				<NavLink to="/SaleShares">
 					<LineShares
 						nameShares={"КЧГ"}
 						totalCount={props.state.stocks.kchg.totalCount}
 						averagePrice={props.state.stocks.kchg.averagePrice}
-					/>
+					/>{" "}
+				</NavLink>{" "}
+				<NavLink to="/SaleShares">
 					<LineShares
 						nameShares={"ЯКХЗ"}
 						totalCount={props.state.stocks.yakhz.totalCount}
 						averagePrice={props.state.stocks.yakhz.averagePrice}
-					/>
+					/>{" "}
+				</NavLink>{" "}
+				<NavLink to="/SaleEarn">
 					<LineShares
 						color="#009F23"
 						nameShares={"Земля"}
-						totalCount={props.state.stocks.yakhz.totalCount}
-						averagePrice={props.state.stocks.yakhz.averagePrice}
+						totalCount={props.state.plots.count}
+						averagePrice={props.state.plots.average_price}
 					/>
-				</div>
-			</NavLink>
+				</NavLink>
+			</div>
 
 			<div className={s.buttonContainer}>
 				<NavLink to={"/InputScreenBuy"}>
@@ -180,7 +191,6 @@ function MainMenu(props) {
 						fontSize="24px"
 					/>
 				</NavLink>
-				
 			</div>
 		</div>
 	);

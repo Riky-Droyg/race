@@ -1,4 +1,4 @@
-import { AddExpensesAC, AddBuisnesAC, DeleteBuisnesAC, DeleteExpensesAC, AddActiveIncomeAC, DeleteActiveIncomeAC, AddDebtsAC, DeleteDebtsAC, AddSharesAC, sellingSharesAC, PurseAC, PaycheckAC, AddEarnkAC, addRealtyCashAC } from "./ActionCreators";
+import { AddExpensesAC, AddBuisnesAC, DeleteBuisnesAC, DeleteExpensesAC, AddActiveIncomeAC, DeleteActiveIncomeAC, AddDebtsAC, DeleteDebtsAC, AddSharesAC, sellingSharesAC, PurseAC, PaycheckAC, AddEarnkAC, addRealtyCashAC, sellSharesAC, sellEarnThunksAC, SellRealtyAC, addRealtyCreditAC } from "./ActionCreators";
 
 export const AddBuisnesThunks = (sizeBuisnes, investment, income) => async (dispatch, getState) => {
 	try {
@@ -199,10 +199,10 @@ export const addSharesThunks = (selectedButton,wantToBuy,valueVoucher,totalCost)
 	}
 };
 
-export const sellingSharesThunks = (nameShares, count, price) => async (dispatch, getState) => {
+export const sellSharesThunks = (selectedButton, wantToSale, valueVoucher, totalCost) => async (dispatch, getState) => {
 	try {
 		let transformNameShares = () => {
-			switch (nameShares) {
+			switch (selectedButton) {
 				case "УКТ": {
 					return "ykt";
 				}
@@ -222,8 +222,7 @@ export const sellingSharesThunks = (nameShares, count, price) => async (dispatch
 					console.log('error "addSharesThunks"');
 			}
 		};
-		let challengeTransformNameShares = transformNameShares();
-		dispatch(sellingSharesAC(challengeTransformNameShares, count, price));
+		dispatch(sellSharesAC(transformNameShares(), wantToSale, valueVoucher, totalCost));
 		let state = getState().MainReduser;
 		console.log(state);
 		const response = await fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
@@ -265,6 +264,7 @@ export const PaycheckThunks = () => async (dispatch, getState) => {
 		dispatch(PaycheckAC());
 		let state = getState().MainReduser;
 		console.log(state);
+		debugger
 		const response = await fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
@@ -299,9 +299,68 @@ export const AddEarnThunks = (count,average_price,total_price) => async (dispatc
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
 	}
 };
+export const sellEarnThunks = (wantToSale, valueVoucher, totalCost) => async (dispatch, getState) => {
+	try {
+		
+		dispatch(sellEarnThunksAC(wantToSale, valueVoucher, totalCost));
+		let state = getState().MainReduser;
+		console.log(state);
+		const response = await fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(state),
+		});
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+		alert("✅ Дані успішно збережено!");
+	} catch (error) {
+		console.error("Помилка:", error);
+		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
+	}
+};
 export const addRealtyCashThunks = (property_type, total_price, credit, deposit, rent_price, real_price, monthly_interest) => async (dispatch, getState) => {
 	try {
 		dispatch(addRealtyCashAC(property_type, total_price, credit, deposit, rent_price, real_price, monthly_interest));
+		let state = getState().MainReduser;
+		console.log(state);
+		const response = await fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(state),
+		});
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+		alert("✅ Дані успішно збережено!");
+	} catch (error) {
+		console.error("Помилка:", error);
+		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
+	}
+};
+export const SellRealtyThunks = (salePrice, selectedID) => async (dispatch, getState) => {
+	try {
+		dispatch(SellRealtyAC(salePrice, selectedID));
+		let state = getState().MainReduser;
+		console.log(state);
+		const response = await fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
+			method: "PUT",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify(state),
+		});
+		if (!response.ok) {
+			throw new Error(`HTTP error! Status: ${response.status}`);
+		}
+		alert("✅ Дані успішно збережено!");
+	} catch (error) {
+		console.error("Помилка:", error);
+		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
+	}
+};
+
+export const addRealtyCreditThunks = (property_type, total_price, credit, deposit, rent_price, real_price, monthly_interest) => async (dispatch, getState) => {
+	try {
+		dispatch(addRealtyCreditAC(property_type, total_price, credit, deposit, rent_price, real_price, monthly_interest));
 		let state = getState().MainReduser;
 		console.log(state);
 		const response = await fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function BuyBuisnes(props) {
 	// Створюємо стан для збереження вибраної кнопки
-	const [selectedButton, setSelectedButton] = useState("ВБ");
+	const [selectedButton, setSelectedButton] = useState("Великий Бізнес");
 	const [investment, setInvestments] = useState("");
 	const [income, setIncome] = useState("");
 	const navigate = useNavigate();
@@ -17,15 +17,24 @@ function BuyBuisnes(props) {
 	const handleButtonClick = (buttonName) => {
 		setSelectedButton(buttonName);
 	};
-	const handleChangeInvestment = (event) => {
-		setInvestments(event.target.value);
-	};
-
-	const handleChangeIncome = (event) => {
-		setIncome(event.target.value);
-	};
 	const AddBuisnes = () => {
+		if (!investment || Number(investment) === 0 || !income || Number(income) === 0) {
+			alert("Будь ласка, введіть вкладення та щомісячний дохід (більші за 0).");
+			return;
+		}
+
+		if (Number(investment) > props.state.cash_on_hand) {
+			alert("Недостатньо коштів для придбання бізнесу.");
+			return;
+		}
+
+		const confirmed = window.confirm(`Додати бізнес з вкладенням $${investment} і доходом $${income}?`);
+		if (!confirmed) return;
+
 		props.AddBuisnesThunks(selectedButton, investment, income);
+		setInvestments("");
+		setIncome("");
+		navigate("/PassiveIncome");
 	};
 
 	const inputRef = useRef(null); // Реф для доступу до інпуту
@@ -66,9 +75,19 @@ function BuyBuisnes(props) {
 								className={s.infoNumber}
 								type="text"
 								value={investment}
-								onChange={handleChangeInvestment} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
+									setInvestments(onlyNums);
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
+									}
+								}}
 							/>
 						</div>
 					</div>
@@ -86,9 +105,19 @@ function BuyBuisnes(props) {
 								className={s.infoNumber}
 								type="text"
 								value={income}
-								onChange={handleChangeIncome} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
+									setIncome(onlyNums);
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
+									}
+								}}
 							/>
 						</div>
 					</div>
@@ -117,10 +146,7 @@ function BuyBuisnes(props) {
 			<Button
 				style={{ marginTop: "auto" }}
 				name={"Придбати"}
-				onClick={() => {
-					AddBuisnes();
-					navigate("/PassiveIncome");
-				}}
+				onClick={AddBuisnes}
 			/>
 		</div>
 	);

@@ -8,11 +8,14 @@ let DELETE_ACTIVE_INCOME = "DELETE_ACTIVE_INCOME";
 let ADD_DEBTS = "ADD_DEBTS";
 let DELETE_DEBTS = "DELETE_DEBTS";
 let ADD_SHARES = "ADD_SHARES";
-let SELLING_SHARES = "SELLING_SHARES";
+let SELL_SHARES = "SELL_SHARES";
 let PURSE = "PURSE";
 let PAYCHECK = "PAYCHECK";
 let ADD_EARN = "ADD_EARN";
 let ADD_REALTY_CASH = "ADD_REALTY_CASH";
+let SELL_EARN = "SELL_EARN";
+let SELL_REALTY = "SELL_REALTY";
+let ADD_REALTY_CREDIT = "ADD_REALTY_CREDIT";
 
 export let АuthorizationAC = (data) => {
 	return {
@@ -39,7 +42,7 @@ export let DeleteBuisnesAC = (index) => {
 export let AddExpensesAC = (name, number) => {
 	return {
 		type: ADD_EXPENSES,
-		name, 
+		name,
 		number,
 	};
 };
@@ -84,12 +87,13 @@ export let AddSharesAC = (nameShares, count, price) => {
 		price,
 	};
 };
-export let sellingSharesAC = (nameShares, count, price) => {
+export let sellSharesAC = (selectedButton, wantToSale, valueVoucher, totalCost) => {
 	return {
-		type: SELLING_SHARES,
-		nameShares,
-		count,
-		price,
+		type: SELL_SHARES,
+		selectedButton,
+		wantToSale,
+		valueVoucher,
+		totalCost,
 	};
 };
 export let PurseAC = (action, value) => {
@@ -122,5 +126,32 @@ export let addRealtyCashAC = (property_type, total_price, credit, deposit, rent_
 		rent_price,
 		real_price,
 		monthly_interest,
+	};
+};
+export let addRealtyCreditAC = (property_type, total_price, credit, deposit, rent_price, real_price, monthly_interest) => {
+	return {
+		type: ADD_REALTY_CREDIT,
+		property_type,
+		total_price,
+		credit,
+		deposit,
+		rent_price,
+		real_price,
+		monthly_interest,
+	};
+};
+export let sellEarnThunksAC = (wantToSale, valueVoucher, totalCost) => {
+	return {
+		type: SELL_EARN,
+		wantToSale,
+		valueVoucher,
+		totalCost,
+	};
+};
+export let SellRealtyAC = (salePrice, selectedID) => {
+	return {
+		type: SELL_REALTY,
+		salePrice,
+		selectedID,
 	};
 };

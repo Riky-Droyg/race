@@ -3,6 +3,7 @@ import s from "./ExpenseForm.module.scss";
 import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnConteiner";
 import HeaderText from "../../components/HeaderText/HeaderText";
 import Button from "../../components/Button/Button";
+import { useNavigate } from "react-router-dom";
 
 function ExpenseForm(props) {
 	let [number, setNumber] = useState(""); // Початкове значення — пустий рядок
@@ -15,9 +16,19 @@ function ExpenseForm(props) {
 	const handleChangeName = (event) => {
 		setName(event.target.value); // Оновлення стану при зміні значення
 	};
+	const navigate = useNavigate();
 
 	const addExpenses = () => {
+		if (!name.trim() || !number || Number(number) === 0) {
+			alert("Будь ласка, заповніть назву витрати та суму (більше 0).");
+			return;
+		}
+
+		const confirmed = window.confirm(`Додати витрату "${name}" на суму ${number}?`);
+		if (!confirmed) return;
+
 		props.AddExpensesThunks(name, number);
+		navigate("/Expenses");
 	};
 
 	return (
@@ -38,9 +49,20 @@ function ExpenseForm(props) {
 				<input
 					onChange={handleChangeNumber}
 					value={number}
-					type=" number"
+					type="number"
 					className={s.numberInput}
 					placeholder="Введи суму витрат"
+					inputMode="numeric"
+					pattern="[0-9]*"
+					onInput={(e) => {
+						const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
+						setNumber(onlyNums);
+					}}
+					onKeyDown={(e) => {
+						if (["e", "E", "-", "+"].includes(e.key)) {
+							e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
+						}
+					}}
 				/>
 			</div>
 

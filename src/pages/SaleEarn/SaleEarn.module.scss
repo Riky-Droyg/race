@@ -53,7 +53,12 @@
 	height: 100%;
 	text-align: right;
 }
-
+.infoNumberOrigin {
+	font-size: 14px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
 .type {
 	min-height: 34px;
 	height: 15.89%;
@@ -71,12 +76,12 @@
 	border-top: 2px dashed black;
 }
 .paddingTop {
-	min-height: 50px;
-	height: 23.36%;
+	min-height: 11px;
+	height: 5.61%;
 }
 .paddingBottom {
-	min-height: 13px;
-	height: 6.07%;
+	min-height: 20px;
+	height: 9.3%;
 }
 .marginBottom {
 	min-height: 27px;

@@ -1,5 +1,6 @@
 import { connect } from "react-redux";
 import SaleEarn from "./SaleEarn";
+import { sellEarnThunks } from "../../components/Redux/Redux-Thunk";
 
 let mapStatetoProps = (state) => {
 	return {
@@ -9,9 +10,9 @@ let mapStatetoProps = (state) => {
 
 let mapDispatchToProps = (dispatch) => {
 	return {
-		// AddActiveIncomeAC: (value) => {
-		// 	dispatch(AddActiveIncomeThunks(value));
-		// },
+		sellEarnThunks: ( wantToSale, valueVoucher, totalCost) => {
+			dispatch(sellEarnThunks( wantToSale, valueVoucher, totalCost));
+		},
 		// DeleteActiveIncomeAC: (index) => {
 		// 	dispatch(DeleteActiveIncomeThunks(index));
 		// },

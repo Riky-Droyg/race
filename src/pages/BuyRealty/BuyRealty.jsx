@@ -7,6 +7,7 @@ import EarnIcon from "../../img/Earn.svg";
 import Home from "../../img/home.svg";
 import TypeHome from "../../img/TypeHome.svg";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
+import { useNavigate } from "react-router-dom";
 
 function BuyRealty(props) {
 	// Створюємо стан для збереження вибраної кнопки
@@ -18,9 +19,64 @@ function BuyRealty(props) {
 	const [real_price, setReal_price] = useState("");
 	const [monthly_interest, setMonthly_interest] = useState("");
 
+	const navigate = useNavigate();
+
 	const addRealtyCash = () => {
-		console.log(property_type, total_price, credit, deposit, rent_price, real_price, monthly_interest)
+		const numericFields = [
+			{ name: "Загальна вартість", value: total_price },
+			{ name: "Кредит", value: credit },
+			{ name: "Завдаток", value: deposit },
+			{ name: "Орендна плата", value: rent_price },
+			{ name: "Реальна вартість", value: real_price },
+			{ name: "Щомісячні відсотки", value: monthly_interest },
+		];
+
+		for (const field of numericFields) {
+			if (!field.value || isNaN(field.value) || Number(field.value) <= 0) {
+				alert(`Будь ласка, введіть коректне число більше 0 для поля "${field.name}".`);
+				return;
+			}
+		}
+
+		if (Number(total_price) > props.state.cash_on_hand) {
+			alert("Недостатньо коштів для придбання нерухомості.");
+			return;
+		}
+
+		const confirmed = window.confirm(`Придбати нерухомість за $${total_price}?`);
+		if (!confirmed) return;
+
 		props.addRealtyCash(property_type, total_price, credit, deposit, rent_price, real_price, monthly_interest);
+		navigate("/SaleRealty");
+	};
+
+	const addRealtyCredit = () => {
+		const numericFields = [
+			{ name: "Загальна вартість", value: total_price },
+			{ name: "Кредит", value: credit },
+			{ name: "Завдаток", value: deposit },
+			{ name: "Орендна плата", value: rent_price },
+			{ name: "Реальна вартість", value: real_price },
+			{ name: "Щомісячні відсотки", value: monthly_interest },
+		];
+
+		for (const field of numericFields) {
+			if (!field.value || isNaN(field.value) || Number(field.value) <= 0) {
+				alert(`Будь ласка, введіть коректне число більше 0 для поля "${field.name}".`);
+				return;
+			}
+		}
+
+		if (Number(deposit) > props.state.cash_on_hand) {
+			alert("Недостатньо коштів для внесення завдатку.");
+			return;
+		}
+
+		const confirmed = window.confirm(`Придбати нерухомість з завдатком $${deposit}?`);
+		if (!confirmed) return;
+
+		props.addRealtyCredit(property_type, total_price, credit, deposit, rent_price, real_price, monthly_interest);
+		navigate("/SaleRealty");
 	};
 	// Обробник для оновлення вибраної кнопки
 	const handleButtonClick = (buttonName) => {
@@ -44,9 +100,6 @@ function BuyRealty(props) {
 	};
 	const handleChangeMonthlyInterest = (event) => {
 		setMonthly_interest(event.target.value);
-	};
-	const AddBuisnes = () => {
-		props.AddBuisnesThunks(property_type, total_price, real_price);
 	};
 
 	const total_priceRef = useRef(null); // Реф для доступу до інпуту
@@ -110,9 +163,19 @@ function BuyRealty(props) {
 								className={s.infoNumber}
 								type="text"
 								value={total_price}
-								onChange={handleChangetotal_price} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
+									setTotal_price(onlyNums);
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
+									}
+								}}
 							/>
 						</div>
 					</div>
@@ -132,9 +195,19 @@ function BuyRealty(props) {
 								className={s.infoNumber}
 								type="text"
 								value={credit}
-								onChange={handleChangeCredit} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
+									setCredit(onlyNums);
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
+									}
+								}}
 							/>
 						</div>
 					</div>
@@ -153,9 +226,19 @@ function BuyRealty(props) {
 								className={s.infoNumber}
 								type="text"
 								value={deposit}
-								onChange={handleChangeDeposit} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
+									setDeposit(onlyNums);
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
+									}
+								}}
 							/>
 						</div>
 					</div>
@@ -174,9 +257,19 @@ function BuyRealty(props) {
 								className={s.infoNumber}
 								type="text"
 								value={monthly_interest}
-								onChange={handleChangeMonthlyInterest} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
+									setMonthly_interest(onlyNums);
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
+									}
+								}}
 							/>
 						</div>
 					</div>
@@ -184,7 +277,6 @@ function BuyRealty(props) {
 						<div className={s.infoText}> Орендна плата</div>
 						<div
 							className={s.wrapperInput}
-							onClick={handleClickRentPrice}
 						>
 							<span className={s.dolar}>+ $</span>
 
@@ -195,9 +287,19 @@ function BuyRealty(props) {
 								className={s.infoNumber}
 								type="text"
 								value={rent_price}
-								onChange={handleClickRentPrice} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
+									setRent_price(onlyNums);
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
+									}
+								}}
 							/>
 						</div>
 					</div>
@@ -216,9 +318,19 @@ function BuyRealty(props) {
 								className={s.infoNumber}
 								type="text"
 								value={real_price}
-								onChange={handleChangeRealPrice} // Виклик функції при зміні
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
+									setReal_price(onlyNums);
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
+									}
+								}}
 							/>
 						</div>
 					</div>
@@ -301,6 +413,7 @@ function BuyRealty(props) {
 				style={{ marginTop: "11px" }}
 				fontSize={24}
 				name={"Придбати в кредит"}
+				onClick={addRealtyCredit}
 			/>
 		</div>
 	);

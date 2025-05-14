@@ -7,78 +7,63 @@ import { NavLink } from "react-router-dom";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
 
 function SaleShares(props) {
+	const SaleShares = () => {
+		
+		const available = availability(); // доступна кількість акцій
+		const avgPurchasePrice = averagePrice(); // середня ціна купівлі
+		const profitOrLoss = (valueVoucher - avgPurchasePrice) * wantToSale; // +/- різниця
+		const profitText = profitOrLoss >= 0 ? "прибуток" : "збиток";
+
+		// Перевірка кількості
+		if (wantToSale > available) {
+			alert(`У вас лише ${available} акцій. Ви не можете продати ${wantToSale}.`);
+			return 0;
+		}
+
+		// Повідомлення з розрахунками
+		const message = `Ви хочете продати ${wantToSale} акцій за ціною $${valueVoucher} кожна.
+	Загальна сума: $${totalCost}.
+	Середня ціна купівлі: $${avgPurchasePrice}.
+	Очікуваний ${profitText}: $${Math.abs(profitOrLoss)}.
+	Підтвердити продаж?`;
+
+		const isConfirmed = window.confirm(message);
+
+		if (isConfirmed) {
+			props.sellSharesThunks(selectedButton, wantToSale, valueVoucher, totalCost);
+			return wantToSale;
+		} else {
+			return 0;
+		}
+	};
+
 	// Створюємо стан для збереження вибраної кнопки
 	const [selectedButton, setSelectedButton] = useState("КРС");
-
-	const [investment, setInvestments] = useState("");
-	const [credit, setCredit] = useState("");
-	const [deposit, setDeposit] = useState("");
-	const [interest, setInterest] = useState("");
-	const [income, setIncome] = useState("");
-	const [realInvestment, setRealInvestment] = useState("");
+	const [wantToSale, setWantToSale] = useState("");
+	const [valueVoucher, setValueVoucher] = useState("");
+	const [totalCost, setTotalCost] = useState("");
 
 	// Обробник для оновлення вибраної кнопки
 	const handleButtonClick = (buttonName) => {
 		setSelectedButton(buttonName);
 	};
-	const handleChangeInvestment = (event) => {
-		setInvestments(event.target.value);
-	};
-	const handleChangeCredit = (event) => {
-		setCredit(event.target.value);
-	};
-	const handleChangeDeposit = (event) => {
-		setDeposit(event.target.value);
-	};
-	const handleChangeInterest = (event) => {
-		setInterest(event.target.value);
-	};
+	const valueVoucherRef = useRef(null); // Реф для доступу до інпуту
+	const wantToSaleRef = useRef(null); // Реф для доступу до інпуту
+	const totalCostRef = useRef(null); // Реф для доступу до інпуту
 
-	const handleChangeIncome = (event) => {
-		setIncome(event.target.value);
-	};
-	const handleChangeRealInvestment = (event) => {
-		setRealInvestment(event.target.value);
-	};
-	const AddBuisnes = () => {
-		props.AddBuisnesThunks(selectedButton, investment, income);
-	};
-
-	const investmentRef = useRef(null); // Реф для доступу до інпуту
-	const creditRef = useRef(null); // Реф для доступу до інпуту
-	const depositRef = useRef(null); // Реф для доступу до інпуту
-	const interestRef = useRef(null); // Реф для доступу до інпуту
-	const incomeRef = useRef(null); // Реф для доступу до інпуту
-	const realInvestmentRef = useRef(null); // Реф для доступу до інпуту
-
-	const handleClickInvestmentRef = () => {
-		if (investmentRef.current) {
-			investmentRef.current.focus(); // Фокусуємо інпут
+	const handleClickValueVoucherRef = () => {
+		if (valueVoucherRef.current) {
+			valueVoucherRef.current.focus(); // Фокусуємо інпут
 		}
 	};
-	const handleClickCreditRef = () => {
-		if (creditRef.current) {
-			creditRef.current.focus(); // Фокусуємо інпут
+	const handleClickWantToSaleRef = () => {
+		if (wantToSaleRef.current) {
+			wantToSaleRef.current.focus(); // Фокусуємо інпут
 		}
 	};
-	const handleClickDepositRef = () => {
-		if (depositRef.current) {
-			depositRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickInterestRef = () => {
-		if (interestRef.current) {
-			interestRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickIncomeRef = () => {
-		if (incomeRef.current) {
-			incomeRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickRealInvestmentRef = () => {
-		if (realInvestmentRef.current) {
-			realInvestmentRef.current.focus(); // Фокусуємо інпут
+	const handleClickTotalCostRef = () => {
+		if (totalCostRef.current) {
+			totalCostRef.current.focus(); // Фокусуємо інпут
 		}
 	};
 	const availability = () => {
@@ -113,6 +98,27 @@ function SaleShares(props) {
 				return 0;
 		}
 	};
+
+	const handleChange = (onlyNums, field) => {
+		let b = +wantToSale,
+			a = +valueVoucher,
+			c = +totalCost;
+		if (field === "a") {
+			a = onlyNums;
+			c = a * b;
+		} else if (field === "b") {
+			b = onlyNums;
+			c = a * b;
+		} else if (field === "c") {
+			c = onlyNums;
+			b = a !== 0 ? c / a : 0;
+		}
+		// debugger;
+		setValueVoucher(isNaN(a) || a === 0 ? "" : a);
+		setWantToSale(isNaN(b) || b === 0 ? "" : Math.round(b));
+		setTotalCost(isNaN(c) || c === 0 ? "" : c);
+	};
+
 	return (
 		<div className={s.wrapper}>
 			<ButtonReturnConteiner />
@@ -168,20 +174,30 @@ function SaleShares(props) {
 						<div className={s.infoText}>Вартість продажу</div>
 						<div
 							className={s.wrapperInput}
-							onClick={handleClickInvestmentRef}
+							onClick={handleClickValueVoucherRef}
 						>
 							<span className={s.dolar}>$</span>
 
-							<span className={`${investment.length === 0 ? s.placeholder : ""}`}>{investment}</span>
+							<span className={`${valueVoucher.length === 0 ? s.placeholder : ""}`}>{valueVoucher}</span>
 
 							<input
-								ref={investmentRef}
+								ref={valueVoucherRef}
 								className={s.infoNumber}
 								type="text"
-								value={investment}
-								onChange={handleChangeInvestment} // Виклик функції при зміні
+								value={valueVoucher}
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
+									handleChange(onlyNums, "a"); // Передаємо очищене значення і тип
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення непотрібних символів
+									}
+								}}
 							/>
 						</div>{" "}
 					</div>
@@ -189,20 +205,30 @@ function SaleShares(props) {
 						<div className={s.infoText}> Кількість</div>
 						<div
 							className={s.wrapperInput}
-							onClick={handleClickCreditRef}
+							onClick={handleClickWantToSaleRef}
 						>
 							<span className={s.dolar}>$</span>
 
-							<span className={`${credit.length === 0 ? s.placeholder : ""}`}>{credit}</span>
+							<span className={`${wantToSale.length === 0 ? s.placeholder : ""}`}>{wantToSale}</span>
 
 							<input
-								ref={creditRef}
+								ref={wantToSaleRef}
 								className={s.infoNumber}
 								type="text"
-								value={credit}
-								onChange={handleChangeCredit} // Виклик функції при зміні
+								value={wantToSale}
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
+									handleChange(onlyNums, "b"); // Передаємо очищене значення і тип
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення непотрібних символів
+									}
+								}}
 							/>
 						</div>{" "}
 					</div>
@@ -210,22 +236,32 @@ function SaleShares(props) {
 						<div className={s.infoText}> Загальна вартість</div>
 						<div
 							className={s.wrapperInput}
-							onClick={handleClickRealInvestmentRef}
+							onClick={handleClickTotalCostRef}
 						>
 							<span className={s.dolar}>$</span>
 
-							<span className={`${realInvestment.length === 0 ? s.placeholder : ""}`}>{realInvestment}</span>
+							<span className={`${totalCost.length === 0 ? s.placeholder : ""}`}>{totalCost}</span>
 
 							<input
-								ref={realInvestmentRef}
+								ref={totalCostRef}
 								className={s.infoNumber}
 								type="text"
-								value={realInvestment}
-								onChange={handleChangeRealInvestment} // Виклик функції при зміні
+								value={totalCost}
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
+									handleChange(onlyNums, "c"); // Передаємо очищене значення і тип
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення непотрібних символів
+									}
+								}}
 							/>
-						</div>{" "}
+						</div>
 					</div>
 				</div>
 			</div>
@@ -233,7 +269,8 @@ function SaleShares(props) {
 
 			<Button
 				style={{ marginTop: "auto" }}
-				name={"Придбати"}
+				name={"Продати"}
+				onClick={SaleShares}
 			/>
 		</div>
 	);

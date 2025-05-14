@@ -7,130 +7,106 @@ import { NavLink } from "react-router-dom";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
 
 function SaleEarn(props) {
-	// Створюємо стан для збереження вибраної кнопки
-	const [selectedButton, setSelectedButton] = useState("ВБ");
+	const SaleEarn = () => {
+		const available = availability(); // доступна кількість соток
+		const avgPurchasePrice = averagePrice(); // середня ціна купівлі
+		const profitOrLoss = (valueVoucher - avgPurchasePrice) * wantToSale; // +/- різниця
+		const profitText = profitOrLoss >= 0 ? "прибуток" : "збиток";
 
-	const [investment, setInvestments] = useState("");
-	const [credit, setCredit] = useState("");
-	const [deposit, setDeposit] = useState("");
-	const [interest, setInterest] = useState("");
-	const [income, setIncome] = useState("");
-	const [realInvestment, setRealInvestment] = useState("");
+		// Перевірка кількості
+		if (wantToSale > available) {
+			alert(`У вас лише ${available} соток. Ви не можете продати ${wantToSale}.`);
+			return 0;
+		}
+
+		// Повідомлення з розрахунками
+		const message = `Ви хочете продати ${wantToSale} соток за ціною $${valueVoucher} кожна.
+	Загальна сума: $${totalCost}.
+	Середня ціна купівлі: $${avgPurchasePrice}.
+	Очікуваний ${profitText}: $${Math.abs(profitOrLoss)}.
+	Підтвердити продаж?`;
+
+		const isConfirmed = window.confirm(message);
+
+		if (isConfirmed) {
+			props.sellEarnThunks(wantToSale, valueVoucher, totalCost);
+			setWantToSale("");
+			setValueVoucher("");
+			setTotalCost("0");
+
+			return wantToSale;
+		} else {
+			return 0;
+		}
+	};
+
+	// Створюємо стан для збереження вибраної кнопки
+	const [wantToSale, setWantToSale] = useState("");
+	const [valueVoucher, setValueVoucher] = useState("");
+	const [totalCost, setTotalCost] = useState("0");
 
 	// Обробник для оновлення вибраної кнопки
-	const handleButtonClick = (buttonName) => {
-		setSelectedButton(buttonName);
+	const valueVoucherRef = useRef(null); // Реф для доступу до інпуту
+	const wantToSaleRef = useRef(null); // Реф для доступу до інпуту
+	const totalCostRef = useRef(null); // Реф для доступу до інпуту
+
+	const handleClickValueVoucherRef = () => {
+		if (valueVoucherRef.current) {
+			valueVoucherRef.current.focus(); // Фокусуємо інпут
+		}
 	};
-	const handleChangeInvestment = (event) => {
-		setInvestments(event.target.value);
+	const handleClickWantToSaleRef = () => {
+		if (wantToSaleRef.current) {
+			wantToSaleRef.current.focus(); // Фокусуємо інпут
+		}
 	};
-	const handleChangeCredit = (event) => {
-		setCredit(event.target.value);
+	const handleClickTotalCostRef = () => {
+		if (totalCostRef.current) {
+			totalCostRef.current.focus(); // Фокусуємо інпут
+		}
 	};
-	const handleChangeDeposit = (event) => {
-		setDeposit(event.target.value);
+	const availability = () => {
+		return props.state.plots.count || 0;
 	};
-	const handleChangeInterest = (event) => {
-		setInterest(event.target.value);
+	const averagePrice = () => {
+		return props.state.plots.average_price || 0;
 	};
 
-	const handleChangeIncome = (event) => {
-		setIncome(event.target.value);
-	};
-	const handleChangeRealInvestment = (event) => {
-		setRealInvestment(event.target.value);
-	};
-	const AddBuisnes = () => {
-		props.AddBuisnesThunks(selectedButton, investment, income);
-	};
-
-	const investmentRef = useRef(null); // Реф для доступу до інпуту
-	const creditRef = useRef(null); // Реф для доступу до інпуту
-	const depositRef = useRef(null); // Реф для доступу до інпуту
-	const interestRef = useRef(null); // Реф для доступу до інпуту
-	const incomeRef = useRef(null); // Реф для доступу до інпуту
-	const realInvestmentRef = useRef(null); // Реф для доступу до інпуту
-
-	const handleClickInvestmentRef = () => {
-		if (investmentRef.current) {
-			investmentRef.current.focus(); // Фокусуємо інпут
+	const handleChange = (onlyNums, field) => {
+		let b = +wantToSale,
+			a = +valueVoucher,
+			c = +totalCost;
+		if (field === "a") {
+			a = onlyNums;
+			c = a * b;
+		} else if (field === "b") {
+			b = onlyNums;
+			c = a * b;
+		} else if (field === "c") {
+			c = onlyNums;
+			b = a !== 0 ? c / a : 0;
 		}
-	};
-	const handleClickCreditRef = () => {
-		if (creditRef.current) {
-			creditRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickDepositRef = () => {
-		if (depositRef.current) {
-			depositRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickInterestRef = () => {
-		if (interestRef.current) {
-			interestRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickIncomeRef = () => {
-		if (incomeRef.current) {
-			incomeRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickRealInvestmentRef = () => {
-		if (realInvestmentRef.current) {
-			realInvestmentRef.current.focus(); // Фокусуємо інпут
-		}
+		// debugger;
+		setValueVoucher(isNaN(a) || a === 0 ? "" : a);
+		setWantToSale(isNaN(b) || b === 0 ? "" : Math.round(b));
+		setTotalCost(isNaN(c) || c === 0 ? "0" : c);
 	};
 
 	return (
 		<div className={s.wrapper}>
 			<ButtonReturnConteiner />
 
-			<HeaderText text="Продати землю" />
+			<HeaderText text="Продати Землю" />
 
 			<div className={s.contentWrapper}>
 				<div className={s.infoWrapper}>
 					<div className={`${s.info} ${s.infoGrid}`}>
-						<div className={s.infoText}>Кількість соток</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickInvestmentRef}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${investment.length === 0 ? s.placeholder : ""}`}>{investment}</span>
-
-							<input
-								ref={investmentRef}
-								className={s.infoNumber}
-								type="text"
-								value={investment}
-								onChange={handleChangeInvestment} // Виклик функції при зміні
-								placeholder="0"
-								maxLength={7}
-							/>
-						</div>{" "}
+						<div className={s.infoText}>кількість соток</div>
+						<div className={s.infoNumberOrigin}>{availability()}</div>
 					</div>
 					<div className={s.info}>
-						<div className={s.infoText}> Ціна за сотку</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickCreditRef}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${credit.length === 0 ? s.placeholder : ""}`}>{credit}</span>
-
-							<input
-								ref={creditRef}
-								className={s.infoNumber}
-								type="text"
-								value={credit}
-								onChange={handleChangeCredit} // Виклик функції при зміні
-								placeholder="0"
-								maxLength={7}
-							/>
-						</div>
+						<div className={s.infoText}> Середня ціна за сотку</div>
+						<div className={s.infoNumberOrigin}>${averagePrice()}</div>
 					</div>
 				</div>
 				<div className={s.margin}></div>
@@ -144,63 +120,70 @@ function SaleEarn(props) {
 						<div className={s.infoText}>Вартість продажу</div>
 						<div
 							className={s.wrapperInput}
-							onClick={handleClickDepositRef}
+							onClick={handleClickValueVoucherRef}
 						>
 							<span className={s.dolar}>$</span>
 
-							<span className={`${deposit.length === 0 ? s.placeholder : ""}`}>{deposit}</span>
+							<span className={`${valueVoucher.length === 0 ? s.placeholder : ""}`}>{valueVoucher}</span>
 
 							<input
-								ref={depositRef}
+								ref={valueVoucherRef}
 								className={s.infoNumber}
 								type="text"
-								value={deposit}
-								onChange={handleChangeDeposit} // Виклик функції при зміні
+								value={valueVoucher}
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
+									handleChange(onlyNums, "a"); // Передаємо очищене значення і тип
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення непотрібних символів
+									}
+								}}
 							/>
-						</div>
+						</div>{" "}
 					</div>
 					<div className={`${s.info} ${s.gridInfoB}`}>
 						<div className={s.infoText}> Кількість</div>
 						<div
 							className={s.wrapperInput}
-							onClick={handleClickInterestRef}
+							onClick={handleClickWantToSaleRef}
 						>
 							<span className={s.dolar}>$</span>
 
-							<span className={`${interest.length === 0 ? s.placeholder : ""}`}>{interest}</span>
+							<span className={`${wantToSale.length === 0 ? s.placeholder : ""}`}>{wantToSale}</span>
 
 							<input
-								ref={interestRef}
+								ref={wantToSaleRef}
 								className={s.infoNumber}
 								type="text"
-								value={interest}
-								onChange={handleChangeInterest} // Виклик функції при зміні
+								value={wantToSale}
 								placeholder="0"
 								maxLength={7}
+								inputMode="numeric"
+								pattern="[0-9]*"
+								onInput={(e) => {
+									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
+									handleChange(onlyNums, "b"); // Передаємо очищене значення і тип
+								}}
+								onKeyDown={(e) => {
+									if (["e", "E", "-", "+"].includes(e.key)) {
+										e.preventDefault(); // Блокуємо введення непотрібних символів
+									}
+								}}
 							/>
-						</div>
+						</div>{" "}
 					</div>
 					<div className={`${s.info} ${s.gridInfoC}`}>
 						<div className={s.infoText}> Загальна вартість</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickIncomeRef}
-						>
+						<div className={s.wrapperInput}>
 							<span className={s.dolar}>$</span>
 
-							<span className={`${income.length === 0 ? s.placeholder : ""}`}>{income}</span>
-
-							<input
-								ref={incomeRef}
-								className={s.infoNumber}
-								type="text"
-								value={income}
-								onChange={handleChangeIncome} // Виклик функції при зміні
-								placeholder="0"
-								maxLength={7}
-							/>
+							<span>{totalCost}</span>
 						</div>
 					</div>
 				</div>
@@ -210,6 +193,7 @@ function SaleEarn(props) {
 			<Button
 				style={{ marginTop: "auto" }}
 				name={"Продати"}
+				onClick={SaleEarn}
 			/>
 		</div>
 	);

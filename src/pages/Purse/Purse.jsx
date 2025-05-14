@@ -17,17 +17,27 @@ function Purse(props) {
 		setValue("");
 	};
 
-	let addPurseAC = () => {
+let addPurseAC = () => {
+	const confirmed = window.confirm("Підтвердити додавання доходу?");
+	if (confirmed) {
 		props.PurseThunks("+", value);
-	};
-	let minusPurseAC = () => {
+		setValue("");
+	}
+};
+let minusPurseAC = () => {
+	const confirmed = window.confirm("Підтвердити витрату?");
+	if (confirmed) {
 		props.PurseThunks("-", value);
-		setValue = 0;
-	};
-	let PaycheckAC = () => {
+		setValue("");
+	}
+};
+let PaycheckAC = () => {
+	const confirmed = window.confirm("Підтвердити отримання получки?");
+	if (confirmed) {
 		props.PaycheckAC();
-		setValue = 0;
-	};
+		setValue("0");
+	}
+};
 	return (
 		<div className={s.financialOverview}>
 			<ButtonReturnConteiner />
@@ -40,28 +50,24 @@ function Purse(props) {
 					marginBottom: "41px",
 				}}
 			/>
-
-			{/* <div className={s.optionSection}> */}
 			<input
 				onChange={handleChange}
 				value={value}
 				type="number"
 				className={s.numberInput}
 				placeholder="Введи суму"
+				inputMode="numeric"
+				pattern="[0-9]*"
+				onInput={(e) => {
+					const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
+					setValue(onlyNums);
+				}}
+				onKeyDown={(e) => {
+					if (["e", "E", "-", "+"].includes(e.key)) {
+						e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
+					}
+				}}
 			/>
-			{/* </div> */}
-			{/* <div
-				onClick={addPurseAC}
-				className={s.button__add}
-			>
-				+Разовий дохід
-			</div>
-			<div
-				onClick={minusPurseAC}
-				className={s.button__minus}
-			>
-				-Разова витрата
-			</div> */}
 
 			<div className={s.buttonContainer}>
 				<Button
@@ -83,11 +89,11 @@ function Purse(props) {
 			</div>
 			<div className={s.margin}></div>
 			<Button
-				name={"Додати"}
+				name={"+Получка"}
 				onClick={PaycheckAC}
-				background = "#B7E5C1"
+				background="#B7E5C1"
 				color="black"
-				fontSize= "24px"
+				fontSize="24px"
 			/>
 		</div>
 	);

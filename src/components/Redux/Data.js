@@ -45,7 +45,11 @@ let State = {
 		total: 0,
 		list: [],
 	},
-	apartments:[],
+	apartments: [],
+	plots: {
+		count: 0,
+		average_price: 0,
+	},
 };
 export default State;
 

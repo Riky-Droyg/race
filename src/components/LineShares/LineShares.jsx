@@ -1,7 +1,9 @@
 import React from "react";
 import s from "./LineShares.module.scss";
+import { useNavigate } from "react-router-dom";
 
-const LineShares = ({ nameShares, totalCount, averagePrice }) => {
+const LineShares = ({ nameShares, totalCount, averagePrice, Click }) => {
+
 	return (
 		<div className={s.dataRow}>
 			<div

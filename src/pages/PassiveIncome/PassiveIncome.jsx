@@ -9,9 +9,15 @@ function PassiveIncome(props) {
 	let totalRent = props.state.apartments.reduce((sum, apartment) => {
 		return sum + apartment.rent_price;
 	}, 0);
-	let deleteBuisnes = (index) => {
-		props.DeleteBuisnes(index);
-	};
+let deleteBuisnes = (index) => {
+	const business = props.state.passive_income.list[index];
+	const confirmed = window.confirm(
+		`Видалити "${business.name}" з доходом ${business.sum}?`
+	);
+	if (!confirmed) return;
+
+	props.DeleteBuisnes(index);
+};
 
 	return (
 		<div className={s.financialOverview}>
@@ -31,7 +37,7 @@ function PassiveIncome(props) {
 						fontSize: "16px",
 					}}
 				/>
-				{totalRent} 
+			
 			</div>
 
 			<ListItems

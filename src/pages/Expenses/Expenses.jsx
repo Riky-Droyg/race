@@ -7,9 +7,15 @@ import Button from "../../components/Button/Button";
 import { NavLink } from "react-router-dom";
 
 function Expenses(props) {
-	let DeleleExpenses = (index) => {
-		props.DeleleExpenses(index);
-	};
+let DeleleExpenses = (index) => {
+	const expense = props.state.expenses.list[index];
+	const confirmed = window.confirm(
+		`Видалити витрату "${expense.name}" на суму ${expense.sum}?`
+	);
+	if (!confirmed) return;
+
+	props.DeleleExpenses(index);
+};
 
 	return (
 		<div className={s.wrpapper}>

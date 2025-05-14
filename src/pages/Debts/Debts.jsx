@@ -7,9 +7,15 @@ import Button from "../../components/Button/Button";
 import { NavLink } from "react-router-dom";
 
 function Debts(props) {
-	let DeleteDebts = (index) => {
-		props.DeleteDebts(index);
-	};
+let DeleteDebts = (index) => {
+	const debt = props.state.debts.list[index];
+	const confirmed = window.confirm(
+		`Видалити борг "${debt.name}" на суму ${debt.sum}?`
+	);
+	if (!confirmed) return;
+
+	props.DeleteDebts(index);
+};
 	return (
 		<div className={s.wrpapper}>
 			<ButtonReturnConteiner />

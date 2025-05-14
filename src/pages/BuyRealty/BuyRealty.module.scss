@@ -31,7 +31,7 @@
 	height: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: 1fr ;
+	grid-template-rows: 1fr;
 	column-gap: 10px;
 	justify-content: space-between;
 	align-items: center;
@@ -59,6 +59,9 @@
 .deposit {
 	grid-area: deposit;
 }
+.monthlyrent_price {
+	border-right: 1px solid black;
+}
 .monthlyInterest {
 	grid-area: monthlyInterest;
 	border-right: 1px solid black;
@@ -73,10 +76,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: flex-end;
-
 }
-.infoText{
-
+.infoText {
 }
 .infoNumber {
 	opacity: 0;
@@ -142,5 +143,5 @@
 }
 .placeholder::before {
 	content: "0";
-	color: #B3B3B3;
+	color: #b3b3b3;
 }
