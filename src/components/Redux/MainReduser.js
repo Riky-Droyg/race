@@ -35,12 +35,10 @@ const MainReduser = (state = initialState, action) => {
 				return total + item.sum; // Додаємо sum кожного елемента до total
 			}, 0); // Початкове значення для total - 0
 			let newTotalInconme = +totalSum + +state.active_income.total;
-			let newPaycheck = +newTotalInconme - +state.expenses.total;
 			const updatedState = {
 				...state,
 				cash_on_hand: state.cash_on_hand - action.investment,
 				total_income: newTotalInconme,
-				paycheck: +newPaycheck,
 				passive_income: {
 					...state.passive_income,
 					total: +totalSum,
@@ -56,11 +54,9 @@ const MainReduser = (state = initialState, action) => {
 				return +total + +item.sum; // Додаємо sum кожного елемента до total
 			}, 0); // Початкове значення для total - 0
 			let newTotalInconme = +totalSum + +state.active_income.total;
-			let newPaycheck = +newTotalInconme - +state.expenses.total;
 			const updatedState = {
 				...state,
 				total_income: newTotalInconme,
-				paycheck: +newPaycheck,
 				passive_income: {
 					...state.passive_income,
 					total: totalSum,
@@ -89,11 +85,9 @@ const MainReduser = (state = initialState, action) => {
 				return total + item.sum; // Додаємо sum кожного елемента до total
 			}, 0); // Початкове значення для total - 0
 			let TotalInconme = +state.total_income;
-			let newPaycheck = +TotalInconme - +totalSum;
 
 			const updatedState = {
 				...state,
-				paycheck: +newPaycheck,
 				expenses: {
 					...state.expenses,
 					total: totalSum,
@@ -107,12 +101,9 @@ const MainReduser = (state = initialState, action) => {
 			const totalSum = updatedList.reduce((total, item) => {
 				return total + item.sum; // Додаємо sum кожного елемента до total
 			}, 0); // Початкове значення для total - 0
-			let TotalInconme = +state.total_income;
-			let newPaycheck = +TotalInconme - +totalSum;
 
 			const updatedState = {
 				...state,
-				paycheck: +newPaycheck,
 
 				expenses: {
 					...state.expenses,
@@ -124,11 +115,11 @@ const MainReduser = (state = initialState, action) => {
 		}
 		case ADD_ACTIVE_INCOME: {
 			let newTotalInconme = +action.value + +state.passive_income.total;
-			let newPaycheck = +newTotalInconme - +state.expenses.total;
+			// let newPaycheck = +newTotalInconme - +state.expenses.total;
 			return {
 				...state,
 				total_income: newTotalInconme,
-				paycheck: +newPaycheck,
+				// paycheck: +newPaycheck,
 				active_income: {
 					...state.active_income,
 					total: action.value,
@@ -139,12 +130,10 @@ const MainReduser = (state = initialState, action) => {
 		}
 		case DELETE_ACTIVE_INCOME: {
 			let newTotalInconme = +state.active_income.total + +state.passive_income.total;
-			let newPaycheck = +newTotalInconme - +state.expenses.total;
 
 			return {
 				...state,
 				total_income: newTotalInconme,
-				paycheck: newPaycheck,
 				active_income: {
 					...state.active_income,
 					total: 0,
@@ -254,20 +243,44 @@ const MainReduser = (state = initialState, action) => {
 			return updatedState; // Повертаємо новий стан
 		}
 		case PURSE: {
-			let newCashOnHand = "";
+			let newCashOnHand = state.cash_on_hand;
+			let value = +action.value;
+
 			if (action.action === "+") {
-				newCashOnHand = +state.cash_on_hand + +action.value;
+				newCashOnHand += value;
 			} else if (action.action === "-") {
-				newCashOnHand = +state.cash_on_hand - +action.value;
+				if (value > newCashOnHand) {
+					const debtAmount = value - newCashOnHand;
+
+					const newExpense = {
+						name: "Витрата (борг)",
+						sum: debtAmount,
+						id: 0,
+					};
+
+					const updatedList = [...state.debts.list, newExpense];
+					const updatedTotal = state.debts.total + debtAmount;
+
+					return {
+						...state,
+						cash_on_hand: 0,
+						debts: {
+							...state.debts,
+							total: updatedTotal,
+							list: updatedList,
+						},
+					};
+				} else {
+					newCashOnHand -= value;
+				}
 			}
-			const updatedState = {
+
+			return {
 				...state,
 				cash_on_hand: newCashOnHand,
 			};
-			return updatedState; // Повертаємо новий стан
 		}
 		case PAYCHECK: {
-			debugger
 			let totalIncome = state.passive_income.total + +state.active_income.total;
 			let paycheck = totalIncome - state.expenses.total;
 			let cash = +state.cash_on_hand;
@@ -299,19 +312,18 @@ const MainReduser = (state = initialState, action) => {
 					const newExpense = {
 						name: "Получка (борг)", // Назва витрати
 						sum: debtAmount,
-						id:0,
+						id: 0,
 					};
 
 					const updatedList = [...state.debts.list, newExpense];
 					const updatedTotal = state.debts.total + debtAmount;
 
-					alert(`Не вистачає готівки. Додано новий борг: ${debtAmount}`);
+					alert(`⚠️ Не вистачає готівки. Додано новий борг: ${debtAmount}`);
 
 					return {
 						...state,
 						cash_on_hand: 0,
 						debts: {
-						
 							total: updatedTotal,
 							list: updatedList,
 						},
@@ -416,7 +428,6 @@ const MainReduser = (state = initialState, action) => {
 						monthly_interest: +action.monthly_interest,
 					}, // додаємо новий об'єкт
 				],
-				paycheck: +newPaycheck,
 			};
 		}
 		case ADD_REALTY_CREDIT: {
@@ -502,8 +513,6 @@ const MainReduser = (state = initialState, action) => {
 			const updatedExpensesList = state.expenses.list.filter((item) => item.id !== action.selectedID);
 			const updatedExpensesTotal = updatedExpensesList.reduce((total, item) => total + item.sum, 0);
 
-			const newPaycheck = totalIncome - updatedExpensesTotal;
-
 			return {
 				...state,
 				passive_income: {
@@ -514,7 +523,6 @@ const MainReduser = (state = initialState, action) => {
 				apartments: updatedApartments,
 				cash_on_hand: state.cash_on_hand + +action.salePrice,
 				total_income: totalIncome,
-				paycheck: newPaycheck,
 				expenses: {
 					...state.expenses,
 					total: updatedExpensesTotal,

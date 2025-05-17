@@ -12,32 +12,38 @@ function Purse(props) {
 		setValue(event.target.value); // Оновлення стану при зміні значення
 	};
 
-	let AddActiveIncome = () => {
-		props.AddActiveIncomeAC(value);
-		setValue("");
+ 	let addPurseAC = () => {
+		const confirmed = window.confirm(`Підтвердити отримання доходу у сумі ${value === "" || 0 ? "0" : value}?`);
+		if (confirmed) {
+			props.PurseThunks("+", value);
+			setValue("");
+		}
 	};
 
-let addPurseAC = () => {
-	const confirmed = window.confirm("Підтвердити додавання доходу?");
-	if (confirmed) {
-		props.PurseThunks("+", value);
-		setValue("");
-	}
-};
 let minusPurseAC = () => {
-	const confirmed = window.confirm("Підтвердити витрату?");
+	const numericValue = Number(value);
+	if (numericValue > props.state.cash_on_hand) {
+		const confirmedDebt = window.confirm(
+			`⚠️ Недостатньо готівки. Додати ${numericValue - props.state.cash_on_hand} у борг?`
+		);
+		if (!confirmedDebt) return;
+	}
+
+	const confirmed = window.confirm(`Підтвердити витрату у сумі ${value === "" || value === "0" ? "0" : value}?`);
 	if (confirmed) {
 		props.PurseThunks("-", value);
 		setValue("");
 	}
 };
-let PaycheckAC = () => {
-	const confirmed = window.confirm("Підтвердити отримання получки?");
-	if (confirmed) {
-		props.PaycheckAC();
-		setValue("0");
-	}
-};
+	let totalIncome = +props.state.passive_income.total + +props.state.active_income.total;
+	let paycheck = totalIncome - props.state.expenses.total;
+	let PaycheckAC = () => {
+		const confirmed = window.confirm(`Підтвердити отримання получки у сумі ${paycheck}?`);
+		if (confirmed) {
+			props.PaycheckAC();
+			setValue("");
+		}
+	};
 	return (
 		<div className={s.financialOverview}>
 			<ButtonReturnConteiner />

@@ -47,7 +47,7 @@ function BuyShares(props) {
 	// props.addSharesThunks(selectedButton, wantToBuy, valueVoucher, totalCost);
 
 	// Створюємо стан для збереження вибраної кнопки
-	const [selectedButton, setSelectedButton] = useState("КРС");
+	const [selectedButton, setSelectedButton] = useState("");
 	const [wantToBuy, setWantToBuy] = useState("");
 	const [valueVoucher, setValueVoucher] = useState("");
 	const [totalCost, setTotalCost] = useState("");

@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 function BuyBuisnes(props) {
 	// Створюємо стан для збереження вибраної кнопки
-	const [selectedButton, setSelectedButton] = useState("Великий Бізнес");
+	const [selectedButton, setSelectedButton] = useState("Малий Бізнес");
 	const [investment, setInvestments] = useState("");
 	const [income, setIncome] = useState("");
 	const navigate = useNavigate();
@@ -124,16 +124,17 @@ function BuyBuisnes(props) {
 				</div>
 				<div className={s.margin}></div>
 				<div className={s.type}>
+				<SelectionButtom
+						text={"МБ"}
+						isSelected={selectedButton === "Малий Бізнес"}
+						onClick={() => handleButtonClick("Малий Бізнес")}
+					/>
 					<SelectionButtom
 						text={"ВБ"}
 						isSelected={selectedButton === "Великий Бізнес"}
 						onClick={() => handleButtonClick("Великий Бізнес")}
 					/>
-					<SelectionButtom
-						text={"МБ"}
-						isSelected={selectedButton === "Малий Бізнес"}
-						onClick={() => handleButtonClick("Малий Бізнес")}
-					/>
+					
 					<SelectionButtom
 						text={"Розширення"}
 						isSelected={selectedButton === "Розширення"}

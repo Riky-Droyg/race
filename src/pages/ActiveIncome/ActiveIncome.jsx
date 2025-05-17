@@ -12,31 +12,31 @@ function ActiveIncome(props) {
 		setValue(event.target.value); // Оновлення стану при зміні значення
 	};
 
-let AddActiveIncome = () => {
-	if (!value || Number(value) === 0) {
-		alert("Будь ласка, введіть суму доходу (більше 0).");
-		return;
-	}
+	let AddActiveIncome = () => {
+		if (!value || Number(value) === 0) {
+			alert("Будь ласка, введіть суму доходу (більше 0).");
+			return;
+		}
 
-	const confirmed = window.confirm(`Додати активний дохід на суму ${value}?`);
-	if (!confirmed) return;
+		const confirmed = window.confirm(`Додати активний дохід на суму ${value}?`);
+		if (!confirmed) return;
 
-	props.AddActiveIncomeAC(value);
-	setValue("");
-};
+		props.AddActiveIncomeAC(value);
+		setValue("");
+	};
 
-let DeleteActiveIncome = () => {
-	if (props.state.active_income.total === 0) {
-		alert("Немає активного доходу для видалення.");
-		return;
-	}
+	let DeleteActiveIncome = () => {
+		if (props.state.active_income.total === 0) {
+			alert("Немає активного доходу для видалення.");
+			return;
+		}
 
-	const income = props.state.active_income.salary;
-	const confirmed = window.confirm(`Видалити активний дохід на суму ${income}?`);
-	if (!confirmed) return;
+		const income = props.state.active_income.salary;
+		const confirmed = window.confirm(`Видалити активний дохід на суму ${income}?`);
+		if (!confirmed) return;
 
-	props.DeleteActiveIncomeAC();
-};
+		props.DeleteActiveIncomeAC();
+	};
 	return (
 		<div className={s.financialOverview}>
 			<ButtonReturnConteiner />
@@ -48,22 +48,32 @@ let DeleteActiveIncome = () => {
 					background: " #B7E5C1",
 					color: "black",
 				}}
-				
 			/>
 
-			<div
-				className={s.businessItem}
-			>
+			{/* <div className={`${s.businessItem}`}>
 				<img
 					className={s.buisnesDelete}
 					src={daggerImg}
 					alt="dagger"
 					onClick={DeleteActiveIncome}
-
 				/>
 
 				<div className={s.businessSize}>{"Зарплата"}</div>
 				<div className={s.businessIncome}>+{props.state.active_income.salary}</div>
+			</div> */}
+			<div className={s.wrapperBusinessItem}>
+				<div className={`${s.businessItemOne}`}>
+					<img
+						className={s.buisnesDelete}
+						src={daggerImg}
+						alt="dagger"
+						onClick={DeleteActiveIncome}
+					/>
+
+					<div className={s.businessSize}>{"Зарплата"}</div>
+					<div className={s.businessIncome}>+{props.state.active_income.salary}</div>
+				</div>
+				<div className={s.lapCounter}>{props.state.paycheck}</div>
 			</div>
 
 			<div className={s.optionSection}>

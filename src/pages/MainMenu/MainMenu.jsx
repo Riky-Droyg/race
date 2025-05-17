@@ -126,7 +126,7 @@ function MainMenu(props) {
 			</div>
 
 			<div className={s.stocksOverview}>
-				<NavLink to="/SaleShares">
+				<NavLink to="/BuyShares">
 					<LineShares
 						nameShares={"УКТ"}
 						totalCount={props.state.stocks.ykt.totalCount}
@@ -134,28 +134,28 @@ function MainMenu(props) {
 						onClick={"/BuyEarth"}
 					/>
 				</NavLink>
-				<NavLink to="/SaleShares">
+				<NavLink to="/BuyShares">
 					<LineShares
 						nameShares={"КРС"}
 						totalCount={props.state.stocks.krs.totalCount}
 						averagePrice={props.state.stocks.krs.averagePrice}
 					/>
 				</NavLink>
-				<NavLink to="/SaleShares">
+				<NavLink to="/BuyShares">
 					<LineShares
 						nameShares={"ДР"}
 						totalCount={props.state.stocks.dr.totalCount}
 						averagePrice={props.state.stocks.dr.averagePrice}
 					/>{" "}
 				</NavLink>{" "}
-				<NavLink to="/SaleShares">
+				<NavLink to="/BuyShares">
 					<LineShares
 						nameShares={"КЧГ"}
 						totalCount={props.state.stocks.kchg.totalCount}
 						averagePrice={props.state.stocks.kchg.averagePrice}
 					/>{" "}
 				</NavLink>{" "}
-				<NavLink to="/SaleShares">
+				<NavLink to="/BuyShares">
 					<LineShares
 						nameShares={"ЯКХЗ"}
 						totalCount={props.state.stocks.yakhz.totalCount}
