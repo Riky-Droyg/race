@@ -5,6 +5,7 @@ import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnCon
 import HeaderText from "../../components/HeaderText/HeaderText";
 import { NavLink } from "react-router-dom";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
+import Input from "../../components/Input/Input";
 
 function SaleShares(props) {
 	const SaleShares = () => {
@@ -100,7 +101,12 @@ function SaleShares(props) {
 	};
 
 	const handleChange = (onlyNums, field) => {
-		let b = +wantToSale,
+		debugger
+	
+		if (onlyNums === "") {
+			onlyNums = 0
+		}
+			let b = +wantToSale,
 			a = +valueVoucher,
 			c = +totalCost;
 		if (field === "a") {
@@ -117,6 +123,7 @@ function SaleShares(props) {
 		setValueVoucher(isNaN(a) || a === 0 ? "" : a);
 		setWantToSale(isNaN(b) || b === 0 ? "" : Math.round(b));
 		setTotalCost(isNaN(c) || c === 0 ? "" : c);
+		
 	};
 
 	return (
@@ -170,7 +177,7 @@ function SaleShares(props) {
 				<div className={s.paddingBottom}></div>
 
 				<div className={s.infoWrapperTwo}>
-					<div className={`${s.info} ${s.gridInfoA}`}>
+					{/* <div className={`${s.info} ${s.gridInfoA}`}>
 						<div className={s.infoText}>Вартість продажу</div>
 						<div
 							className={s.wrapperInput}
@@ -200,69 +207,31 @@ function SaleShares(props) {
 								}}
 							/>
 						</div>{" "}
-					</div>
-					<div className={`${s.info} ${s.gridInfoB}`}>
-						<div className={s.infoText}> Кількість</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickWantToSaleRef}
-						>
-							<span className={s.dolar}>$</span>
+					</div> */}
+					<Input
+						text="Вартість продажу"
+						newClass={s.gridInfoA}
+						onChange={handleChange}
+						symbolOnChange="a"
 
-							<span className={`${wantToSale.length === 0 ? s.placeholder : ""}`}>{wantToSale}</span>
+					
+					/>
+					<Input
+						text="Загальна вартість"
+						newClass={s.gridInfoC}
+						value={`${totalCost}`}
+						onChange={handleChange}
+						symbolOnChange="c"
 
-							<input
-								ref={wantToSaleRef}
-								className={s.infoNumber}
-								type="text"
-								value={wantToSale}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
-									handleChange(onlyNums, "b"); // Передаємо очищене значення і тип
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення непотрібних символів
-									}
-								}}
-							/>
-						</div>{" "}
-					</div>
-					<div className={`${s.info} ${s.gridInfoC}`}>
-						<div className={s.infoText}> Загальна вартість</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickTotalCostRef}
-						>
-							<span className={s.dolar}>$</span>
+					
+					/>
+					<Input
+						text="Ціна за сотку"
+						newClass={s.gridInfoB}
+						onChange={handleChange}
+						symbolOnChange="b"
 
-							<span className={`${totalCost.length === 0 ? s.placeholder : ""}`}>{totalCost}</span>
-
-							<input
-								ref={totalCostRef}
-								className={s.infoNumber}
-								type="text"
-								value={totalCost}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
-									handleChange(onlyNums, "c"); // Передаємо очищене значення і тип
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення непотрібних символів
-									}
-								}}
-							/>
-						</div>
-					</div>
+					/>
 				</div>
 			</div>
 			<div className={s.marginBottom}></div>

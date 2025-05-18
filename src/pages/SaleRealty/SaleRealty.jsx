@@ -5,6 +5,7 @@ import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnCon
 import HeaderText from "../../components/HeaderText/HeaderText";
 import { NavLink } from "react-router-dom";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
+import Input from "../../components/Input/Input";
 
 function SaleRealty(props) {
 	// Створюємо стан для збереження вибраної кнопки
@@ -13,20 +14,17 @@ function SaleRealty(props) {
 	const [salePrice, setSalePrice] = useState("");
 	const [interest, setInterest] = useState("");
 
-
 	const SellRealty = () => {
 		// Знаходимо квартиру за selectedID
-		const apartment = props.state.apartments.find(ap => ap.id === selectedID);
-	
+		const apartment = props.state.apartments.find((ap) => ap.id === selectedID);
+
 		// Якщо квартира не знайдена
 		if (!apartment) {
 			alert("Квартиру не знайдено.");
 			return;
 		}
-	
-		const originalPrice = apartment.real_price
-		;
-	
+
+		const originalPrice = apartment.real_price;
 		// Перевірка на 0 або нижче 100%
 		if (salePrice <= 0) {
 			alert("Ціна продажу повинна бути більше за 0.");
@@ -36,7 +34,7 @@ function SaleRealty(props) {
 			alert("Ціна продажу повинна бути не менше за реальну вартість.");
 			return;
 		}
-	
+
 		// Підтвердження
 		const confirmed = window.confirm("Ви впевнені, що хочете продати нерухомість?");
 		if (confirmed) {
@@ -59,6 +57,10 @@ function SaleRealty(props) {
 	};
 
 	const handleChange = (onlyNums, field) => {
+		
+		if (onlyNums === "") {
+			onlyNums = 0
+		}
 		let a = +salePrice,
 			b = +interest;
 		let idFind = props.state.apartments.find((item) => item.id === selectedID);
@@ -180,7 +182,7 @@ function SaleRealty(props) {
 				<div className={s.paddingBottom}></div>
 
 				<div className={s.infoWrapperTwo}>
-					<div className={`${s.info} ${s.gridInfoB}`}>
+					{/* <div className={`${s.info} ${s.gridInfoB}`}>
 						<div className={s.infoText}> Ціна Продажу</div>
 						<div
 							className={s.wrapperInput}
@@ -241,7 +243,25 @@ function SaleRealty(props) {
 								}}
 							/>
 						</div>
-					</div>
+					</div> */}
+					<Input
+						text="Ціна Продажу"
+						newClass={s.gridInfoA}
+						onChange={handleChange}
+						symbolOnChange="a"
+						value={salePrice}
+
+					/>
+					<Input
+						text="Ріст ціни за відсотком"
+						newClass={s.gridInfoB}
+						onChange={handleChange}
+						symbolOnChange="b"
+						displaySymbol=""
+						value={interest}
+						displaySymbolRight="%"
+
+					/>
 				</div>
 			</div>
 

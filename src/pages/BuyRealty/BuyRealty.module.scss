@@ -51,24 +51,45 @@
 }
 .totalValue {
 	grid-area: totalValue;
+	border-right: none;
+
 }
 .credit {
 	grid-area: credit;
-	border-right: 1px solid black;
+	border-left: none;
+	border-left: 1px solid black;
+
 }
 .deposit {
 	grid-area: deposit;
+	border: none;
+	border-left: 1px solid black;;
+	// border-right: 1px solid black;
+
+
 }
 .monthlyrent_price {
+	border: none;
+	border-left: 1px solid black;
 	border-right: 1px solid black;
+	
+
+}
+.rent_price{
+	border-right: none;
 }
 .monthlyInterest {
 	grid-area: monthlyInterest;
-	border-right: 1px solid black;
+	border: none;
+	border-left: 1px solid black;;
+
 }
 .realCost {
 	grid-area: realCost;
+	border: none;
 	border-bottom: 1px solid black;
+	border-left: 1px solid black;;
+
 }
 .gridImg {
 	grid-area: img;

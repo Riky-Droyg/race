@@ -8,6 +8,7 @@ import Home from "../../img/home.svg";
 import TypeHome from "../../img/TypeHome.svg";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
 import { useNavigate } from "react-router-dom";
+import Input from "../../components/Input/Input";
 
 function BuyRealty(props) {
 	// Створюємо стан для збереження вибраної кнопки
@@ -147,7 +148,7 @@ function BuyRealty(props) {
 
 			<div className={s.contentWrapper}>
 				<div className={s.infoWrapper}>
-					<div className={`${s.info} ${s.totalValue}`}>
+					{/* <div className={`${s.info} ${s.totalValue}`}>
 						<div className={s.infoText}>Загальна вартість</div>
 
 						<div
@@ -178,9 +179,14 @@ function BuyRealty(props) {
 								}}
 							/>
 						</div>
-					</div>
+					</div> */}
+					<Input
+						text="Загальна вартість"
+						onChange={setTotal_price}
+						newClass={s.totalValue}
+					/>
 
-					<div className={`${s.info} ${s.credit}`}>
+					{/* <div className={`${s.info} ${s.credit}`}>
 						<div className={s.infoText}>Кредит</div>
 						<div
 							className={s.wrapperInput}
@@ -210,8 +216,14 @@ function BuyRealty(props) {
 								}}
 							/>
 						</div>
-					</div>
-					<div className={`${s.info} ${s.deposit}`}>
+					</div> */}
+					<Input
+						text="Кредит"
+						onChange={setCredit}
+						newClass={s.credit}
+					/>
+
+					{/* <div className={`${s.info} ${s.deposit}`}>
 						<div className={s.infoText}>Завдаток</div>
 						<div
 							className={s.wrapperInput}
@@ -241,8 +253,14 @@ function BuyRealty(props) {
 								}}
 							/>
 						</div>
-					</div>
-					<div className={`${s.info} ${s.monthlyrent_price}`}>
+					</div> */}
+					<Input
+						text="Завдаток"
+						onChange={setDeposit}
+						newClass={s.deposit}
+					/>
+
+					{/* <div className={`${s.info} ${s.monthlyrent_price}`}>
 						<div className={s.infoText}>Щомісячні відсотки</div>
 						<div
 							className={s.wrapperInput}
@@ -272,8 +290,13 @@ function BuyRealty(props) {
 								}}
 							/>
 						</div>
-					</div>
-					<div className={`${s.info} ${s.rent_price}`}>
+					</div> */}
+					<Input
+						text="Щомісячні відсотки"
+						onChange={setMonthly_interest}
+						newClass={s.monthlyrent_price}
+					/>
+					{/* <div className={`${s.info} ${s.rent_price}`}>
 						<div className={s.infoText}> Орендна плата</div>
 						<div
 							className={s.wrapperInput}
@@ -302,8 +325,13 @@ function BuyRealty(props) {
 								}}
 							/>
 						</div>
-					</div>
-					<div className={`${s.info} ${s.realCost}`}>
+					</div> */}
+					<Input
+						text="Орендна плата"
+						onChange={setRent_price}
+						newClass={s.rent_price}
+					/>
+					{/* <div className={`${s.info} ${s.realCost}`}>
 						<div className={s.infoText}> Реальна вартість</div>
 						<div
 							className={s.wrapperInput}
@@ -333,7 +361,12 @@ function BuyRealty(props) {
 								}}
 							/>
 						</div>
-					</div>
+					</div> */}
+					<Input
+						text="Реальна вартість"
+						onChange={setReal_price}
+						newClass={s.realCost}
+					/>
 					<div className={`${s.info} ${s.gridImg}`}>
 						<Button
 							name={property_type}

@@ -6,6 +6,7 @@ import HeaderText from "../../components/HeaderText/HeaderText";
 import EarnIcon from "../../img/Earn.svg";
 import TypeIcon from "../../img/TypeIcon.svg";
 import { useNavigate } from "react-router-dom";
+import Input from "../../components/Input/Input";
 
 function BuyEarth(props) {
 	// Створюємо стан для збереження вибраної кнопки
@@ -24,6 +25,7 @@ function BuyEarth(props) {
 		setAverage_price(event.target.value);
 	};
 	const AddEarn = () => {
+		debugger
 		const numericFields = [
 			{ name: "Площа ділянки (соток)", value: count },
 			{ name: "Ціна за сотку", value: average_price },
@@ -72,7 +74,7 @@ function BuyEarth(props) {
 
 			<div className={s.contentWrapper}>
 				<div className={s.infoWrapper}>
-					<div className={`${s.info} ${s.gridHeader}`}>
+					{/* <div className={`${s.info} ${s.gridHeader}`}>
 						<div className={s.infoText}>Площа ділянки (соток)</div>
 						<div
 							className={s.wrapperInput}
@@ -100,8 +102,9 @@ function BuyEarth(props) {
 								}}
 							/>
 						</div>
-					</div>
-					<div className={`${s.info} ${s.gridInfoA}`}>
+					</div> */}
+
+					{/* <div className={`${s.info} ${s.gridInfoA}`}>
 						<div className={s.infoText}> Загальна вартість</div>
 						<div className={s.wrapperInput}>
 							<span className={s.dolar}>$</span>
@@ -139,7 +142,28 @@ function BuyEarth(props) {
 								}}
 							/>
 						</div>
-					</div>
+					</div> */}
+					<Input
+						text="Площа ділянки (соток)"
+						newClass={s.gridHeader}
+						onChange={setCount}
+
+					
+					/>
+					<Input
+						text="Загальна вартість"
+						newClass={s.gridInfoA}
+						disabled={true}
+						value={`${total_price}`}
+					
+					/>
+					<Input
+						text="Ціна за сотку"
+						newClass={s.gridInfoB}
+						onChange={setAverage_price}
+
+					/>
+
 					<div className={`${s.info} ${s.gridImg}`}>
 						<img
 							className={s.typeIcon}

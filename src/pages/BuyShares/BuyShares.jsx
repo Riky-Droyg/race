@@ -5,10 +5,16 @@ import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnCon
 import HeaderText from "../../components/HeaderText/HeaderText";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
 import { useNavigate } from "react-router-dom";
+import Input from "../../components/Input/Input";
 
 function BuyShares(props) {
 	const navigate = useNavigate();
 	const addShares = () => {
+		if (!selectedButton) {
+			alert("Будь ласка, оберіть тип акції перед покупкою.");
+			return;
+		}
+
 		const purchaseCost = valueVoucher * wantToBuy;
 
 		if (purchaseCost > totalCost) {
@@ -38,7 +44,6 @@ function BuyShares(props) {
 				props.addSharesThunks(selectedButton, wantToBuy, valueVoucher, totalCost);
 				navigate("/SaleShares");
 				return wantToBuy;
-
 			} else {
 				return 0;
 			}
@@ -78,24 +83,30 @@ function BuyShares(props) {
 	};
 
 	const handleChange = (onlyNums, field) => {
+		if (onlyNums === "") {
+			onlyNums = 0
+		}
+
 		let b = +wantToBuy,
 			a = +valueVoucher,
 			c = +totalCost;
 		if (field === "a") {
-			a = onlyNums;
-			c = a * b;
+			a = +onlyNums;
+			c = +a * +b;
 		} else if (field === "b") {
-			b = onlyNums;
-			c = a * b;
+			b = +onlyNums;
+			c = +a * +b;
 		} else if (field === "c") {
-			c = onlyNums;
-			b = a !== 0 ? c / a : 0;
+			c = +onlyNums;
+			b = +a !== 0 ? +c / +a : 0;
 		}
 		// debugger;
-		setValueVoucher(isNaN(a) || a === 0 ? "" : a);
-		setWantToBuy(isNaN(b) || b === 0 ? "" : Math.round(b));
-		setTotalCost(isNaN(c) || c === 0 ? "" : c);
+		setValueVoucher(isNaN(+a) || +a === 0 ? "" : +a);
+		setWantToBuy(isNaN(+b) || +b === 0 ? "" : Math.round(+b));
+		setTotalCost(isNaN(+c) || +c === 0 ? "" : +c);
+		console.log(wantToBuy);
 	};
+	console.log(wantToBuy);
 
 	return (
 		<div className={s.wrapper}>
@@ -105,57 +116,12 @@ function BuyShares(props) {
 
 			<div className={s.contentWrapper}>
 				<div className={s.infoWrapper}>
-					<div className={s.info}>
-						<div className={s.infoText}>Вартість ваучера</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickValueVoucherRef}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${valueVoucher.length === 0 ? s.placeholder : ""}`}>{valueVoucher}</span>
-
-							<input
-								ref={valueVoucherRef}
-								className={s.infoNumber}
-								type="text"
-								value={valueVoucher}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
-									handleChange(onlyNums, "a"); // Передаємо очищене значення і тип
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення непотрібних символів
-									}
-								}}
-							/>
-						</div>{" "}
-					</div>
-					{/* <div className={s.info}>
-						<div className={s.infoText}> Кількість</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickCreditRef}
-						>
-
-							<span className={`${credit.length === 0 ? s.placeholder : ""}`}>{credit}</span>
-
-							<input
-								ref={creditRef}
-								className={s.infoNumber}
-								type="text"
-								value={credit}
-								onChange={handleChangeCredit} // Виклик функції при зміні
-								placeholder="0"
-								maxLength={7}
-							/>
-						</div>{" "}
-					</div> */}
+					<Input
+						text="Вартість ваучера"
+						onChange={handleChange}
+						symbolOnChange="a"
+						value={valueVoucher}
+					/>
 				</div>
 				<div className={s.margin}></div>
 				<div className={s.type}>
@@ -191,66 +157,19 @@ function BuyShares(props) {
 				<div className={s.paddingBottom}></div>
 
 				<div className={s.infoWrapper}>
-					<div className={s.info}>
-						<div className={s.infoText}>Хочу придбати</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickWantToBuyRef}
-						>
-							<span className={`${wantToBuy.length === 0 ? s.placeholder : ""}`}>{wantToBuy}</span>
-
-							<input
-								ref={wantToBuyRef}
-								className={s.infoNumber}
-								type="text"
-								value={wantToBuy}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
-									handleChange(onlyNums, "b"); // Передаємо очищене значення і тип
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення непотрібних символів
-									}
-								}}
-							/>
-						</div>{" "}
-					</div>
-					<div className={s.info}>
-						<div className={s.infoText}> Загальна вартість</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickTotalCostRef}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${totalCost.length === 0 ? s.placeholder : ""}`}>{totalCost}</span>
-
-							<input
-								ref={totalCostRef}
-								className={s.infoNumber}
-								type="text"
-								value={totalCost}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
-									handleChange(onlyNums, "c"); // Передаємо очищене значення і тип
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення непотрібних символів
-									}
-								}}
-							/>
-						</div>
-					</div>
+					<Input
+						text="Хочу придбати"
+						onChange={handleChange}
+						symbolOnChange="b"
+						value={wantToBuy}
+						displaySymbol=""
+					/>
+					<Input
+						text="Загальна вартість"
+						onChange={handleChange}
+						symbolOnChange="c"
+						value={totalCost}
+					/>
 				</div>
 			</div>
 			<div className={s.marginBottom}></div>

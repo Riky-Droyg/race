@@ -5,6 +5,7 @@ import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnCon
 import HeaderText from "../../components/HeaderText/HeaderText";
 import { NavLink } from "react-router-dom";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
+import Input from "../../components/Input/Input";
 
 function SaleEarn(props) {
 	const SaleEarn = () => {
@@ -116,7 +117,7 @@ function SaleEarn(props) {
 				<div className={s.paddingBottom}></div>
 
 				<div className={s.infoWrapperTwo}>
-					<div className={`${s.info} ${s.gridInfoA}`}>
+					{/* <div className={`${s.info} ${s.gridInfoA}`}>
 						<div className={s.infoText}>Вартість продажу</div>
 						<div
 							className={s.wrapperInput}
@@ -185,7 +186,31 @@ function SaleEarn(props) {
 
 							<span>{totalCost}</span>
 						</div>
-					</div>
+					</div> */}
+					<Input
+						text="Вартість продажу"
+						newClass={s.gridInfoA}
+						onChange={handleChange}
+						symbolOnChange="a"
+
+					
+					/>
+					<Input
+						text="Загальна вартість"
+						newClass={s.gridInfoC}
+						value={`${totalCost}`}
+						onChange={handleChange}
+						symbolOnChange="c"
+
+					
+					/>
+					<Input
+						text="Ціна за сотку"
+						newClass={s.gridInfoB}
+						onChange={handleChange}
+						symbolOnChange="b"
+
+					/>
 				</div>
 			</div>
 			<div className={s.marginBottom}></div>

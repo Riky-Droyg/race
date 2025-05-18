@@ -100,6 +100,7 @@
 	row-gap: 4px;
 	font-size: 22px;
 	margin-bottom: 12px;
+	
 }
 .margin {
 	min-height: 6px;
@@ -128,7 +129,8 @@
 	flex-direction: column;
 }
 .gridInfoA {
-	margin-bottom: 8px;
+	border-bottom: none;
+
 }
 .gridInfoB {
 }

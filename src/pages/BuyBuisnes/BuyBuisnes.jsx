@@ -5,6 +5,7 @@ import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnCon
 import HeaderText from "../../components/HeaderText/HeaderText";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
 import { useNavigate } from "react-router-dom";
+import Input from "../../components/Input/Input";
 
 function BuyBuisnes(props) {
 	// Створюємо стан для збереження вибраної кнопки
@@ -18,7 +19,7 @@ function BuyBuisnes(props) {
 		setSelectedButton(buttonName);
 	};
 	const AddBuisnes = () => {
-		if (!investment || Number(investment) === 0 || !income || Number(income) === 0) {
+		if ((!investment || Number(investment) === 0 || !income || Number(income) === 0) && selectedButton !== "Розширення") {
 			alert("Будь ласка, введіть вкладення та щомісячний дохід (більші за 0).");
 			return;
 		}
@@ -59,72 +60,21 @@ function BuyBuisnes(props) {
 
 			<div className={s.contentWrapper}>
 				<div className={s.infoWrapper}>
-					<div className={s.info}>
-						<div className={s.infoText}>Початкові вкладення</div>
+					<Input
+						text="Початкові вкладення"
+						onChange={setInvestments}
+						newClass={s.noneBorder}
 
-						<div
-							className={s.wrapperInput}
-							onClick={handleParentClick}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${investment.length === 0 ? s.placeholder : ""}`}>{investment}</span>
-
-							<input
-								ref={inputRef}
-								className={s.infoNumber}
-								type="text"
-								value={investment}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
-									setInvestments(onlyNums);
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
-									}
-								}}
-							/>
-						</div>
-					</div>
-					<div className={s.info}>
-						<div className={s.infoText}> Щомісячний дохід</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleParentTwoClick}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${income.length === 0 ? s.placeholder : ""}`}>{income}</span>
-							<input
-								ref={inputTwoRef}
-								className={s.infoNumber}
-								type="text"
-								value={income}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
-									setIncome(onlyNums);
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
-									}
-								}}
-							/>
-						</div>
-					</div>
+					/>
+					<Input
+						text="Щомісячний дохід"
+						onChange={setIncome}
+					/>
+					
 				</div>
 				<div className={s.margin}></div>
 				<div className={s.type}>
-				<SelectionButtom
+					<SelectionButtom
 						text={"МБ"}
 						isSelected={selectedButton === "Малий Бізнес"}
 						onClick={() => handleButtonClick("Малий Бізнес")}
@@ -134,7 +84,7 @@ function BuyBuisnes(props) {
 						isSelected={selectedButton === "Великий Бізнес"}
 						onClick={() => handleButtonClick("Великий Бізнес")}
 					/>
-					
+
 					<SelectionButtom
 						text={"Розширення"}
 						isSelected={selectedButton === "Розширення"}

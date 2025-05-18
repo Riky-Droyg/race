@@ -31,18 +31,24 @@
 	display: flex;
 	border: 1px solid black;
 }
+
 .gridHeader {
 	grid-area: header;
+	border: none;
 	border: 1px solid black;
+	// border-right: 1px solid black;
+
 }
 .gridInfoA {
 	grid-area: infoA;
+	border: none;
 	border-left: 1px solid black;
 	border-right: 1px solid black;
 	border-bottom: 1px solid black;
 }
 .gridInfoB {
 	grid-area: infoB;
+	border: none;
 	border-left: 1px solid black;
 	border-right: 1px solid black;
 	border-bottom: 1px solid black;
