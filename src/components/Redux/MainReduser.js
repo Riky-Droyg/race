@@ -416,7 +416,7 @@ const MainReduser = (state = initialState, action) => {
 
 				cash_on_hand: newCashOnHand,
 				apartments: [
-					...state.apartments, // додаємо всі існуючі об'єкти з масиву plots
+					...state.apartments,
 					{
 						id: newIdApartments,
 						property_type: action.property_type,
@@ -426,6 +426,7 @@ const MainReduser = (state = initialState, action) => {
 						rent_price: +action.rent_price,
 						real_price: +action.real_price,
 						monthly_interest: +action.monthly_interest,
+						is_credit: false,
 					}, // додаємо новий об'єкт
 				],
 			};
@@ -489,6 +490,7 @@ const MainReduser = (state = initialState, action) => {
 						rent_price: +action.rent_price,
 						real_price: +action.real_price,
 						monthly_interest: +action.monthly_interest,
+						is_credit: true,
 					}, // додаємо новий об'єкт
 				],
 				debts: {
@@ -513,6 +515,19 @@ const MainReduser = (state = initialState, action) => {
 			const updatedExpensesList = state.expenses.list.filter((item) => item.id !== action.selectedID);
 			const updatedExpensesTotal = updatedExpensesList.reduce((total, item) => total + item.sum, 0);
 
+			const updatedDebtsList = state.debts.list.filter((item) => item.id !== action.selectedID);
+			const updatedDebtsTotal = updatedDebtsList.reduce((total, item) => total + item.sum, 0);
+
+			// is_credit: true,
+			debugger;
+			let soldApartment = state.apartments.find((item) => item.id === action.selectedID);
+			let newCashOnHand = 0;
+
+			if (soldApartment?.is_credit === false) {
+				newCashOnHand = state.cash_on_hand + +action.salePrice;
+			} else if (soldApartment?.is_credit === true) {
+				newCashOnHand = state.cash_on_hand + (+action.salePrice - soldApartment.credit);
+			}
 			return {
 				...state,
 				passive_income: {
@@ -521,12 +536,17 @@ const MainReduser = (state = initialState, action) => {
 					list: updatedPassiveList,
 				},
 				apartments: updatedApartments,
-				cash_on_hand: state.cash_on_hand + +action.salePrice,
+				cash_on_hand: newCashOnHand,
 				total_income: totalIncome,
 				expenses: {
 					...state.expenses,
 					total: updatedExpensesTotal,
 					list: updatedExpensesList,
+				},
+				debts: {
+					...state.debts,
+					total: updatedDebtsTotal,
+					list: updatedDebtsList,
 				},
 			};
 		}

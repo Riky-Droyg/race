@@ -8,7 +8,6 @@ import Button from "../../components/Button/Button";
 function MainMenu(props) {
 	let totalIncome = +props.state.passive_income.total + +props.state.active_income.total;
 	let paycheck = totalIncome - props.state.expenses.total;
-
 	return (
 		<div className={s.financialOverview}>
 			<div className={s.marquee}>
