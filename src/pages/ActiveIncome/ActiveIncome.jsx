@@ -37,6 +37,42 @@ function ActiveIncome(props) {
 
 		props.DeleteActiveIncomeAC();
 	};
+
+	let activeIncome = () => {
+		if (props.state.active_income.to_restore === 0) {
+			return (
+				<div className={`${s.businessItem}`}>
+					<img
+						className={s.buisnesDelete}
+						src={daggerImg}
+						alt="dagger"
+						onClick={DeleteActiveIncome}
+					/>
+
+					<div className={s.businessSize}>{"Зарплата"}</div>
+					<div className={s.businessIncome}>+{props.state.active_income.salary}</div>
+				</div>
+			);
+		} else {
+			return (
+				<div className={s.wrapperBusinessItem}>
+					<div className={`${s.businessItemOne}`}>
+						<img
+							className={s.buisnesDelete}
+							src={daggerImg}
+							alt="dagger"
+							onClick={DeleteActiveIncome}
+						/>
+
+						<div className={s.businessSize}>{"Зарплата"}</div>
+						<div className={s.businessIncome}>+{props.state.active_income.salary}</div>
+					</div>
+					<div className={s.lapCounter}>{props.state.active_income.to_restore}</div>
+				</div>
+			);
+		}
+	};
+
 	return (
 		<div className={s.financialOverview}>
 			<ButtonReturnConteiner />
@@ -49,33 +85,8 @@ function ActiveIncome(props) {
 					color: "black",
 				}}
 			/>
-
-			{/* <div className={`${s.businessItem}`}>
-				<img
-					className={s.buisnesDelete}
-					src={daggerImg}
-					alt="dagger"
-					onClick={DeleteActiveIncome}
-				/>
-
-				<div className={s.businessSize}>{"Зарплата"}</div>
-				<div className={s.businessIncome}>+{props.state.active_income.salary}</div>
-			</div> */}
-			<div className={s.wrapperBusinessItem}>
-				<div className={`${s.businessItemOne}`}>
-					<img
-						className={s.buisnesDelete}
-						src={daggerImg}
-						alt="dagger"
-						onClick={DeleteActiveIncome}
-					/>
-
-					<div className={s.businessSize}>{"Зарплата"}</div>
-					<div className={s.businessIncome}>+{props.state.active_income.salary}</div>
-				</div>
-				<div className={s.lapCounter}>{props.state.paycheck}</div>
-			</div>
-
+			{activeIncome()}
+			
 			<div className={s.optionSection}>
 				<input
 					onChange={handleChange}

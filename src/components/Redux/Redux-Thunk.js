@@ -13,7 +13,6 @@ export const AddBuisnesThunks = (sizeBuisnes, investment, income) => async (disp
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -33,7 +32,6 @@ export const DeleteBuisnesThunks = (index) => async (dispatch, getState) => {
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -52,7 +50,6 @@ export const AddExpensesThunks = (name, number) => async (dispatch, getState) =>
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -72,7 +69,6 @@ export const DeleteExpensesThunks = (index) => async (dispatch, getState) => {
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -91,7 +87,6 @@ export const AddActiveIncomeThunks = (value) => async (dispatch, getState) => {
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -110,7 +105,6 @@ export const DeleteActiveIncomeThunks = () => async (dispatch, getState) => {
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -130,7 +124,6 @@ export const AddDebtsThunks = (text, value) => async (dispatch, getState) => {
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -150,7 +143,6 @@ export const DeleteDebtsThunks = (index) => async (dispatch, getState) => {
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -192,7 +184,6 @@ export const addSharesThunks = (selectedButton,wantToBuy,valueVoucher,totalCost)
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -233,7 +224,6 @@ export const sellSharesThunks = (selectedButton, wantToSale, valueVoucher, total
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -253,7 +243,6 @@ export const PurseThunks = (action, value) => async (dispatch, getState) => {
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -264,7 +253,6 @@ export const PaycheckThunks = () => async (dispatch, getState) => {
 		dispatch(PaycheckAC());
 		let state = getState().MainReduser;
 		console.log(state);
-		debugger
 		const response = await fetch(`https://patsuk-6e89a0c8f358.herokuapp.com/put/${state._id}`, {
 			method: "PUT",
 			headers: { "Content-Type": "application/json" },
@@ -273,7 +261,6 @@ export const PaycheckThunks = () => async (dispatch, getState) => {
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -293,7 +280,6 @@ export const AddEarnThunks = (count,average_price,total_price) => async (dispatc
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -313,7 +299,6 @@ export const sellEarnThunks = (wantToSale, valueVoucher, totalCost) => async (di
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -332,7 +317,6 @@ export const addRealtyCashThunks = (property_type, total_price, credit, deposit,
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -351,7 +335,6 @@ export const SellRealtyThunks = (salePrice, selectedID) => async (dispatch, getS
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");
@@ -371,7 +354,6 @@ export const addRealtyCreditThunks = (property_type, total_price, credit, deposi
 		if (!response.ok) {
 			throw new Error(`HTTP error! Status: ${response.status}`);
 		}
-		alert("✅ Дані успішно збережено!");
 	} catch (error) {
 		console.error("Помилка:", error);
 		alert("❌ Помилка при збереженні даних. Спробуйте ще раз.");

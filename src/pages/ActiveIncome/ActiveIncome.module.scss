@@ -54,9 +54,7 @@
 	justify-content: space-between;
 	align-items: center;
 	border-radius: 13px;
-	// background-color: #b7e5c1;
-	background-color: #c3c3c3;
-
+	background-color: #b7e5c1;
 	min-height: 50px;
 	height: functions.percent-of-h(50);
 	margin-bottom: 10px;
@@ -82,6 +80,7 @@
 	display: flex;
 	// justify-content: space-between;
 	height: functions.percent-of-h(50);
+	margin-bottom: 10px;
 }
 .lapCounter {
 	display: flex;
@@ -95,7 +94,6 @@
 	margin-left: 12px;
 	font-weight: 400;
 	font-size: 24px;
-
 }
 .businessItem:last-child {
 	margin-bottom: 0;

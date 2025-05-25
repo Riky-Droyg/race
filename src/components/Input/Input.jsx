@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import s from "./Input.module.scss";
 
 const Input = ({
@@ -11,8 +11,15 @@ const Input = ({
   symbolOnChange,
   displaySymbol = "$",
   displaySymbolRight = "",
+  signs = ""
 }) => {
   const [internalValue, setInternalValue] = useState("");
+
+  useEffect(() => {
+    if (value === "") {
+      setInternalValue("");
+    }
+  }, [value]);
 
   // Функція форматування числа з комами
   const formatNumberWithCommas = (num) => {
@@ -32,12 +39,12 @@ const Input = ({
 
   // Формуємо рядок для відображення: символ + відформатоване число або internalValue
   const displayValue =
+  
     value !== undefined && value !== ""
-      ? `${displaySymbol}${formatNumberWithCommas(value)}${displaySymbolRight}`
+      ? `${signs}${displaySymbol}${formatNumberWithCommas(value)}${displaySymbolRight}`
       : internalValue !== ""
-      ? `${displaySymbol}${formatNumberWithCommas(internalValue)}${displaySymbolRight}`
+      ? `${signs}${displaySymbol}${formatNumberWithCommas(internalValue)}${displaySymbolRight}`
       : "";
-
   return (
     <div className={`${s.info} ${newClass || ""}`}>
       <div className={s.infoText}>{text}</div>
@@ -46,10 +53,10 @@ const Input = ({
         type="text"
         value={displayValue}
         onChange={handleChange}
-        maxLength={15}
+        maxLength={11}
         inputMode="numeric"
         pattern="[0-9]*"
-        placeholder={`${displaySymbol}${placeholder}${displaySymbolRight}`}
+        placeholder={`${signs}${displaySymbol}${placeholder}${displaySymbolRight}`}
         autoComplete="off"
         readOnly={disabled}
       />

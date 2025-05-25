@@ -137,6 +137,7 @@ const MainReduser = (state = initialState, action) => {
 				active_income: {
 					...state.active_income,
 					total: 0,
+					to_restore: 11,
 				},
 			};
 		}
@@ -285,13 +286,34 @@ const MainReduser = (state = initialState, action) => {
 			let paycheck = totalIncome - state.expenses.total;
 			let cash = +state.cash_on_hand;
 
+			// Нова функція для оновлення to_restore та total активного доходу
+			const updateActiveIncome = (toRestore = state.active_income.to_restore) => {
+				if (toRestore === 0) {
+					return {
+						toRestore: 0,
+						newTotalActiveIncome: state.active_income.salary,
+					};
+				} else {
+					return {
+						toRestore: toRestore - 1,
+						newTotalActiveIncome: state.active_income.total,
+					};
+				}
+			};
+
+			const { toRestore, newTotalActiveIncome } = updateActiveIncome();
+
 			if (paycheck >= 0) {
 				// Просто додаємо до готівки
 				const newCashOnHand = cash + paycheck;
-
 				return {
 					...state,
 					cash_on_hand: newCashOnHand,
+					active_income: {
+						...state.active_income,
+						total: newTotalActiveIncome,
+						to_restore: toRestore,
+					},
 				};
 			} else {
 				// Від’ємна получка
@@ -312,7 +334,7 @@ const MainReduser = (state = initialState, action) => {
 					const newExpense = {
 						name: "Получка (борг)", // Назва витрати
 						sum: debtAmount,
-						id: 0,
+						id: Date.now(),
 					};
 
 					const updatedList = [...state.debts.list, newExpense];
@@ -358,13 +380,21 @@ const MainReduser = (state = initialState, action) => {
 
 		case SELL_EARN: {
 			let totalCount = +state.plots.count - +action.wantToSale;
-			let cashOnHand = state.cash_on_hand + action.totalCost;
+			let cashOnHand = +state.cash_on_hand + +action.totalCost;
 
+			let newAveragePrice = () => {
+				if (totalCount === 0) {
+					return 0;
+				} else {
+					return state.plots.average_price;
+				}
+			};
 			const updatedState = {
 				...state,
 				plots: {
 					...state.plots,
 					count: totalCount,
+					average_price: newAveragePrice(),
 				},
 				cash_on_hand: cashOnHand,
 			};

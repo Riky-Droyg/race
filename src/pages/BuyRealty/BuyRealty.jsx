@@ -1,11 +1,9 @@
-import React, { useRef, useState } from "react";
+import React, { useState } from "react";
 import s from "./BuyRealty.module.scss";
 import Button from "../../components/Button/Button";
 import ButtonReturnConteiner from "../../components/ButtonReturn/ButtonReturnConteiner";
 import HeaderText from "../../components/HeaderText/HeaderText";
-import EarnIcon from "../../img/Earn.svg";
 import Home from "../../img/home.svg";
-import TypeHome from "../../img/TypeHome.svg";
 import SelectionButtom from "../../components/SelectionButtom/SelectionButtom";
 import { useNavigate } from "react-router-dom";
 import Input from "../../components/Input/Input";
@@ -83,63 +81,6 @@ function BuyRealty(props) {
 	const handleButtonClick = (buttonName) => {
 		setProperty_type(buttonName);
 	};
-	const handleChangetotal_price = (event) => {
-		setTotal_price(event.target.value);
-	};
-	const handleChangeCredit = (event) => {
-		setCredit(event.target.value);
-	};
-	const handleChangeDeposit = (event) => {
-		setDeposit(event.target.value);
-	};
-	const handleClickRentPrice = (event) => {
-		setRent_price(event.target.value);
-	};
-
-	const handleChangeRealPrice = (event) => {
-		setReal_price(event.target.value);
-	};
-	const handleChangeMonthlyInterest = (event) => {
-		setMonthly_interest(event.target.value);
-	};
-
-	const total_priceRef = useRef(null); // Реф для доступу до інпуту
-	const creditRef = useRef(null); // Реф для доступу до інпуту
-	const depositRef = useRef(null); // Реф для доступу до інпуту
-	const rent_priceRef = useRef(null); // Реф для доступу до інпуту
-	const real_priceRef = useRef(null); // Реф для доступу до інпуту
-	const monthly_interestRef = useRef(null); // Реф для доступу до інпуту
-
-	const handleClicktotal_priceRef = () => {
-		if (total_priceRef.current) {
-			total_priceRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickCreditRef = () => {
-		if (creditRef.current) {
-			creditRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickDepositRef = () => {
-		if (depositRef.current) {
-			depositRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleChangeRentPriceRef = () => {
-		if (rent_priceRef.current) {
-			rent_priceRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickRealPriceRef = () => {
-		if (real_priceRef.current) {
-			real_priceRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickMonthlyInterestRef = () => {
-		if (monthly_interestRef.current) {
-			monthly_interestRef.current.focus(); // Фокусуємо інпут
-		}
-	};
 	return (
 		<div className={s.wrapper}>
 			<ButtonReturnConteiner />
@@ -148,220 +89,43 @@ function BuyRealty(props) {
 
 			<div className={s.contentWrapper}>
 				<div className={s.infoWrapper}>
-					{/* <div className={`${s.info} ${s.totalValue}`}>
-						<div className={s.infoText}>Загальна вартість</div>
-
-						<div
-							className={s.wrapperInput}
-							onClick={handleClicktotal_priceRef}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${total_price.length === 0 ? s.placeholder : ""}`}>{total_price}</span>
-
-							<input
-								ref={total_priceRef}
-								className={s.infoNumber}
-								type="text"
-								value={total_price}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
-									setTotal_price(onlyNums);
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
-									}
-								}}
-							/>
-						</div>
-					</div> */}
+					
 					<Input
 						text="Загальна вартість"
 						onChange={setTotal_price}
 						newClass={s.totalValue}
 					/>
 
-					{/* <div className={`${s.info} ${s.credit}`}>
-						<div className={s.infoText}>Кредит</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickCreditRef}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${credit.length === 0 ? s.placeholder : ""}`}>{credit}</span>
-
-							<input
-								ref={creditRef}
-								className={s.infoNumber}
-								type="text"
-								value={credit}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
-									setCredit(onlyNums);
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
-									}
-								}}
-							/>
-						</div>
-					</div> */}
+				
 					<Input
 						text="Кредит"
 						onChange={setCredit}
 						newClass={s.credit}
 					/>
 
-					{/* <div className={`${s.info} ${s.deposit}`}>
-						<div className={s.infoText}>Завдаток</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickDepositRef}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${deposit.length === 0 ? s.placeholder : ""}`}>{deposit}</span>
-
-							<input
-								ref={depositRef}
-								className={s.infoNumber}
-								type="text"
-								value={deposit}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
-									setDeposit(onlyNums);
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
-									}
-								}}
-							/>
-						</div>
-					</div> */}
+				
 					<Input
 						text="Завдаток"
 						onChange={setDeposit}
 						newClass={s.deposit}
 					/>
 
-					{/* <div className={`${s.info} ${s.monthlyrent_price}`}>
-						<div className={s.infoText}>Щомісячні відсотки</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickMonthlyInterestRef}
-						>
-							<span className={s.dolar}>- $</span>
-
-							<span className={`${monthly_interest.length === 0 ? s.placeholder : ""}`}>{monthly_interest}</span>
-
-							<input
-								ref={monthly_interestRef}
-								className={s.infoNumber}
-								type="text"
-								value={monthly_interest}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
-									setMonthly_interest(onlyNums);
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
-									}
-								}}
-							/>
-						</div>
-					</div> */}
+				
 					<Input
 						text="Щомісячні відсотки"
 						onChange={setMonthly_interest}
 						newClass={s.monthlyrent_price}
+						signs = "-"
+
 					/>
-					{/* <div className={`${s.info} ${s.rent_price}`}>
-						<div className={s.infoText}> Орендна плата</div>
-						<div
-							className={s.wrapperInput}
-						>
-							<span className={s.dolar}>+ $</span>
-
-							<span className={`${rent_price.length === 0 ? s.placeholder : ""}`}>{rent_price}</span>
-
-							<input
-								ref={rent_priceRef}
-								className={s.infoNumber}
-								type="text"
-								value={rent_price}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
-									setRent_price(onlyNums);
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
-									}
-								}}
-							/>
-						</div>
-					</div> */}
+				
 					<Input
 						text="Орендна плата"
 						onChange={setRent_price}
 						newClass={s.rent_price}
+						signs = "+"
 					/>
-					{/* <div className={`${s.info} ${s.realCost}`}>
-						<div className={s.infoText}> Реальна вартість</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickRealPriceRef}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${real_price.length === 0 ? s.placeholder : ""}`}>{real_price}</span>
-
-							<input
-								ref={real_priceRef}
-								className={s.infoNumber}
-								type="text"
-								value={real_price}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє всі символи, що не є цифрами
-									setReal_price(onlyNums);
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення "e", "E", "+" та "-"
-									}
-								}}
-							/>
-						</div>
-					</div> */}
+					
 					<Input
 						text="Реальна вартість"
 						onChange={setReal_price}

@@ -1,6 +1,6 @@
 import React from "react";
 import s from "./MainMenu.module.scss";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import HeaderBar from "../../components/HeaderBar/HeaderBar";
 import LineShares from "../../components/LineShares/LineShares";
 import Button from "../../components/Button/Button";
