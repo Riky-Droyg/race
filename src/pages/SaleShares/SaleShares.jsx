@@ -9,7 +9,6 @@ import Input from "../../components/Input/Input";
 
 function SaleShares(props) {
 	const SaleShares = () => {
-		
 		const available = availability(); // доступна кількість акцій
 		const avgPurchasePrice = averagePrice(); // середня ціна купівлі
 		const profitOrLoss = (valueVoucher - avgPurchasePrice) * wantToSale; // +/- різниця
@@ -48,25 +47,6 @@ function SaleShares(props) {
 	const handleButtonClick = (buttonName) => {
 		setSelectedButton(buttonName);
 	};
-	const valueVoucherRef = useRef(null); // Реф для доступу до інпуту
-	const wantToSaleRef = useRef(null); // Реф для доступу до інпуту
-	const totalCostRef = useRef(null); // Реф для доступу до інпуту
-
-	const handleClickValueVoucherRef = () => {
-		if (valueVoucherRef.current) {
-			valueVoucherRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickWantToSaleRef = () => {
-		if (wantToSaleRef.current) {
-			wantToSaleRef.current.focus(); // Фокусуємо інпут
-		}
-	};
-	const handleClickTotalCostRef = () => {
-		if (totalCostRef.current) {
-			totalCostRef.current.focus(); // Фокусуємо інпут
-		}
-	};
 	const availability = () => {
 		switch (selectedButton) {
 			case "КРС":
@@ -101,12 +81,11 @@ function SaleShares(props) {
 	};
 
 	const handleChange = (onlyNums, field) => {
-		debugger
-	
+
 		if (onlyNums === "") {
-			onlyNums = 0
+			onlyNums = 0;
 		}
-			let b = +wantToSale,
+		let b = +wantToSale,
 			a = +valueVoucher,
 			c = +totalCost;
 		if (field === "a") {
@@ -123,7 +102,6 @@ function SaleShares(props) {
 		setValueVoucher(isNaN(a) || a === 0 ? "" : a);
 		setWantToSale(isNaN(b) || b === 0 ? "" : Math.round(b));
 		setTotalCost(isNaN(c) || c === 0 ? "" : c);
-		
 	};
 
 	return (
@@ -177,44 +155,11 @@ function SaleShares(props) {
 				<div className={s.paddingBottom}></div>
 
 				<div className={s.infoWrapperTwo}>
-					{/* <div className={`${s.info} ${s.gridInfoA}`}>
-						<div className={s.infoText}>Вартість продажу</div>
-						<div
-							className={s.wrapperInput}
-							onClick={handleClickValueVoucherRef}
-						>
-							<span className={s.dolar}>$</span>
-
-							<span className={`${valueVoucher.length === 0 ? s.placeholder : ""}`}>{valueVoucher}</span>
-
-							<input
-								ref={valueVoucherRef}
-								className={s.infoNumber}
-								type="text"
-								value={valueVoucher}
-								placeholder="0"
-								maxLength={7}
-								inputMode="numeric"
-								pattern="[0-9]*"
-								onInput={(e) => {
-									const onlyNums = e.target.value.replace(/[^\d]/g, ""); // Видаляє все, крім цифр
-									handleChange(onlyNums, "a"); // Передаємо очищене значення і тип
-								}}
-								onKeyDown={(e) => {
-									if (["e", "E", "-", "+"].includes(e.key)) {
-										e.preventDefault(); // Блокуємо введення непотрібних символів
-									}
-								}}
-							/>
-						</div>{" "}
-					</div> */}
 					<Input
 						text="Вартість продажу"
 						newClass={s.gridInfoA}
 						onChange={handleChange}
 						symbolOnChange="a"
-
-					
 					/>
 					<Input
 						text="Загальна вартість"
@@ -222,15 +167,12 @@ function SaleShares(props) {
 						value={`${totalCost}`}
 						onChange={handleChange}
 						symbolOnChange="c"
-
-					
 					/>
 					<Input
-						text="Ціна за сотку"
+						text="Кількість"
 						newClass={s.gridInfoB}
 						onChange={handleChange}
 						symbolOnChange="b"
-
 					/>
 				</div>
 			</div>

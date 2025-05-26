@@ -27,6 +27,16 @@
 	/* стилі для елементів з мітками */
 	font-size: 15px;
 }
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+	margin: 0;
+}
+
+/* Для Firefox */
+input[type="number"] {
+	-moz-appearance: textfield;
+}
 .numberInput {
 	width: 100%;
 	height: 60px;
@@ -140,7 +150,6 @@
 }
 .margin {
 	height: functions.dvh(256);
-
 }
 .businessIncome {
 	/* стилі для доходу бізнесу */

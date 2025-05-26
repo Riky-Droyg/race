@@ -40,6 +40,7 @@ body {
 	font-weight: 400; */
 	font-family: 'e-Ukraine';
 	font-weight: 500;
+	background-color: #000000;
 
 
 }
@@ -320,6 +321,8 @@ template {
 
 .app {
 	width: 100vw;
+	max-width: 450px;
+	background-color: white;
 	height: 100dvh;
 	padding: 0px 22px 22px 22px;
 	margin: 0 auto;

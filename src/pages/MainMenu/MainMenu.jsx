@@ -161,7 +161,7 @@ function MainMenu(props) {
 						averagePrice={props.state.stocks.yakhz.averagePrice}
 					/>{" "}
 				</NavLink>{" "}
-				<NavLink to="/SaleEarn">
+				<NavLink to="/BuyEarth">
 					<LineShares
 						color="#009F23"
 						nameShares={"Земля"}

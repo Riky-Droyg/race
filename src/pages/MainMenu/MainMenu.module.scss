@@ -7,12 +7,13 @@
 }
 .marquee {
 	width: 100%;
+	max-width: 450px;
 	overflow: hidden;
 	white-space: nowrap;
 	position: absolute;
 	top: 0;
-	left: 0;
-	min-height: 36px;
+	left: 50%;
+	transform: translateX(-50%);
 	height: functions.dvh(36);
 	display: flex;
 	align-items: center;
@@ -34,7 +35,7 @@
 		transform: translateX(-100%);
 	}
 }
-.paddingTop{
+.paddingTop {
 	height: functions.percent-of-h(45);
 }
 .incomeOverview {
@@ -47,7 +48,7 @@
 	row-gap: 8px;
 	column-gap: 6px;
 	margin-bottom: 8px;
-}	
+}
 
 /* Акції */
 .stocksOverview {
@@ -63,14 +64,13 @@
 	align-items: stretch;
 	column-gap: 8px;
 	row-gap: 8px;
-	background-color: #B7CFE5;
+	background-color: #b7cfe5;
 	padding: 12px;
 	border-radius: 16px;
 	margin-bottom: 13px;
-
 }
 
-.buttonContainer{
+.buttonContainer {
 	overflow: hidden;
 	width: 100%;
 	min-height: 80px;
@@ -79,11 +79,8 @@
 	grid-template-columns: 1fr 1fr;
 	grid-template-rows: 1fr;
 	justify-content: center;
-	align-items: stretch;  
+	align-items: stretch;
 	column-gap: 8px;
 	padding-top: 20px;
 	border-top: dashed 2px black;
-  }
-
-
-
+}
